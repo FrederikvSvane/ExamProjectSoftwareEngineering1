@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 
-public class EmployeeTest {
+public class EmployeeSteps {
     EmployeeBase base;
     private ErrorMessageHandler errorMessageHandler;
-    public EmployeeTest(EmployeeBase base, ErrorMessageHandler errorMessageHandler){
+    public EmployeeSteps(EmployeeBase base, ErrorMessageHandler errorMessageHandler){
         this.base = base;
         this.errorMessageHandler = errorMessageHandler;
     }
