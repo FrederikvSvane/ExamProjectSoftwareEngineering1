@@ -1,0 +1,14 @@
+.MenuAnchorPane{
+    -fx-background-color: whitesmoke;
+}
+
+.MenuAnchorPane Button{
+    -fx-border-style: solid; 
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-color: white;
+}
+
+.MenuAnchorPane Button:hover{
+    -fx-background-color: whitesmoke;
+}

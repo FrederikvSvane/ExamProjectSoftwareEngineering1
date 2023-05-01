@@ -36,6 +36,7 @@ public class Project {
         this.employeeHours = new HashMap<>();
         this.startDate = startDate;
 //      this.endDate = endDate;
+
     }
 
     public int getProjectID() {

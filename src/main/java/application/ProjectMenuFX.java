@@ -18,6 +18,7 @@ import java.io.IOException;
 public class ProjectMenuFX extends Application {
 
     String[] list = new String[10];
+    NewProjectFX npFX = new NewProjectFX();
 
     public void newStart() throws IOException {
         Stage stage = new Stage();
@@ -45,9 +46,9 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button newProject2;
     @FXML
-    Button addActivity1;
+    Button newActivity1;
     @FXML
-    Button addActivity2;
+    Button newActivity2;
     @FXML
     Button deleteActivity1;
     @FXML
@@ -56,8 +57,16 @@ public class ProjectMenuFX extends Application {
     Button addHours1;
     @FXML
     Button addHours2;
+    @FXML
+    Button logOut;
 
-    public void addProject(){
+    public void addProject() throws IOException {
+        ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
+        projectList.setItems(items);
+        npFX.newStart();
+
+    }
+    public void addProject2(){
         ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
         projectList.setItems(items);
 
@@ -67,9 +76,22 @@ public class ProjectMenuFX extends Application {
         projectList.setItems(items);
         System.out.println(projectList.getOnMouseClicked());
     }
-
+    public void updateList2(){
+        ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
+        projectList.setItems(items);
+        System.out.println(projectList.getOnMouseClicked());
+    }
     public void projectSelect(){
         String selectedItem = projectList.getSelectionModel().getSelectedItem();
         System.out.println("Clicked on: " + selectedItem);
+    }
+    public void projectSelect2(){
+        String selectedItem = projectList.getSelectionModel().getSelectedItem();
+        System.out.println("Clicked on: " + selectedItem);
+    }
+
+    public void logOut(){
+        Stage stage = (Stage) logOut.getScene().getWindow();
+        stage.close();
     }
 }
