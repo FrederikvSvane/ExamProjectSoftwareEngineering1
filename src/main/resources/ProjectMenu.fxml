@@ -34,11 +34,11 @@
                                           <TableColumn prefWidth="150.0" text="Total Hours" />
                                       </columns>
                                     </TableView>
-                                    <Button fx:id="newProject1" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" prefWidth="100.0" text="New Project" />
+                                    <Button fx:id="newProject1" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" onAction="#addProject" prefWidth="100.0" text="New Project" />
                                     <Button fx:id="newActivity1" layoutX="570.0" layoutY="125.0" mnemonicParsing="false" prefWidth="100.0" text="New Activity" />
                                     <Button fx:id="deleteActivity1" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" prefWidth="100.0" text="Delete Activity" />
                                     <Button fx:id="addHours1" layoutX="570.0" layoutY="225.0" mnemonicParsing="false" prefWidth="100.0" text="Add Hours" />
-                                    <Button fx:id="logOut1" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" prefWidth="100.0" text="Log Out" />
+                                    <Button fx:id="logOut" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#logOut" prefWidth="100.0" text="Log Out" />
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
@@ -73,7 +73,7 @@
                                           <Button fx:id="addHours2" layoutX="570.0" layoutY="225.0" mnemonicParsing="false" prefWidth="100.0" text="Add Hours" />
                                           <Button fx:id="newActivity2" layoutX="570.0" layoutY="125.0" mnemonicParsing="false" prefWidth="100.0" text="New Activity" />
                                           <Button fx:id="deleteActivity2" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" prefWidth="100.0" text="Delete Activity" />
-                                          <Button fx:id="logOut2" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" prefWidth="100.0" text="Log Out" />
+                                          <Button fx:id="logOut" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#logOut" prefWidth="100.0" text="Log Out" />
                                        </children>
                                     </AnchorPane>
                                  </items>

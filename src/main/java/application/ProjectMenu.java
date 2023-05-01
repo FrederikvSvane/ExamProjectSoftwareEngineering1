@@ -28,8 +28,7 @@ public class ProjectMenu{
 //    }
 
 
-    public void addProject(String projectName){
-        Project tempProject = new Project(projectName);
+    public void addProject(Project tempProject){
         projects.add(tempProject);
     }
 

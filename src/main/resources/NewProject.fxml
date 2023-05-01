@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="400.0" styleClass="MenuAnchorPane" stylesheets="@Menu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NewProjectFX">
+   <children>
+      <TextField fx:id="projectName" layoutX="14.0" layoutY="14.0" promptText="Project Name" />
+      <TextField fx:id="budgetHours" layoutX="14.0" layoutY="54.0" promptText="Budgetted Hours " />
+      <DatePicker fx:id="startDate" layoutX="173.0" layoutY="14.0" promptText="Start Date" />
+      <Button fx:id="createProjectButton" layoutX="337.0" layoutY="111.0" mnemonicParsing="false" onAction="#createProject" text="Create" />
+      <Button fx:id="cancel" layoutX="270.0" layoutY="111.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <TextField fx:id="duration" layoutX="173.0" layoutY="54.0" promptText="Duration (Weeks)" />
+   </children>
+</AnchorPane>

@@ -18,6 +18,7 @@ import java.io.IOException;
 public class ProjectMenuFX extends Application {
 
     String[] list = new String[10];
+    NewProjectFX npFX = new NewProjectFX();
 
     public void newStart() throws IOException {
         Stage stage = new Stage();
@@ -57,13 +58,12 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button addHours2;
     @FXML
-    Button logOut1;
-    @FXML
-    Button logOut2;
+    Button logOut;
 
-    public void addProject(){
+    public void addProject() throws IOException {
         ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
         projectList.setItems(items);
+        npFX.newStart();
 
     }
     public void addProject2(){
@@ -88,5 +88,10 @@ public class ProjectMenuFX extends Application {
     public void projectSelect2(){
         String selectedItem = projectList.getSelectionModel().getSelectedItem();
         System.out.println("Clicked on: " + selectedItem);
+    }
+
+    public void logOut(){
+        Stage stage = (Stage) logOut.getScene().getWindow();
+        stage.close();
     }
 }
