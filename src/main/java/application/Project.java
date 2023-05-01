@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,6 +17,16 @@ public class Project {
     private int endDate;
     private int duration;
 
+
+    public Project(String projectName){
+        this.projectName = projectName;
+        setProjectID();
+//      this.activityList = new List<Activity>;
+        this.employeeList = new ArrayList<Employee>();
+        this.employeeHours = new HashMap<>();
+//      this.endDate = endDate;
+    }
+
     public Project(String projectName, int budgetedHours, int startDate, int duration){
         this.projectName = projectName;
         projectID += 1;
@@ -25,6 +36,22 @@ public class Project {
         this.employeeHours = new HashMap<>();
         this.startDate = startDate;
 //      this.endDate = endDate;
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    private void setProjectID() {
+        int year = ProjectMenu.getDate().get(Calendar.YEAR);
+        int numOfProjects = ProjectMenu.getProjectsCreatedInYear(year);
+        //2023 mod 100 => 23 * 10000 => 230000 + 1 + 1 => 230001
+        this.projectID = year%100*10000 + numOfProjects+1;
     }
 
 }

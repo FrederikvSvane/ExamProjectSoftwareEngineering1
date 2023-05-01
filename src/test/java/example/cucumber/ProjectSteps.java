@@ -1,68 +1,72 @@
 package example.cucumber;
 
 import application.AuthenticationService;
-import application.EmployeeBase;
-import application.ExceptionHandler;
+import application.Project;
+import application.ProjectMenu;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ProjectSteps {
 
-    EmployeeBase base;
+    private ProjectMenu projectMenu;
+
+    private MockDateHolder mockDateHolder;
+
     private ErrorMessageHandler errorMessageHandler;
 
     String user;
 
 
-    public ProjectSteps(EmployeeBase base, ErrorMessageHandler errorMessageHandler) {
-        this.base = base;
+    public ProjectSteps(ProjectMenu base, ErrorMessageHandler errorMessageHandler) {
+        this.projectMenu = base;
+        mockDateHolder = new MockDateHolder(projectMenu);
+        mockDateHolder.setDate(new GregorianCalendar());
         this.errorMessageHandler = errorMessageHandler;
     }
 
 
     @Given("a user is logged in")
     public void a_user_is_logged_in() throws Exception {
-        // Write code here that turns the phrase above into concrete actions
+
         user = "giig";
         AuthenticationService as = new AuthenticationService(user);
 
         assertTrue(as.loginSuccessful());
-
     }
 
     @Given("a project with name {string} does not exist")
-    public void a_project_with_name_does_not_exist(String string) {
-        // Write code here that turns the phrase above into concrete actions
-
+    public void a_project_with_name_does_not_exist(String string) throws Exception{
+        assertFalse(projectMenu.projectExists(string));
     }
 
     @Given("the year is {int}")
-    public void the_year_is(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_year_is(Integer year) {
+        assertEquals(ProjectMenu.getDate().get(Calendar.YEAR), (int) year);
     }
 
     @Given("there has been created {int} projects in {int}")
-    public void there_has_been_created_projects_in(Integer int1, Integer int2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void there_has_been_created_projects_in(Integer numOfProjects, Integer year) {
+        assertEquals(ProjectMenu.getProjectsCreatedInYear(year), (int) numOfProjects);
     }
 
     @When("user creates project with name {string}")
-    public void user_creates_project_with_name(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void user_creates_project_with_name(String projectName) {
+        projectMenu.addProject(projectName);
     }
 
-    @Then("a new project with the name {string} and project ID {string} is created")
-    public void a_new_project_with_the_name_and_project_id_is_created(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("a new project with the name {string} and project ID {int} is created")
+    public void a_new_project_with_the_name_and_project_id_is_created(String projectName, int projectID) {
+        assertTrue(projectMenu.projectExists(projectName));
+        assertEquals(projectMenu.getProject(projectName).getProjectID(), projectID);
+
     }
 
     @Given("a project with name {string} exists")
