@@ -32,6 +32,7 @@ public class ProjectMenu{
 //    }
 
 
+<<<<<<< HEAD
     public void addProject(String projectName) throws ExceptionHandler{
         if(projectExists(projectName)){
             throw new ExceptionHandler("Project already exists");
@@ -39,6 +40,10 @@ public class ProjectMenu{
             Project tempProject = new Project(projectName);
             projects.add(tempProject);
         }
+=======
+    public void addProject(Project tempProject){
+        projects.add(tempProject);
+>>>>>>> Employee
     }
 
 
