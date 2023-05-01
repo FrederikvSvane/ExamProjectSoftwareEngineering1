@@ -2,8 +2,11 @@ package application;
 
 import java.util.ArrayList;
 
+
 public class EmployeeBase {
+
     public static ArrayList<Employee> employeeBase = new ArrayList<Employee>();
+
 
     public void createEmployee(String employeeInitials) throws ExceptionHandler{
         if(employeeInitials.length() <= 4){

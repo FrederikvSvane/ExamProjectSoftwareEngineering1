@@ -13,6 +13,14 @@ import javafx.stage.Stage;
 
 public class Driver extends Application {
 
+    private AuthenticationService authenticationService;
+    private EmployeeBase employeeBase;
+
+    public Driver(String username) {
+        authenticationService = new AuthenticationService(username);
+        employeeBase = new EmployeeBase();
+    }
+
 
     @Override
     public void start(Stage stage) {
