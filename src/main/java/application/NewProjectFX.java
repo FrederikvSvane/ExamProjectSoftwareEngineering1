@@ -17,7 +17,7 @@ import java.time.temporal.IsoFields;
 public class NewProjectFX extends Application {
 
     Project project;
-    ProjectMenu projectMenu = new ProjectMenu();
+    ProjectMenu projectMenu;
 
     public void newStart() throws IOException {
         Stage stage = new Stage();
@@ -45,7 +45,7 @@ public class NewProjectFX extends Application {
     @FXML
     TextField duration;
 
-    public void createProject(){
+    public void createProject() throws ExceptionHandler {
         String pName = projectName.getText();
         int sDate = startDate.getValue().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
 
@@ -55,7 +55,8 @@ public class NewProjectFX extends Application {
 
         //Add code to project
         project = new Project(pName, bHours, sDate, pDuration);
-        projectMenu.addProject(project);
+        projectMenu = new ProjectMenu();
+        projectMenu.addProject(pName);
 
         System.out.println(projectMenu.toString());
 
