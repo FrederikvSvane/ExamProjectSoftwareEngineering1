@@ -8,31 +8,34 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static javafx.application.Application.launch;
-
 public class Driver extends Application{
 
     private AuthenticationService authenticationService;
-    private EmployeeBase employeeBase;
-/*
+    private EmployeeBase employeeBase =  new EmployeeBase();;
+
+
+
+    /*
     public Driver(String username) {
         authenticationService = new AuthenticationService(username);
         employeeBase = new EmployeeBase();
-    }
-*/
-
+    } */
 
 
     public static void main(String[] args) throws IOException {
-      launch(args);
-    }
-    @Override
-    public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        Scene scene = new Scene(root);
+        launch();
 
-        stage.setScene(scene);
-        stage.show();
     }
+
+    public void start(Stage stage) throws IOException, ExceptionHandler {
+        DriverFX driverFX = new DriverFX();
+        driverFX.newStart();
+        employeeBase.createEmployee("ljs");
+    }
+
+
+
+
+
 
 }

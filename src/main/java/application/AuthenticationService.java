@@ -4,7 +4,7 @@ public class AuthenticationService {
 
     private String username;
 
-    private EmployeeBase employeeBase;
+    private EmployeeBase employeeBase = new EmployeeBase();
 
     public AuthenticationService(String username) {
         this.username = username;
