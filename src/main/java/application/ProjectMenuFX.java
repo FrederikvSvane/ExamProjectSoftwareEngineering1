@@ -37,7 +37,25 @@ public class ProjectMenuFX extends Application {
     @FXML
     ListView<String> projectList;
     @FXML
-    Button update;
+    Button update1;
+    @FXML
+    Button update2;
+    @FXML
+    Button newProject1;
+    @FXML
+    Button newProject2;
+    @FXML
+    Button addActivity1;
+    @FXML
+    Button addActivity2;
+    @FXML
+    Button deleteActivity1;
+    @FXML
+    Button deleteActivity2;
+    @FXML
+    Button addHours1;
+    @FXML
+    Button addHours2;
 
     public void addProject(){
         ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
