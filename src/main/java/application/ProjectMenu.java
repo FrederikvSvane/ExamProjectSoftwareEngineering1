@@ -5,11 +5,11 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import application.DateServer;
 
 public class ProjectMenu{
 
     private static DateServer dateServer;
+    private String username;
 
     private List<Project> projects = new ArrayList<Project>();
 
@@ -22,15 +22,23 @@ public class ProjectMenu{
         return dateServer.getDate();
     }
 
+    public ProjectMenu(String username){
+        this.username = username;
+    }
+
 
 //    public void displayMenu(){
 //
 //    }
 
 
-    public void addProject(String projectName){
-        Project tempProject = new Project(projectName);
-        projects.add(tempProject);
+    public void addProject(String projectName) throws ExceptionHandler{
+        if(projectExists(projectName)){
+            throw new ExceptionHandler("Project already exists");
+        }else{
+            Project tempProject = new Project(projectName);
+            projects.add(tempProject);
+        }
     }
 
 

@@ -39,7 +39,6 @@ public class EmployeeSteps {
 
     @Then("error message {string}")
     public void error_message(String err) throws Exception{
-        // Write code here that turns the phrase above into concrete actions
         assertEquals(err, this.errorMessageHandler.getErrorMessage());
     }
 

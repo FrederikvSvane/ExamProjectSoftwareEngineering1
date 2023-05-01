@@ -58,26 +58,28 @@ public class ProjectSteps {
     }
 
     @When("user creates project with name {string}")
-    public void user_creates_project_with_name(String projectName) {
-        projectMenu.addProject(projectName);
+    public void user_creates_project_with_name(String projectName) throws Exception{
+        try {
+            projectMenu.addProject(projectName);
+        } catch (Exception e) {
+            errorMessageHandler.setErrorMessage(e.getMessage());
+        }
     }
 
     @Then("a new project with the name {string} and project ID {int} is created")
     public void a_new_project_with_the_name_and_project_id_is_created(String projectName, int projectID) {
         assertTrue(projectMenu.projectExists(projectName));
         assertEquals(projectMenu.getProject(projectName).getProjectID(), projectID);
-
     }
 
     @Given("a project with name {string} exists")
-    public void a_project_with_name_exists(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void a_project_with_name_exists(String projectName) throws Exception{
+        try{
+            projectMenu.addProject(projectName);
+        assertTrue(projectMenu.projectExists(projectName));
+        }catch(Exception e){
+            errorMessageHandler.setErrorMessage(e.getMessage());
+        }
     }
 
-    @Then("a new project is not created")
-    public void a_new_project_is_not_created() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 }
