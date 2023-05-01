@@ -1,19 +1,10 @@
 package application;
 
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import application.DriverFX;
 
-public class Driver extends Application {
+public class Driver{
 
-
+/*
     @Override
     public void start(Stage stage) {
         Label l = new Label("Indtast dit brugernavn her");
@@ -28,10 +19,16 @@ public class Driver extends Application {
         Scene scene = new Scene(grid, 640, 480);
         stage.setScene(scene);
         stage.show();
-    }
+    } */
+
+
 
     public static void main(String[] args) {
-        launch();
+        DriverFX driver = new DriverFX;
+
+        driver.start();
     }
+
+
 
 }
