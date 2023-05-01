@@ -3,6 +3,7 @@ package application;
 public class AuthenticationService {
 
     private String username;
+    private Boolean isLoggedIn = false;
 
     private EmployeeBase employeeBase = new EmployeeBase();
 
@@ -11,12 +12,17 @@ public class AuthenticationService {
     }
 
     public boolean loginSuccessful() {
-        return employeeBase.containsEmployee(username);
+
+        if (employeeBase.containsEmployee(username)){
+             isLoggedIn = true;
+             return true;
+        }
+        return false;
     }
 
-
-
-
+    public Boolean loginStatus() {
+        return isLoggedIn;
+    }
 
     public String getUsername() {
         return username;
