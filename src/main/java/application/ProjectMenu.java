@@ -1,5 +1,6 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,15 +8,26 @@ public class ProjectMenu{
 
 
 
-    private HashMap<Project, List<Activity>> projects = new HashMap<Project, List<Activity>>();
-    private ProjectService projectService;
+    private List<Project> projects = new ArrayList<Project>();
 
-    public ProjectMenu(ProjectService projectService) {
-        this.projectService = projectService;
+
+    public ProjectMenu() {
     }
 
-    public void displayMenu(){
 
+
+//    public void displayMenu(){
+//
+//    }
+
+
+    public void addProject(Project projectName){
+        projects.add(projectName);
+    }
+
+
+    public boolean projectExists(String projectName){
+        return projects.stream().anyMatch(p -> p.getProjectName().equals(projectName));
     }
 
 }

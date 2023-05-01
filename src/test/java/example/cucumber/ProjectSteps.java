@@ -3,6 +3,7 @@ package example.cucumber;
 import application.AuthenticationService;
 import application.EmployeeBase;
 import application.ExceptionHandler;
+import application.ProjectMenu;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,35 +11,34 @@ import org.junit.Assert;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ProjectSteps {
 
-    EmployeeBase base;
+    private ProjectMenu projectBase;
     private ErrorMessageHandler errorMessageHandler;
 
     String user;
 
 
-    public ProjectSteps(EmployeeBase base, ErrorMessageHandler errorMessageHandler) {
-        this.base = base;
+    public ProjectSteps(ProjectMenu base, ErrorMessageHandler errorMessageHandler) {
+        this.projectBase = base;
         this.errorMessageHandler = errorMessageHandler;
     }
 
 
     @Given("a user is logged in")
     public void a_user_is_logged_in() throws Exception {
-        // Write code here that turns the phrase above into concrete actions
+
         user = "giig";
         AuthenticationService as = new AuthenticationService(user);
 
         assertTrue(as.loginSuccessful());
-
     }
 
     @Given("a project with name {string} does not exist")
-    public void a_project_with_name_does_not_exist(String string) {
-        // Write code here that turns the phrase above into concrete actions
-
+    public void a_project_with_name_does_not_exist(String string) throws Exception{
+        assertFalse(projectBase.projectExists(string));
     }
 
     @Given("the year is {int}")
