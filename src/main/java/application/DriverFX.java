@@ -13,8 +13,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class DriverFX extends Application{
-    private Driver driver;
+    private Driver driver = new Driver();
     private Stage stage;
+
 
     public void newStart() throws IOException {
         Stage stage = new Stage();
@@ -41,15 +42,16 @@ public class DriverFX extends Application{
 
 
 
-    public void getLogin(){
+    public void getLogin() throws IOException {
         Stage stage = (Stage) loginButton.getScene().getWindow();
         String initials = loginField.getText();
-        driver = new Driver();
         boolean doesExist = driver.getLogin(initials);
 
         if(doesExist){
             System.out.println("I exist");
             stage.close();
+            ProjectMenuFX PM = new ProjectMenuFX();
+            PM.newStart();
         } else {
             System.out.println("I do not exist");
         }
