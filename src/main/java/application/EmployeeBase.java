@@ -7,8 +7,12 @@ public class EmployeeBase {
 
     public void createEmployee(String employeeInitials) throws ExceptionHandler{
         if(employeeInitials.length() <= 4){
-            Employee employee = new Employee(employeeInitials, 0);
-            employeeBase.add(employee);
+            if (!containsEmployee(employeeInitials)){
+                Employee employee = new Employee(employeeInitials, 0);
+                employeeBase.add(employee);
+            } else {
+                throw new ExceptionHandler("Employee with given initials already exist, please input new initials.");
+            }
         } else {
             throw new ExceptionHandler("Initials doesn’t fit the restrictions, please input new initials.");
         }
