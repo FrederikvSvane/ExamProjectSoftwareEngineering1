@@ -1,6 +1,6 @@
 package example.cucumber;
 
-public class ErrorMessageHandler {
+public class ErrorMessageHolder {
     private String errorMessage = "";
 
     public String getErrorMessage(){
