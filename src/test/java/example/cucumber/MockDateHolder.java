@@ -26,10 +26,6 @@ public class MockDateHolder {
 	
 	public void advanceDateByDays(int days) {
 		Calendar currentDate = dateServer.getDate();
-		// Important: we need to create a new object,
-		// otherwise, the old calendar object gets changed,
-		// which suddenly changes the date for objects 
-		// using that old calendar object
 		Calendar nextDate = new GregorianCalendar();
 		nextDate.setTime(currentDate.getTime());
 		nextDate.add(Calendar.DAY_OF_YEAR, days);

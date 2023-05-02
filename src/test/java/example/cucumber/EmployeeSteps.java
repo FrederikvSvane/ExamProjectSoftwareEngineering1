@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EmployeeSteps {
     EmployeeBase base;
-    private ErrorMessageHandler errorMessageHandler;
-    public EmployeeSteps(EmployeeBase base, ErrorMessageHandler errorMessageHandler){
+    private ErrorMessageHolder errorMessageHolder;
+    public EmployeeSteps(EmployeeBase base, ErrorMessageHolder errorMessageHolder){
         this.base = base;
-        this.errorMessageHandler = errorMessageHandler;
+        this.errorMessageHolder = errorMessageHolder;
     }
 
 
@@ -26,7 +26,7 @@ public class EmployeeSteps {
         try{
             base.createEmployee(initials);
         } catch (ExceptionHandler e){
-            errorMessageHandler.setErrorMessage(e.getMessage());
+            errorMessageHolder.setErrorMessage(e.getMessage());
         }
 
     }
@@ -39,7 +39,7 @@ public class EmployeeSteps {
 
     @Then("error message {string}")
     public void error_message(String err) throws Exception{
-        assertEquals(err, this.errorMessageHandler.getErrorMessage());
+        assertEquals(err, this.errorMessageHolder.getErrorMessage());
     }
 
 }

@@ -5,8 +5,10 @@ import java.util.List;
 
 public class AuthenticationService {
 
+    private static String loggedInUser;
+
     private String username;
-    private Boolean isLoggedIn = false;
+    private static Boolean isLoggedIn = false;
 
     private static List<Employee> loggedInEmployees= new ArrayList<Employee>();
 
@@ -20,17 +22,27 @@ public class AuthenticationService {
 
         if (employeeBase.containsEmployee(username)){
              isLoggedIn = true;
+             loggedInUser = username;
              return true;
         }
         return false;
     }
 
-    public Boolean loginStatus() {
+    public static void logout() {
+    	isLoggedIn = false;
+    	loggedInUser = null;
+    }
+
+    public static Boolean loginStatus() {
         return isLoggedIn;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public static String getLoggedInUser() {
+        return loggedInUser;
     }
 
 }
