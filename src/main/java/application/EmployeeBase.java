@@ -29,4 +29,8 @@ public class EmployeeBase {
     public boolean containsEmployee(String employeeInitials) {
         return employeeBase.stream().anyMatch(e -> e.getEmployeeInitials().equals(employeeInitials));
     }
+
+    public Employee getEmployee(String initials){
+        return employeeBase.stream().filter(e-> e.getEmployeeInitials().equals(initials)).findFirst().get();
+    }
 }

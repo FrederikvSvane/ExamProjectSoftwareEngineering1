@@ -29,13 +29,14 @@ public class Project {
 
     public Project(String projectName, int budgetedHours, int startDate, int duration){
         this.projectName = projectName;
-        projectID += 1;
+        setProjectID();
 //      this.activityList = new List<Activity>;
         this.employeeList = new ArrayList<Employee>();
         this.budgetedHours = budgetedHours;
         this.employeeHours = new HashMap<>();
         this.startDate = startDate;
-//      this.endDate = endDate;
+        this.duration = duration;
+        this.endDate = startDate + duration;
 
     }
 
@@ -54,5 +55,25 @@ public class Project {
         //2023 mod 100 => 23 * 10000 => 230000 + 1 + 1 => 230001
         this.projectID = year%100*10000 + numOfProjects+1;
     }
+
+    public void setProjectLeader(String initials) throws ExceptionHandler{
+        EmployeeBase employeeBase = new EmployeeBase();
+        if(!employeeBase.containsEmployee(initials)){
+            throw new ExceptionHandler("User does not exist");
+        }else{
+            if(projectLeader != null){
+                throw new ExceptionHandler("Project leader already assigned to project.");
+            }else{
+                projectLeader = employeeBase.getEmployee(initials);
+            }
+
+        }
+
+    }
+    public Employee getProjectLeader(){
+        return projectLeader;
+    }
+
+
 
 }
