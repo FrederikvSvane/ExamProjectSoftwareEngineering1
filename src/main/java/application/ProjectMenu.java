@@ -33,11 +33,15 @@ public class ProjectMenu{
 
 
     public void addProject(String projectName) throws ExceptionHandler{
-        if(projectExists(projectName)){
-            throw new ExceptionHandler("Project already exists");
-        }else{
-            Project tempProject = new Project(projectName);
-            projects.add(tempProject);
+        if(!AuthenticationService.loginStatus()){
+            throw new ExceptionHandler("User must be logged in to create project");
+        }else {
+            if (projectExists(projectName)) {
+                throw new ExceptionHandler("Project already exists");
+            } else {
+                Project newProject = new Project(projectName);
+                projects.add(newProject);
+            }
         }
     }
 

@@ -11,16 +11,7 @@ import java.io.IOException;
 public class Driver extends Application{
 
     private AuthenticationService AS;
-    private EmployeeBase employeeBase =  new EmployeeBase();;
-
-
-
-    /*
-    public Driver(String username) {
-        authenticationService = new AuthenticationService(username);
-        employeeBase = new EmployeeBase();
-    }
-    */
+    private EmployeeBase employeeBase =  new EmployeeBase();
 
 
     public static void main(String[] args) throws IOException {

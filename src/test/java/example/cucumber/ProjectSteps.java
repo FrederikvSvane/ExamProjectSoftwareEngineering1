@@ -1,7 +1,6 @@
 package example.cucumber;
 
 import application.AuthenticationService;
-import application.Project;
 import application.ProjectMenu;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,18 +17,22 @@ public class ProjectSteps {
 
     private ProjectMenu projectMenu;
 
+    private ProjectHolder projectHolder;
+    private ProjectMenuHolder projectMenuHolder;
+
     private MockDateHolder mockDateHolder;
 
-    private ErrorMessageHandler errorMessageHandler;
+    private ErrorMessageHolder errorMessageHolder;
 
     String user;
 
 
-    public ProjectSteps(ProjectMenu base, ErrorMessageHandler errorMessageHandler) {
-        this.projectMenu = base;
-        mockDateHolder = new MockDateHolder(projectMenu);
+    public ProjectSteps(ErrorMessageHolder errorMessageHolder, ProjectMenuHolder projectMenuHolder, ProjectHolder projectHolder){
+        this.projectMenuHolder = projectMenuHolder;
+        mockDateHolder = new MockDateHolder(this.projectMenuHolder.getProjectMenu());
         mockDateHolder.setDate(new GregorianCalendar());
-        this.errorMessageHandler = errorMessageHandler;
+        this.errorMessageHolder = errorMessageHolder;
+        this.projectHolder = projectHolder;
     }
 
 
@@ -44,7 +47,7 @@ public class ProjectSteps {
 
     @Given("a project with name {string} does not exist")
     public void a_project_with_name_does_not_exist(String string) throws Exception{
-        assertFalse(projectMenu.projectExists(string));
+        assertFalse(projectMenuHolder.getProjectMenu().projectExists(string));
     }
 
     @Given("the year is {int}")
@@ -60,26 +63,35 @@ public class ProjectSteps {
     @When("user creates project with name {string}")
     public void user_creates_project_with_name(String projectName) throws Exception{
         try {
-            projectMenu.addProject(projectName);
+            projectMenuHolder.getProjectMenu().addProject(projectName);
         } catch (Exception e) {
-            errorMessageHandler.setErrorMessage(e.getMessage());
+            errorMessageHolder.setErrorMessage(e.getMessage());
         }
     }
 
     @Then("a new project with the name {string} and project ID {int} is created")
     public void a_new_project_with_the_name_and_project_id_is_created(String projectName, int projectID) {
-        assertTrue(projectMenu.projectExists(projectName));
-        assertEquals(projectMenu.getProject(projectName).getProjectID(), projectID);
+        assertTrue(projectMenuHolder.getProjectMenu().projectExists(projectName));
+        assertEquals(projectMenuHolder.getProjectMenu().getProject(projectName).getProjectID(), projectID);
     }
 
     @Given("a project with name {string} exists")
     public void a_project_with_name_exists(String projectName) throws Exception{
         try{
-            projectMenu.addProject(projectName);
-        assertTrue(projectMenu.projectExists(projectName));
+            projectMenuHolder.getProjectMenu().addProject(projectName);
+        assertTrue(projectMenuHolder.getProjectMenu().projectExists(projectName));
         }catch(Exception e){
-            errorMessageHandler.setErrorMessage(e.getMessage());
+            errorMessageHolder.setErrorMessage(e.getMessage());
         }
     }
+
+    @Given("a user is not logged in")
+    public void a_user_is_not_logged_in() {
+        AuthenticationService.logout();
+        user = "non";
+        AuthenticationService as = new AuthenticationService(user);
+    }
+
+
 
 }
