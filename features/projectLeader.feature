@@ -22,10 +22,10 @@ Feature: A projectleader is added to a specific project Actors: user
   Scenario: User unsuccessfully adds a project leader2
     Given That I am logged in and have selected a project, and project already have a projectleader
     And a user has an employee with username "heya"
-    When I add the employee as a project leader
+    When a user adds the employee as a project leader
     Then error message "Project leader already assigned to project."
 
   Scenario: User removes a project leader from project
     Given That I am logged in and have selected a project, and project already have a projectleader
-    When I remove the projectleader from the project
+    When a user remove the projectleader from the project
     Then the employee is no longer marked as project leader

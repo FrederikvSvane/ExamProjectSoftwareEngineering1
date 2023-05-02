@@ -18,7 +18,7 @@ public class Project {
     private int duration;
 
 
-    public Project(String projectName){
+    public Project(String projectName) {
         this.projectName = projectName;
         setProjectID();
 //      this.activityList = new List<Activity>;
@@ -27,7 +27,7 @@ public class Project {
 //      this.endDate = endDate;
     }
 
-    public Project(String projectName, int budgetedHours, int startDate, int duration){
+    public Project(String projectName, int budgetedHours, int startDate, int duration) {
         this.projectName = projectName;
         setProjectID();
 //      this.activityList = new List<Activity>;
@@ -53,27 +53,31 @@ public class Project {
         int year = ProjectMenu.getDate().get(Calendar.YEAR);
         int numOfProjects = ProjectMenu.getProjectsCreatedInYear(year);
         //2023 mod 100 => 23 * 10000 => 230000 + 1 + 1 => 230001
-        this.projectID = year%100*10000 + numOfProjects+1;
+        this.projectID = year % 100 * 10000 + numOfProjects + 1;
     }
 
-    public void setProjectLeader(String initials) throws ExceptionHandler{
+    public void setProjectLeader(String initials) throws ExceptionHandler {
         EmployeeBase employeeBase = new EmployeeBase();
-        if(!employeeBase.containsEmployee(initials)){
+        if (!employeeBase.containsEmployee(initials)) {
             throw new ExceptionHandler("User does not exist");
-        }else{
-            if(projectLeader != null){
+        } else {
+            if (projectLeader != null) {
                 throw new ExceptionHandler("Project leader already assigned to project.");
-            }else{
+            } else {
                 projectLeader = employeeBase.getEmployee(initials);
             }
 
         }
 
     }
-    public Employee getProjectLeader(){
+
+    public Employee getProjectLeader() {
         return projectLeader;
     }
 
-
-
+    public void removeProjectLeader() {
+        if (projectLeader != null) {
+            projectLeader = null;
+        }
+    }
 }

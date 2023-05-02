@@ -72,7 +72,7 @@ public class ProjectLeaderSteps {
         }
     }
 
-    @When("I add the employee as a project leader")
+    @When("a user adds the employee as a project leader")
     public void i_add_the_employee_as_a_project_leader() {
         // Write code here that turns the phrase above into concrete actions
         try{
@@ -100,16 +100,16 @@ public class ProjectLeaderSteps {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
     }
-    @When("I remove the projectleader from the project")
+    @When("a user remove the projectleader from the project")
     public void i_remove_the_projectleader_from_the_project() {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        projectMenuHolder.getProjectMenu().getProject("Awesome Project").removeProjectLeader();
     }
 
     @Then("the employee is no longer marked as project leader")
     public void the_employee_is_no_longer_marked_as_project_leader() {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(projectMenuHolder.getProjectMenu().getProject("Awesome Project").getProjectLeader(), null);
     }
 
 
