@@ -41,10 +41,10 @@ public class ProjectMenu{
         }
     }
 
-        private boolean projectExists(String projectName) {
-            return projects.stream().anyMatch(p -> p.getProjectName().equals(projectName));
-        }
 
+    public boolean projectExists(String projectName) {
+        return projects.stream().anyMatch(p -> p.getProjectName().equals(projectName));
+    }
 
     public static int getProjectsCreatedInYear(int year) {
     	if(projectsCreatedInYear.get(year)==null) {
