@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProjectMenu{
 
-    private static DateServer dateServer;
+    private static DateServer dateServer = new DateServer();
     private String username;
 
     private List<Project> projects = new ArrayList<Project>();

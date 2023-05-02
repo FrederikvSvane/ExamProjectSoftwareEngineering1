@@ -16,7 +16,6 @@ public class Driver extends Application{
 
     public static void main(String[] args) throws IOException {
         launch();
-
     }
 
     public void start(Stage stage) throws IOException, ExceptionHandler {
@@ -40,10 +39,4 @@ public class Driver extends Application{
         }
 
     }
-
-
-
-
-
-
 }
