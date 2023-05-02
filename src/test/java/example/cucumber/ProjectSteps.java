@@ -63,7 +63,7 @@ public class ProjectSteps {
     @When("user creates project with name {string}")
     public void user_creates_project_with_name(String projectName) throws Exception{
         try {
-            projectMenuHolder.getProjectMenu().addProject(projectName);
+            projectMenuHolder.getProjectMenu().addProject(projectName, 1, 1,1);
         } catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -78,7 +78,7 @@ public class ProjectSteps {
     @Given("a project with name {string} exists")
     public void a_project_with_name_exists(String projectName) throws Exception{
         try{
-            projectMenuHolder.getProjectMenu().addProject(projectName);
+            projectMenuHolder.getProjectMenu().addProject(projectName, 1, 1, 1);
         assertTrue(projectMenuHolder.getProjectMenu().projectExists(projectName));
         }catch(Exception e){
             errorMessageHolder.setErrorMessage(e.getMessage());

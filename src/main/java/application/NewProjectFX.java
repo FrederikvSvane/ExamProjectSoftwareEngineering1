@@ -18,6 +18,17 @@ public class NewProjectFX extends Application {
 
     Project project;
     ProjectMenu projectMenu;
+    ProjectMenuFX projectMenuFX;
+
+    public NewProjectFX() {
+    }
+
+    public NewProjectFX(ProjectMenuFX projectMenuFX) {
+        this.projectMenuFX = projectMenuFX;
+    }
+
+
+
 
     public void newStart() throws IOException {
         Stage stage = new Stage();
@@ -56,12 +67,16 @@ public class NewProjectFX extends Application {
         //Add code to project
         //project = new Project(pName, bHours, sDate, pDuration);
         projectMenu = new ProjectMenu(AuthenticationService.getUsername());
-        projectMenu.addProject(pName);
+        projectMenu.addProject(pName,bHours,sDate,pDuration);
 
-        System.out.println(projectMenu.toString());
+        //System.out.println(projectMenu.toString());
+
+        ProjectMenuFX.getInstance().updateList();
 
         Stage stage = (Stage) createProjectButton.getScene().getWindow();
         stage.close();
+
+
     }
 
     public void cancel(){

@@ -9,16 +9,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 
+import javax.swing.text.TableView;
 import javax.swing.text.View;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ProjectMenuFX extends Application {
 
+
     String[] list = new String[10];
     NewProjectFX npFX = new NewProjectFX();
+
+    private static ProjectMenuFX instance;
+
+    public ProjectMenuFX() {
+        instance = this;
+    }
+
+    public static ProjectMenuFX getInstance() {
+        return instance;
+    }
 
     public void newStart() throws IOException {
         Stage stage = new Stage();
@@ -31,12 +45,21 @@ public class ProjectMenuFX extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 
 
     @FXML
-    ListView<String> projectList;
+    ListView<String> MyProjectsList;
+    @FXML
+    ListView<String> AllProjectsList;
+    @FXML
+    ListView<String> informationRowRight;
+    @FXML
+    ListView<String> informationRowRight1;
+    @FXML
+    ListView<String> informationRowLeft;
+    @FXML
+    ListView<String> informationRowLeft1;
     @FXML
     Button update1;
     @FXML
@@ -59,39 +82,59 @@ public class ProjectMenuFX extends Application {
     Button addHours2;
     @FXML
     Button logOut;
+    @FXML
+    public void initialize() {
+        updateList();
+        setInformationRowLeft();
+    }
 
     public void addProject() throws IOException {
-        ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
-        projectList.setItems(items);
         npFX.newStart();
-
     }
+
+    public void setInformationRowLeft() {
+        ObservableList<String> info =FXCollections.observableArrayList("Project Name:", "Project Leader:", "End Date:","Start Date:","Duration:", "Budgeted Hours:", "Total Hours:", "Project ID:");
+        informationRowLeft.setItems(info);
+        informationRowLeft1.setItems(info);
+    }
+
+    public void setInformationRowRight1(Project project) {
+        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getUsername(), Integer.toString(project.getEndDate()), Integer.toString(project.getStartDate()), Integer.toString(project.getDuration()), Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
+        informationRowRight1.setItems(info);
+    }
+
+
     public void addProject2(){
         ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
-        projectList.setItems(items);
+        MyProjectsList.setItems(items);
 
     }
     public void updateList(){
-        ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
-        projectList.setItems(items);
-        System.out.println(projectList.getOnMouseClicked());
+        ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
+        AllProjectsList.setItems((ObservableList<String>) projects);
+        //System.out.println(projectList.getOnMouseClicked());
     }
-    public void updateList2(){
-        ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
-        projectList.setItems(items);
-        System.out.println(projectList.getOnMouseClicked());
-    }
+
     public void projectSelect(){
-        String selectedItem = projectList.getSelectionModel().getSelectedItem();
-        System.out.println("Clicked on: " + selectedItem);
+        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
+        Project project = ProjectMenu.getProject(selectedItem);
+        setInformationRowRight1(project);
     }
     public void projectSelect2(){
-        String selectedItem = projectList.getSelectionModel().getSelectedItem();
+        String selectedItem = MyProjectsList.getSelectionModel().getSelectedItem();
         System.out.println("Clicked on: " + selectedItem);
     }
 
-    public void logOut(){
+    public void logOut() throws IOException {
+
+        AuthenticationService.logout();
+
+        System.out.println("Logged out");
+
         Stage stage = (Stage) logOut.getScene().getWindow();
         stage.close();
+
+        DriverFX PM = new DriverFX();
+        PM.newStart();
     }
 }

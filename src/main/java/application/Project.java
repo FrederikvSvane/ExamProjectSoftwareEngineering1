@@ -35,7 +35,7 @@ public class Project {
         this.budgetedHours = budgetedHours;
         this.employeeHours = new HashMap<>();
         this.startDate = startDate;
-//      this.endDate = endDate;
+        this.endDate = startDate + duration;
 
     }
 
@@ -55,4 +55,31 @@ public class Project {
         this.projectID = year%100*10000 + numOfProjects+1;
     }
 
+    public Employee getProjectLeader() {
+        if(projectLeader == null){
+            Employee none = new Employee("none", 0);
+            return none;
+        }
+        return projectLeader;
+    }
+
+    public int getEndDate() {
+        return endDate;
+    }
+
+    public int getStartDate() {
+        return startDate;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getBudgetedHours() {
+        return budgetedHours;
+    }
+
+    public int getTotalHours() {
+        return 0;
+    }
 }

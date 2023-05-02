@@ -11,9 +11,10 @@ public class ProjectMenu{
     private static DateServer dateServer = new DateServer();
     private String username;
 
-    private List<Project> projects = new ArrayList<Project>();
+    private static List<Project> projects = new ArrayList<Project>();
 
     private static HashMap<Integer, Integer> projectsCreatedInYear = new HashMap<Integer, Integer>();
+
 
 
     public void setDateServer(DateServer dateServer) { this.dateServer = dateServer;}
@@ -32,14 +33,14 @@ public class ProjectMenu{
 //    }
 
 
-    public void addProject(String projectName) throws ExceptionHandler{
+    public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler{
         if(!AuthenticationService.loginStatus()){
             throw new ExceptionHandler("User must be logged in to create project");
         }else {
             if (projectExists(projectName)) {
                 throw new ExceptionHandler("Project already exists");
             } else {
-                Project newProject = new Project(projectName);
+                Project newProject = new Project(projectName, budgetedHours, startDate, duration);
                 projects.add(newProject);
             }
         }
@@ -58,7 +59,20 @@ public class ProjectMenu{
     	}
     }
 
-    public Project getProject(String projectName) {
+    public static Project getProject(String projectName) {
         return projects.stream().filter(p -> p.getProjectName().equals(projectName)).findFirst().get();
     }
+
+    public static ArrayList<Project> getProjects() {
+        return (ArrayList<Project>) projects;
+    }
+
+    public static List<String> getProjectNames() {
+        List<String> projectNames = new ArrayList<String>();
+        for (Project project : projects) {
+            projectNames.add(project.getProjectName());
+        }
+        return projectNames;
+    }
+
 }

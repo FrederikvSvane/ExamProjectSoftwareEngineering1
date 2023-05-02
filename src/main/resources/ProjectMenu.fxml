@@ -21,17 +21,17 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <ListView fx:id="projectList" onMouseClicked="#projectSelect" prefHeight="369.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ListView onMouseClicked="#projectSelect" prefHeight="369.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
                                     <Button fx:id="update1" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#updateList" prefWidth="100.0" text="Refresh" />
-                                    <TableView prefHeight="669.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
+                                    <TableView layoutY="197.0" prefHeight="472.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="197.0">
                                       <columns>
-                                        <TableColumn prefWidth="150.0" text="Activities" />
-                                        <TableColumn prefWidth="150.0" text="Hours" />
-                                          <TableColumn prefWidth="150.0" text="Total Hours" />
+                                        <TableColumn prefWidth="176.0" text="Activities" />
+                                        <TableColumn prefWidth="196.0" text="Hours" />
+                                          <TableColumn prefWidth="175.0" text="Total Hours" />
                                       </columns>
                                     </TableView>
                                     <Button fx:id="newProject1" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" onAction="#addProject" prefWidth="100.0" text="New Project" />
@@ -39,6 +39,29 @@
                                     <Button fx:id="deleteActivity1" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" prefWidth="100.0" text="Delete Activity" />
                                     <Button fx:id="addHours1" layoutX="570.0" layoutY="225.0" mnemonicParsing="false" prefWidth="100.0" text="Add Hours" />
                                     <Button fx:id="logOut" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#logOut" prefWidth="100.0" text="Log Out" />
+                                    <SplitPane dividerPositions="0.5018315018315018" prefHeight="197.0" prefWidth="548.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                             <children>
+                                                <SplitPane dividerPositions="0.4684014869888476" layoutX="8.0" layoutY="7.0" prefHeight="195.0" prefWidth="271.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                         <children>
+                                                            <ListView fx:id="informationRowLeft" layoutX="-17.0" layoutY="-3.0" prefHeight="193.0" prefWidth="123.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                         <children>
+                                                            <ListView fx:id="informationRowRight" layoutX="-30.0" layoutY="-21.0" prefHeight="193.0" prefWidth="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                      </items>
+                                    </SplitPane>
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
@@ -56,17 +79,17 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <ListView fx:id="projectList1" onMouseClicked="#projectSelect" prefHeight="369.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <ListView fx:id="AllProjectsList" onMouseClicked="#projectSelect" prefHeight="369.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
                                           <Button fx:id="update2" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#updateList" prefWidth="100.0" text="Refresh" />
-                                          <TableView prefHeight="669.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
+                                          <TableView layoutY="198.0" prefHeight="471.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="198.0">
                                              <columns>
-                                                <TableColumn prefWidth="150.0" text="Activities" />
-                                                <TableColumn prefWidth="150.0" text="Hours" />
-                                                <TableColumn prefWidth="150.0" text="Total Hours" />
+                                                <TableColumn prefWidth="178.0" text="Activities" />
+                                                <TableColumn prefWidth="188.0" text="Hours" />
+                                                <TableColumn prefWidth="181.0" text="Total Hours" />
                                              </columns>
                                           </TableView>
                                           <Button fx:id="newProject2" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" prefWidth="100.0" text="New Project" />
@@ -74,6 +97,29 @@
                                           <Button fx:id="newActivity2" layoutX="570.0" layoutY="125.0" mnemonicParsing="false" prefWidth="100.0" text="New Activity" />
                                           <Button fx:id="deleteActivity2" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" prefWidth="100.0" text="Delete Activity" />
                                           <Button fx:id="logOut" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#logOut" prefWidth="100.0" text="Log Out" />
+                                          <SplitPane dividerPositions="0.5018315018315018" layoutY="2.0" prefHeight="197.0" prefWidth="548.0">
+                                             <items>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <SplitPane dividerPositions="0.4684014869888476" layoutX="8.0" layoutY="7.0" prefHeight="195.0" prefWidth="271.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <items>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <ListView fx:id="informationRowLeft1" layoutX="-17.0" layoutY="-3.0" prefHeight="193.0" prefWidth="123.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <ListView fx:id="informationRowRight1" layoutX="-30.0" layoutY="-21.0" prefHeight="193.0" prefWidth="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </items>
+                                                      </SplitPane>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                                             </items>
+                                          </SplitPane>
                                        </children>
                                     </AnchorPane>
                                  </items>
