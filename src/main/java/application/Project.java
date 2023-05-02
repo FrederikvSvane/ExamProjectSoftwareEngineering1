@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class Project {
+public class Project{
     private String projectName;
     private static int projectID = 23000; //Indkorporér dato/kalender her
     private List<Activity> activityList;
@@ -16,6 +16,7 @@ public class Project {
     private int startDate;
     private int endDate;
     private int duration;
+    EmployeeBase employeeBase = new EmployeeBase();
 
 
     public Project(String projectName) {
@@ -57,7 +58,6 @@ public class Project {
     }
 
     public void setProjectLeader(String initials) throws ExceptionHandler {
-        EmployeeBase employeeBase = new EmployeeBase();
         if (!employeeBase.containsEmployee(initials)) {
             throw new ExceptionHandler("User does not exist");
         } else {
@@ -78,6 +78,18 @@ public class Project {
     public void removeProjectLeader() {
         if (projectLeader != null) {
             projectLeader = null;
+        }
+    }
+
+    public void addEmployeeToProject(String initials) throws ExceptionHandler {
+        if (employeeBase.containsEmployee(initials)) {
+            if (!employeeList.contains(employeeBase.getEmployee(initials))) {
+                employeeList.add(employeeBase.getEmployee(initials));
+            } else{
+                throw new ExceptionHandler("The user is already assigned to the project");
+            }
+        } else {
+            throw new ExceptionHandler("The user doesn't exist");
         }
     }
 }

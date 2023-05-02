@@ -1,6 +1,5 @@
 package example.cucumber;
-import application.AuthenticationService;
-import application.ProjectMenu;
+import application.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,28 +12,40 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class EmployeeProjectSteps {
+
+    private String user;
+
+    private Project project;
+    private EmployeeBase employeeBase = new EmployeeBase();
+
+    private ErrorMessageHolder errorMessageHolder;
+    private ProjectMenuHolder projectMenuHolder;
+
+    public EmployeeProjectSteps(ErrorMessageHolder errorMessageHolder, ProjectMenuHolder projectMenuHolder){
+        this.projectMenuHolder = projectMenuHolder;
+        this.errorMessageHolder = errorMessageHolder;
+    }
+
     @Given("A user is logged in and has a project selected.")
     public void a_user_is_logged_in_and_has_a_project_selected() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        user = "giig";
+        AuthenticationService as = new AuthenticationService(user);
+
+        assertTrue(as.loginSuccessful());
+        project = projectMenuHolder.getProjectMenu().getProject("Awesome Project");
     }
 
-    @Given("A user is created with the initials “lusj“.")
-    public void a_user_is_created_with_the_initials_lusj() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Given("A user exists with the initials {string}.")
+    public void a_user_exists_with_the_initials(String string) {
+        assertTrue(employeeBase.containsEmployee(string));
     }
 
-    @When("An existing user adds a new employee to a project")
-    public void an_existing_user_adds_a_new_employee_to_a_project() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @When("An existing user adds {string} to a project")
+    public void an_existing_user_adds_to_a_project(String string) throws Exception {
+        try {
+            project.addEmployeeToProject(string);
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
     }
-
-    @Then("The system throws an error, because the employee is already assigned to the project")
-    public void the_system_throws_an_error_because_the_employee_is_already_assigned_to_the_project() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
 }
