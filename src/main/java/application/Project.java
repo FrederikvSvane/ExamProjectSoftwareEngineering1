@@ -5,10 +5,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class Project{
+public class Project implements ProjectService{
     private String projectName;
     private static int projectID = 23000; //Indkorporér dato/kalender her
-    private List<Activity> activityList;
+    private List<Activity> activityList = new ArrayList<Activity>();
     private ArrayList<Employee> employeeList;
     private Employee projectLeader;
     private int budgetedHours;
@@ -16,6 +16,8 @@ public class Project{
     private int startDate;
     private int endDate;
     private int duration;
+
+    Activity activity;
     EmployeeBase employeeBase = new EmployeeBase();
 
 
@@ -92,4 +94,26 @@ public class Project{
             throw new ExceptionHandler("The user doesn't exist");
         }
     }
+
+    public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler{
+        if(!activityExists(activityName)){
+            activity = new ProjectActivity(activityName, hours, startDate, duration);
+            activityList.add(activity);
+        } else {
+            throw new ExceptionHandler("An activity with the given name already exists");
+        }
+
+    }
+    public void addConstantActivity(String activityName, int hours, int startDate, int duration){}
+
+    public void removeEmployeeFromProject(String initials){}
+    public void setTimeframe(String pName, int startDate, int duration){}
+    public boolean activityExists(String activityName){
+        return activityList.stream().anyMatch(e -> e.getActivityName().equals(activityName));
+    }
+    public Activity selectActivity(String activityName){ return new ProjectActivity(null, 0, 0, 0);}
+
+
+
+
 }

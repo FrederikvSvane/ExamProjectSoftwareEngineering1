@@ -2,21 +2,20 @@ package application;
 
 public interface ProjectService {
 
-    void addProjectLeader(Project project,Employee newProjectLeader);
+    void setProjectLeader(String initials) throws ExceptionHandler;
 
-    void addActivity(Project project, String name, int hours, int startDate, int duration);
+    void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler;
+    void addConstantActivity(String activityName, int hours, int startDate, int duration);
 
-    void addEmployee(Project project, Employee newEmployee);
+    void addEmployeeToProject(String initials) throws ExceptionHandler;
 
-    void removeEmployee(Project project, Employee employee);
+    void removeEmployeeFromProject(String initials);
 
     //void displayProject(Project project);
 
-    void setTimeframe(Project project, int startDate, int duration);
+    void setTimeframe(String pName, int startDate, int duration);
 
-    boolean projectExists(String projectName);
+    boolean activityExists(String activityName);
 
-    boolean activityExists(Project project, String activityName);
-
-    Activity selectActivity(Project project, String activityName);
+    Activity selectActivity(String activityName);
 }
