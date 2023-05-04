@@ -112,7 +112,18 @@ public class Project implements ProjectService{
     public void addConstantActivity(String activityName, int hours, int startDate, int duration){}
 
     public void removeEmployeeFromProject(String initials){}
-    public void setTimeframe(String pName, int startDate, int duration){}
+
+    public void setTimeframe(int startDate, int duration) throws ExceptionHandler {
+        if (startDate <= 0 || startDate > 52 || duration <= 0) {
+            throw new ExceptionHandler("The given timeframe is invalid");
+        } else {
+            this.startDate = startDate;
+            this.duration = duration;
+            this.endDate = startDate + duration;
+        }
+    }
+
+
     public boolean activityExists(String activityName){
         return activityList.stream().anyMatch(e -> e.getActivityName().equals(activityName));
     }

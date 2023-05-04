@@ -1,4 +1,4 @@
-Feature: employeeProject
+Feature: Employee Project
 
   Background: The employeeDatabase has a set of employees
     When createEmployee is given "giig"

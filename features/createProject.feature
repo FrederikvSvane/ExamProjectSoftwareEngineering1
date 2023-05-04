@@ -1,8 +1,9 @@
-Feature: Project
+Feature: Create Project
 
   Background: The employeeDatabase has a set of employees
     When createEmployee is given "giig"
     When createEmployee is given "mate"
+
 
   Scenario: Create a project
     Given a user is logged in
@@ -27,3 +28,5 @@ Feature: Project
     And there has been created 0 projects in 2023
     When user creates project with name "project"
     Then error message "User must be logged in to create project"
+
+

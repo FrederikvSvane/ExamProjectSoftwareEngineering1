@@ -13,7 +13,7 @@ public interface ProjectService {
 
     //void displayProject(Project project);
 
-    void setTimeframe(String pName, int startDate, int duration);
+    void setTimeframe(int startDate, int duration) throws ExceptionHandler;
 
     boolean activityExists(String activityName);
 
