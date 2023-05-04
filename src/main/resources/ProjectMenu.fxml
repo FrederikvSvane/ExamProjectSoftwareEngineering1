@@ -27,13 +27,6 @@
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
                                     <Button fx:id="update1" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#updateList" prefWidth="100.0" text="Refresh" />
-                                    <TableView layoutY="197.0" prefHeight="472.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="197.0">
-                                      <columns>
-                                        <TableColumn fx:id="aNameColumn" prefWidth="176.0" text="Activities" />
-                                        <TableColumn prefWidth="196.0" text="Hours" />
-                                          <TableColumn prefWidth="175.0" text="Total Hours" />
-                                      </columns>
-                                    </TableView>
                                     <Button fx:id="newProject1" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" onAction="#addProject" prefWidth="100.0" text="New Project" />
                                     <Button fx:id="newActivity1" layoutX="570.0" layoutY="125.0" mnemonicParsing="false" prefWidth="100.0" text="New Activity" />
                                     <Button fx:id="deleteActivity1" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" prefWidth="100.0" text="Delete Activity" />
@@ -62,6 +55,13 @@
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
                                       </items>
                                     </SplitPane>
+                                    <TableView fx:id="table" layoutY="197.0" prefHeight="472.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="197.0">
+                                      <columns>
+                                        <TableColumn fx:id="aNameColumn" prefWidth="176.0" text="Activities" />
+                                        <TableColumn prefWidth="196.0" text="Hours" />
+                                          <TableColumn prefWidth="175.0" text="Total Hours" />
+                                      </columns>
+                                    </TableView>
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
@@ -85,7 +85,7 @@
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
                                           <Button fx:id="update2" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#updateList" prefWidth="100.0" text="Refresh" />
-                                          <TableView layoutY="198.0" prefHeight="471.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="198.0">
+                                          <TableView fx:id="table" layoutY="198.0" prefHeight="471.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="198.0">
                                              <columns>
                                                 <TableColumn prefWidth="178.0" text="Activities" />
                                                 <TableColumn prefWidth="188.0" text="Hours" />

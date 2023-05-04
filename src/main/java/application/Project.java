@@ -8,7 +8,7 @@ import java.util.List;
 public class Project implements ProjectService{
     private String projectName;
     private static int projectID = 23000; //Indkorporér dato/kalender her
-    private List<Activity> activityList = new ArrayList<Activity>();
+    private List<ProjectActivity> activityList = new ArrayList<ProjectActivity>();
     private ArrayList<Employee> employeeList;
     private Employee projectLeader;
     private int budgetedHours;
@@ -17,7 +17,7 @@ public class Project implements ProjectService{
     private int endDate;
     private int duration;
 
-    Activity activity;
+    ProjectActivity activity;
     EmployeeBase employeeBase = new EmployeeBase();
 
 
@@ -154,5 +154,5 @@ public class Project implements ProjectService{
         }
         return totalHours;
     }
-    public List<Activity> getActivityList(){ return activityList; }
+    public List<ProjectActivity> getActivityList(){ return activityList; }
 }

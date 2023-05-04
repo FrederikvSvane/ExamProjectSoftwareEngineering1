@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -59,7 +60,8 @@ public class NewActivityFX extends Application {
 
         Project project = ProjectMenu.getProject(pName);
         project.addProjectActivity(aName,bHours,sDate,aDuration);
-
+        ProjectMenuFX pmFX = new ProjectMenuFX();
+        pmFX.activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
         Stage stage = (Stage) createActivityButton.getScene().getWindow();
         stage.close();
 

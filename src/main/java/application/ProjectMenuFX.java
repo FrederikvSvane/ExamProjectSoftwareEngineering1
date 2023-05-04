@@ -86,11 +86,19 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button logOut;
     @FXML
-    TableColumn aNameColumn;
+    private TableColumn<ProjectActivity, String> aNameColumn;
     @FXML
-    TableView table;
+    private TableColumn<Activity, String> hoursColumn;
+
+    @FXML
+    private TableColumn<Activity, String> totalHoursColumn;
+
+    @FXML
+    private TableView<ProjectActivity> table;
+    ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList();
     @FXML
     public void initialize() {
+
         updateList();
         setInformationRowLeft();
     }
@@ -121,13 +129,18 @@ public class ProjectMenuFX extends Application {
 
     }
     public void updateList(){
+        //activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
+        aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
+        activityData.add(new ProjectActivity("Activity 1", 2,3 ,12));
+        activityData.add(new ProjectActivity("Activity 2", 4, 6,12));
+        table.setItems(activityData);
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
         ObservableList<String> data = FXCollections.observableArrayList();
         data.add("Hello, world!");
-        table = new TableView<String>();
+        //table = new TableView<String>();
         // Set the data model as the table's data source
-        table.setItems(data);
+        //table.setItems((ObservableList<String>)data);
 
 
         //aNameColumn.setCellValueFactory(new PropertyValueFactory("Navn1"));
