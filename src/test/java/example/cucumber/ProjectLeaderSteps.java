@@ -109,7 +109,7 @@ public class ProjectLeaderSteps {
     @Then("the employee is no longer marked as project leader")
     public void the_employee_is_no_longer_marked_as_project_leader() {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals(projectMenuHolder.getProjectMenu().getProject("Awesome Project").getProjectLeader(), null);
+        assertEquals(projectMenuHolder.getProjectMenu().getProject("Awesome Project").getProjectLeader().getEmployeeInitials(), "none");
     }
 
 

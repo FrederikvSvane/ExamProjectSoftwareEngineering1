@@ -22,8 +22,8 @@ Feature: Project
 
   Scenario: Fail to create project
     Given a user is not logged in
-    And a project with name "project1" does not exist
+    And a project with name "project" does not exist
     And the year is 2023
     And there has been created 0 projects in 2023
-    When user creates project with name "project1"
+    When user creates project with name "project"
     Then error message "User must be logged in to create project"
