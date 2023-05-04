@@ -74,7 +74,12 @@ public class Project implements ProjectService{
     }
 
     public Employee getProjectLeader() {
-        return projectLeader;
+        if(projectLeader == null){
+            Employee none = new Employee("none",0);
+            return none;
+        } else {
+            return projectLeader;
+        }
     }
 
     public void removeProjectLeader() {
@@ -114,6 +119,28 @@ public class Project implements ProjectService{
     public Activity selectActivity(String activityName){ return new ProjectActivity(null, 0, 0, 0);}
 
 
+    public int getEndDate() {
+        return endDate;
+    }
 
+    public int getStartDate() {
+        return startDate;
+    }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getBudgetedHours() {
+        return budgetedHours;
+    }
+
+    public int getTotalHours() {
+        int totalHours = 0;
+        for (Activity activity : activityList) {
+            //totalHours += ProjectActivity.getHours();
+            return totalHours;
+        }
+        return totalHours;
+    }
 }
