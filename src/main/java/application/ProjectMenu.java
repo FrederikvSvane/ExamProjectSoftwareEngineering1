@@ -1,15 +1,14 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 public class ProjectMenu{
 
     private static DateServer dateServer = new DateServer();
     private String username;
+
+    private ArrayList<offWorkActivity> offWorkActivities = new ArrayList<offWorkActivity>();
 
     private static List<Project> projects = new ArrayList<Project>();
 
@@ -73,6 +72,21 @@ public class ProjectMenu{
             projectNames.add(project.getProjectName());
         }
         return projectNames;
+    }
+
+    public void createOffWorkActivity(String activityName) throws ExceptionHandler{
+        if(!AuthenticationService.loginStatus()){
+            throw new ExceptionHandler("User must be logged in to create activity");
+        }else if(offWorkActivityExists(activityName)){
+            throw new ExceptionHandler("An off-work activity with the given name already exists");
+        }else {
+            offWorkActivity offWorkActivity = new offWorkActivity(activityName);
+            offWorkActivities.add(offWorkActivity);
+        }
+    }
+
+    public boolean offWorkActivityExists(String activityName) {
+        return offWorkActivities.stream().anyMatch(a -> a.getActivityName().equals(activityName));
     }
 
 }
