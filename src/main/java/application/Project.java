@@ -154,4 +154,5 @@ public class Project implements ProjectService{
         }
         return totalHours;
     }
+    public List<Activity> getActivityList(){ return activityList; }
 }

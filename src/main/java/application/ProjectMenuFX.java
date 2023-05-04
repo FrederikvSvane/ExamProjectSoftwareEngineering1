@@ -10,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import javax.swing.text.TableView;
+
 import javax.swing.text.View;
 
 import java.io.IOException;
@@ -84,7 +86,9 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button logOut;
     @FXML
-    Button logOut1;
+    TableColumn aNameColumn;
+    @FXML
+    TableView table;
     @FXML
     public void initialize() {
         updateList();
@@ -119,6 +123,14 @@ public class ProjectMenuFX extends Application {
     public void updateList(){
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
+        ObservableList<String> data = FXCollections.observableArrayList();
+        data.add("Hello, world!");
+        table = new TableView<String>();
+        // Set the data model as the table's data source
+        table.setItems(data);
+
+
+        //aNameColumn.setCellValueFactory(new PropertyValueFactory("Navn1"));
         //System.out.println(projectList.getOnMouseClicked());
     }
 
