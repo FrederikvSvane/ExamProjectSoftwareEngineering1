@@ -22,11 +22,15 @@ public class EmployeeBase {
 
     }
 
-    public boolean checkInitials(String employeeInitials){
+    /*public boolean checkInitials(String employeeInitials){
         return employeeBase.contains(employeeInitials);
-    }
+    }*/
 
     public boolean containsEmployee(String employeeInitials) {
         return employeeBase.stream().anyMatch(e -> e.getEmployeeInitials().equals(employeeInitials));
+    }
+
+    public Employee getEmployee(String initials){
+        return employeeBase.stream().filter(e-> e.getEmployeeInitials().equals(initials)).findFirst().get();
     }
 }

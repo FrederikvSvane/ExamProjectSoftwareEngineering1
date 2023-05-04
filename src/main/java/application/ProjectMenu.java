@@ -46,6 +46,19 @@ public class ProjectMenu{
         }
     }
 
+    public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler{
+        if(!AuthenticationService.loginStatus()){
+            throw new ExceptionHandler("User must be logged in to create project");
+        }else {
+            if (projectExists(projectName)) {
+                throw new ExceptionHandler("Project already exists");
+            } else {
+                Project newProject = new Project(projectName, budgetedHours, startDate, duration);
+                projects.add(newProject);
+            }
+        }
+    }
+
 
     public boolean projectExists(String projectName) {
         return projects.stream().anyMatch(p -> p.getProjectName().equals(projectName));

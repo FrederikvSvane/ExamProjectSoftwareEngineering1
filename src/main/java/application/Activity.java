@@ -16,4 +16,8 @@ public abstract class Activity{
         this.hours += hours;
     }
 
+    public String getActivityName(){
+        return activityName;
+    }
+
 }
