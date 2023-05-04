@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -15,11 +16,30 @@ import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 
 public class NewActivityFX extends Application {
+    private static String pName;
 
+    public void newStart(String pName) throws IOException {
+        this.pName = pName;
 
-    @Override
-    public void start(Stage stage) throws Exception {
+        Stage stage = new Stage();
+        start(stage);
 
     }
+    @Override
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("NewActivity.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        Label nameLabel = (Label) stage.getScene().lookup("#nameLabel");
+        nameLabel.setText("Add activity for project:" + pName);
+        stage.show();
+    }
+
+    @FXML
+    Label nameLabel;
+    @FXML
+    TextField activityName;
+    @FXML
+    DatePicker startDate;
 
 }

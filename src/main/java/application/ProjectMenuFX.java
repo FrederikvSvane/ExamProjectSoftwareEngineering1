@@ -23,6 +23,7 @@ public class ProjectMenuFX extends Application {
 
     String[] list = new String[10];
     NewProjectFX npFX = new NewProjectFX();
+    NewActivityFX naFX = new NewActivityFX();
 
     private static ProjectMenuFX instance;
 
@@ -83,6 +84,8 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button logOut;
     @FXML
+    Button logOut1;
+    @FXML
     public void initialize() {
         updateList();
         setInformationRowLeft();
@@ -90,6 +93,10 @@ public class ProjectMenuFX extends Application {
 
     public void addProject() throws IOException {
         npFX.newStart();
+    }
+    public void addProjectActivity() throws IOException {
+        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
+        naFX.newStart(selectedItem);
     }
 
     public void setInformationRowLeft() {
@@ -119,9 +126,10 @@ public class ProjectMenuFX extends Application {
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
         setInformationRowRight1(project);
+
     }
     public void projectSelect2(){
-        String selectedItem = MyProjectsList.getSelectionModel().getSelectedItem();
+        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         System.out.println("Clicked on: " + selectedItem);
     }
 
