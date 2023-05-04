@@ -88,8 +88,6 @@ public class ProjectSteps {
     @Given("a user is not logged in")
     public void a_user_is_not_logged_in() {
         AuthenticationService.logout();
-        user = "non";
-        AuthenticationService as = new AuthenticationService(user);
     }
 
 

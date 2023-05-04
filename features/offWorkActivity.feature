@@ -1,9 +1,11 @@
-Feature: Create an off-work activity.
-  Background: constant activity.
-    Given an off work activity with name "Influenza" exists
+Feature: Create off-work activity.
+  Background: Off-work activities exist
     When createEmployee is given "giig"
     When createEmployee is given "mate"
     When createEmployee is given "heya"
+    Given a user is logged in
+    Given an off work activity with name "Influenza" exists
+
 
   Scenario: User successfully adds a new constant activity to a project.
     Given a user is logged in

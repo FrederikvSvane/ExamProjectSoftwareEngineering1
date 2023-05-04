@@ -89,4 +89,11 @@ public class ProjectMenu{
         return offWorkActivities.stream().anyMatch(a -> a.getActivityName().equals(activityName));
     }
 
+    public offWorkActivity getOffWorkActivity(String activityName) {
+        return offWorkActivities.stream().filter(a -> a.getActivityName().equals(activityName)).findFirst().get();
+    }
+
+    public void addHoursToOffWorkActivity(String activityName, String employeeInitials,Integer hours) throws Exception{
+        getOffWorkActivity(activityName).addHours(employeeInitials, hours);
+    }
 }

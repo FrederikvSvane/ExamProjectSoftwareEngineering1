@@ -1,9 +1,6 @@
 package example.cucumber;
 
-import application.AuthenticationService;
-import application.EmployeeBase;
-import application.ExceptionHandler;
-import application.Project;
+import application.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -69,6 +66,54 @@ public class ActivitySteps {
         assertTrue(projectMenuHolder.getProjectMenu().offWorkActivityExists(activityName));
     }
 
+
+
+    @When("An activity {string} exists in project {string}")
+    public void anActivityExistsInProject(String activityName, String projectName){
+        project = projectMenuHolder.getProjectMenu().getProject(projectName);
+        assertTrue(project.activityExists(activityName));
+    }
+
+    @When("An activity {string} is added to project {string}")
+    public void anActivityIsAddedToProject(String activityName, String projectName) throws Exception{
+        project = projectMenuHolder.getProjectMenu().getProject(projectName);
+        project.addProjectActivity(activityName, 10, 1, 2);
+    }
+
+
+
+//    @Given("The user has {int} unregistered work hours")
+//    public void theUserHasUnregisteredWorkHours(Integer int1) {
+//
+//    }
+
+    @When("The user adds {int} work hours to {string} in project {string}")
+    public void theUserAddsWorkHoursToInProject(Integer hours, String activityName, String projectName) {
+        Activity activity= projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName);
+        try {
+            activity.addHours(AuthenticationService.getUsername(), hours);
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("{int} work hours are added to {string} in project {string}")
+    public void workHoursAreAddedToInProject(Integer int1, String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("No work hours are added to {string} in project {string}")
+    public void noWorkHoursAreAddedToInProject(String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Given("An activity {string} does not exist in project {string}")
+    public void anActivityDoesNotExistInProject(String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
 
 
 }

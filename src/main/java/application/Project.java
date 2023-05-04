@@ -101,6 +101,13 @@ public class Project implements ProjectService{
     }
 
     public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler{
+        if(activityName == null || activityName.equals("")){
+            throw new ExceptionHandler("The activity name is invalid");
+        } else if(hours <= 0){
+            throw new ExceptionHandler("The amount of hours is invalid");
+        } else if(startDate <= 0 || startDate > 52 || duration <= 0){
+            throw new ExceptionHandler("The given timeframe is invalid");
+        } else
         if(!activityExists(activityName)){
             activity = new ProjectActivity(activityName, hours, startDate, duration);
             activityList.add(activity);
@@ -153,5 +160,9 @@ public class Project implements ProjectService{
             return totalHours;
         }
         return totalHours;
+    }
+
+    public Activity getActivity(String activityName){
+        return activityList.stream().filter(e -> e.getActivityName().equals(activityName)).findFirst().get();
     }
 }
