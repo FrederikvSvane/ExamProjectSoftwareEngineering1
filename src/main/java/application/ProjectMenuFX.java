@@ -60,13 +60,13 @@ public class ProjectMenuFX extends Application {
     @FXML
     ListView<String> informationRowRight;
     @FXML
-    ListView<String> informationRowRight1;
+    ListView<String> informationRowRight1 = new ListView<>();
     @FXML
     ListView<String> informationRowLeft;
     @FXML
     ListView<String> informationRowLeft1;
     @FXML
-    ListView<String> employeeListView;
+    public ListView<String> employeeListView = new ListView<>();
     @FXML
     Button update1;
     @FXML
@@ -167,7 +167,6 @@ public class ProjectMenuFX extends Application {
         addProjectActivityToList(project);
         setInformationRowRight1(project);
         setEmployeeView(project);
-
     }
     public void projectSelect2(){
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
@@ -175,8 +174,10 @@ public class ProjectMenuFX extends Application {
     }
 
     public void setEmployeeView(Project project){
-        ObservableList<String> info =FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
+        ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
         employeeListView.setItems(info);
+        System.out.println("I was run");
+        System.out.println(project.employeeList.contains(EmployeeBase.getEmployee("sss")));
     }
 
     public void logOut() throws IOException {
@@ -197,19 +198,40 @@ public class ProjectMenuFX extends Application {
         table.setItems(activityData);
     }
 
-    public void addEmployee() throws ExceptionHandler {
+    public void addEmployee() throws ExceptionHandler, IOException {
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
         System.out.println("Add Employee");
-        project.addEmployeeToProject("sss");
+        //project.addEmployeeToProject("sss");
+        AddEmployeeFX aeFX = new AddEmployeeFX();
+        aeFX.newStart(project.getProjectName());
         setEmployeeView(project);
     }
 
-    public void addProjectLeader() throws ExceptionHandler {
+    public void addProjectLeader() throws ExceptionHandler, IOException {
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
         System.out.println("Add PL");
-        project.setProjectLeader("sss");
+        AddProjectLeaderFX aplFX = new AddProjectLeaderFX();
+        aplFX.newStart(project.getProjectName());
         setInformationRowRight1(project);
+    }
+
+    public void removeProjectLeader(){
+        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
+        Project project = ProjectMenu.getProject(selectedItem);
+
+        project.removeProjectLeader();
+        setEmployeeView(project);
+    }
+
+    public void removeActivityFromList(){
+        String selectedProject = AllProjectsList.getSelectionModel().getSelectedItem();
+        Project project = ProjectMenu.getProject(selectedProject);
+
+        ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
+
+        project.getActivityList().remove(selectedActivity);
+        updateList();
     }
 }

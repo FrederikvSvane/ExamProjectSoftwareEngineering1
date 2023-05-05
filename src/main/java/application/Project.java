@@ -117,6 +117,7 @@ public class Project implements ProjectService {
     }
 
     public void removeEmployeeFromProject(String initials) {
+        employeeList.remove(EmployeeBase.getEmployee(initials));
     }
 
     public void setTimeframe(int startDate, int duration) throws ExceptionHandler {
