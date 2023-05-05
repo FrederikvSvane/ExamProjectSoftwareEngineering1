@@ -1,4 +1,5 @@
 package example.cucumber;
+
 import application.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,7 +22,7 @@ public class EmployeeProjectSteps {
     private ErrorMessageHolder errorMessageHolder;
     private ProjectMenuHolder projectMenuHolder;
 
-    public EmployeeProjectSteps(ErrorMessageHolder errorMessageHolder, ProjectMenuHolder projectMenuHolder){
+    public EmployeeProjectSteps(ErrorMessageHolder errorMessageHolder, ProjectMenuHolder projectMenuHolder) {
         this.projectMenuHolder = projectMenuHolder;
         this.errorMessageHolder = errorMessageHolder;
     }
@@ -73,4 +74,21 @@ public class EmployeeProjectSteps {
     }
 
 
+    @Then("user {string} is added to the project")
+    public void userIsAddedToTheProject(String employeeInitials) {
+        assertTrue(project.containsEmployee(employeeInitials));
+    }
+
+    @Then("project {string} is added to user {string}")
+    public void projectIsAddedToUser(String projectName, String employeeInitials) {
+        assertTrue(employeeBase.getEmployee(employeeInitials).containsProject(projectName));
+    }
+
+    @Then("{string} is not added to project {string}")
+    public void isNotAddedToProject(String employeeInitials, String projectName) {
+        assertFalse(employeeBase.getEmployee(employeeInitials).containsProject(projectName));
+    }
 }
+
+
+

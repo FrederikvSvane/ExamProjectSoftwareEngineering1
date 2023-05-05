@@ -44,7 +44,7 @@ public class ProjectActivity extends Activity {
     }
 
 
-    public void setNumberOfWeeks(int numberOfWeeks) throws ExceptionHandler {
+    public void setDuration(int numberOfWeeks) throws ExceptionHandler {
         if (numberOfWeeks <= 0) {
             throw new ExceptionHandler("The given time is invalid");
         } else {
@@ -57,4 +57,11 @@ public class ProjectActivity extends Activity {
         return endDate;
     }
 
+    public int getBudgetedHours() {
+        return budgetedHours;
+    }
+
+    public void setBudgetedHours(Integer budgetedHours) {
+        this.budgetedHours = budgetedHours;
+    }
 }

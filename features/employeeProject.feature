@@ -11,6 +11,7 @@ Feature: Employee Project
     Given A user is logged in and has a project selected.
     And A user exists with the initials "lusj".
     When An existing user adds "lusj" to a project
+    Then user "lusj" is added to the project
 
   Scenario: Add an employee to a project and the user is already assigned to the project
     Given A user is logged in and has a project selected.
@@ -23,6 +24,19 @@ Feature: Employee Project
     Given A user is logged in and has a project selected.
     When An existing user adds "rsas" to a project
     Then error message "The user doesn't exist"
+
+  Scenario: Add an employee to a project and the project is added to the user
+    Given A user is logged in and has a project selected.
+    And A user exists with the initials "lusj".
+    When An existing user adds "lusj" to a project
+    Then project "Awesome Project" is added to user "lusj"
+
+  Scenario: Add and remove an employee from a project and the project is not under the user
+    Given A user is logged in and has a project selected.
+    And A user exists with the initials "lusj".
+    When An existing user adds "lusj" to a project
+    When An existing user removes "lusj" from a project
+    Then "lusj" is not added to project "Awesome Project"
 
   # removes employee from project
 
@@ -38,3 +52,4 @@ Feature: Employee Project
     And A user exists with the initials "lusj".
     When An existing user removes "lusj" from a project
     Then error message "User doesn't exist in the project"
+

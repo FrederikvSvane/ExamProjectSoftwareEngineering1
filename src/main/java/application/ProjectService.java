@@ -15,6 +15,4 @@ public interface ProjectService {
     void setTimeframe(int startDate, int duration) throws ExceptionHandler;
 
     boolean activityExists(String activityName);
-
-    Activity selectActivity(String activityName);
 }

@@ -50,4 +50,12 @@ public class TimeFrameSteps {
         assertEquals(project.getEndDate(), endDate);
     }
 
+    @When("the project is changed to a start week number of {int} and {int} weeks duration")
+    public void theProjectIsChangedToAStartWeekNumberOfAndWeeksDuration(Integer startDate, Integer duration) {
+        try {
+            project.setTimeframe(startDate, duration);
+        } catch (ExceptionHandler e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
 }

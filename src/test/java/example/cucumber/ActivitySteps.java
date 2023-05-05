@@ -83,12 +83,6 @@ public class ActivitySteps {
         }
     }
 
-
-//    @Given("The user has {int} unregistered work hours")
-//    public void theUserHasUnregisteredWorkHours(Integer int1) {
-//
-//    }
-
     @When("The user adds {int} work hours to {string} in project {string}")
     public void theUserAddsWorkHoursToInProject(Integer hours, String activityName, String projectName) throws Exception {
         try {
@@ -129,10 +123,56 @@ public class ActivitySteps {
     @Then("The user have added a start week {int} and stopdate {int} to the activity {string} in project {string}")
     public void theUserHaveAddedAStartAndStopdateToTheActivity( int startWeek, int stopDate, String activityName, String projectName) throws Exception {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals(startWeek, projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).getStartWeek());
-        assertEquals(stopDate, projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).getEndDate());
-
+        try {
+            assertEquals(startWeek, projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).getStartWeek());
+            assertEquals(stopDate, projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).getEndDate());
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
     }
+
+    @Given("{string} has {int} total work hours")
+    public void hasTotalWorkHours(String projectName, Integer hours) {
+        assertEquals(hours, projectMenuHolder.getProjectMenu().getProject(projectName).getTotalHours());
+    }
+
+    @Then("The project {string} has {int} total work hours")
+    public void theProjectHasTotalWorkHours(String projectName, Integer hours) {
+        assertEquals(hours, projectMenuHolder.getProjectMenu().getProject(projectName).getTotalHours());
+    }
+
+    @When("the user adds the week {int} as start week to activity {string} in project {string}")
+    public void theUserAddsTheWeekAsStartWeekToActivityInProject(Integer startWeek, String activityName, String projectName) throws Exception {
+        try {
+            projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).setStartWeek(startWeek);
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @When("the user adds the length of the activity is {int} to activity {string} in project {string}")
+    public void theUserAddsTheLengthOfTheActivityIsToActivityInProject(Integer duration, String activityName, String projectName) throws Exception {
+        try {
+            projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).setDuration(duration);
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @When("the user adds {int} budgeted hours to activity {string} in project {string}")
+    public void theUserAddsBudgetedHoursToActivityInProject(Integer budgetedHours, String activityName, String projectName) throws Exception {
+        try {
+            projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).setBudgetedHours(budgetedHours);
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("the activity {string} in project {string} have {int} budgeted hours")
+    public void theActivityInProjectHaveBudgetedHours(String activityName, String projectName, Integer budgetedHours) throws Exception {
+        assertEquals(budgetedHours,projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).getBudgetedHours());
+    }
+
 
 
 }
