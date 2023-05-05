@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="186.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddHoursFX">
+   <children>
+      <Label fx:id="activityLabel" layoutX="178.0" layoutY="21.0" text="Label" />
+      <TextField fx:id="aNameTextfield" layoutX="117.0" layoutY="81.0" promptText="Hours" />
+      <Button fx:id="submitButton" layoutX="222.0" layoutY="132.0" mnemonicParsing="false" onAction="#submitHours" prefWidth="100.0" text="Submit Hours" />
+      <Button fx:id="cancelButton" layoutX="78.0" layoutY="132.0" mnemonicParsing="false" onAction="#cancel" prefWidth="100.0" text="Cancel" />
+   </children>
+</AnchorPane>

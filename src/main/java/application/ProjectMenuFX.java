@@ -26,6 +26,7 @@ public class ProjectMenuFX extends Application {
     String[] list = new String[10];
     NewProjectFX npFX = new NewProjectFX();
     NewActivityFX naFX = new NewActivityFX();
+    AddHoursFX adFX = new AddHoursFX();
 
     private Project currentProject;
 
@@ -84,9 +85,9 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button deleteActivity2;
     @FXML
-    Button addHours1;
+    Button addHours;
     @FXML
-    Button addHours2;
+    Button addHoursAll;
     @FXML
     Button logOut;
     @FXML
@@ -142,28 +143,14 @@ public class ProjectMenuFX extends Application {
 
     }
     public void updateList(){
-        //activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
-        //activityData.add(new ProjectActivity("Activity 1", 2,3 ,5));
-
-        //ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList();
-
-        //table.setItems(activityData);
-        //System.out.println("Hey Hey");
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
-
-        //table = new TableView<String>();
-        // Set the data model as the table's data source
-        //table.setItems((ObservableList<String>)data);
-
-
-        //aNameColumn.setCellValueFactory(new PropertyValueFactory("Navn1"));
-        //System.out.println(projectList.getOnMouseClicked());
     }
 
     public void projectSelect(){
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
+        currentProject = project;
         addProjectActivityToList(project);
         setInformationRowRight1(project);
         setEmployeeView(project);
@@ -217,6 +204,7 @@ public class ProjectMenuFX extends Application {
         setInformationRowRight1(project);
     }
 
+<<<<<<< Updated upstream
     public void removeProjectLeader(){
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
@@ -235,3 +223,14 @@ public class ProjectMenuFX extends Application {
         updateList();
     }
 }
+=======
+    public void addHours() throws IOException {
+                ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
+                String selectedItem = selectedActivity.getActivityName();
+                    adFX.newStart(selectedItem, currentProject);
+                System.out.println("Im here and im square");
+            }
+
+    }
+
+>>>>>>> Stashed changes

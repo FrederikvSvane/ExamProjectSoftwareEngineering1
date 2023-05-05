@@ -6,6 +6,7 @@ public class ProjectActivity extends Activity {
     private int budgetedHours;
     private String endDate;
     private int totalHours;
+    private String pName;
 
     public ProjectActivity(String activityName, int budgetedHours, int startWeek, int numberOfWeeks) {
         this.activityName = activityName;
@@ -63,5 +64,7 @@ public class ProjectActivity extends Activity {
     }
     public int getTotalHours(){return totalHours;}
 
-    public void setTotalHours(int totalHours){this.totalHours = totalHours;}
+    public void addHoursToActivity(int Hours){this.totalHours = this.totalHours + Hours;}
+    public String getpName(){return pName;}
+
 }
