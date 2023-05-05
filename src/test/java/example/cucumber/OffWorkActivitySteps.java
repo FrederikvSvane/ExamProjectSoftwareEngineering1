@@ -40,7 +40,7 @@ public class OffWorkActivitySteps {
     @When("a user adds {int} hours to off-work activity {string}")
     public void aUserAddsHoursToOffWorkActivity(Integer hours, String activityName) throws Exception {
         try {
-            projectMenuHolder.getProjectMenu().addHoursToOffWorkActivity(activityName, AuthenticationService.getUsername(), hours);
+            projectMenuHolder.getProjectMenu().addHoursToOffWorkActivity(activityName, AuthenticationService.getLoggedInUser(), hours);
         } catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -48,7 +48,7 @@ public class OffWorkActivitySteps {
 
     @Then("the activity {string} has {int} hours on user")
     public void theActivityHasHoursOnUser(String activityName, Integer hours) {
-        assertEquals(hours, projectMenuHolder.getProjectMenu().getOffWorkActivity(activityName).getEmployeeHours(employeeBase.getEmployee(AuthenticationService.getUsername())));
+        assertEquals(hours, projectMenuHolder.getProjectMenu().getOffWorkActivity(activityName).getEmployeeHours(AuthenticationService.getLoggedInUser()));
     }
 
 }

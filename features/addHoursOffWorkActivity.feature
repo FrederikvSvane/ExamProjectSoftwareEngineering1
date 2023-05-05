@@ -14,7 +14,7 @@ Feature: Add hours to off-work activity
     Then the activity "Vacation" has 34 hours on user
 
 
-  Scenario: User successfully adds hours to a off-work activity twice.
+  Scenario: User successfully adds hours to a off-work activity.
     Given a user "mate" is logged in
     When a user adds 34 hours to off-work activity "Vacation"
     When a user adds 34 hours to off-work activity "Vacation"

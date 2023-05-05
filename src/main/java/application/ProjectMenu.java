@@ -41,6 +41,11 @@ public class ProjectMenu{
             } else {
                 Project newProject = new Project(projectName, budgetedHours, startDate, duration);
                 projects.add(newProject);
+                if (projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) == null) {
+                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), 1);
+                } else {
+                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) + 1);
+                }
             }
         }
     }
@@ -95,5 +100,9 @@ public class ProjectMenu{
 
     public void addHoursToOffWorkActivity(String activityName, String employeeInitials,Integer hours) throws Exception{
         getOffWorkActivity(activityName).addHours(employeeInitials, hours);
+    }
+
+    public void setProjectsCreatedInYear(Integer numOfProjects, Integer year) {
+        projectsCreatedInYear.put(year, numOfProjects);
     }
 }

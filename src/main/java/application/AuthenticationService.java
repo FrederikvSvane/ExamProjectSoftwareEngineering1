@@ -7,7 +7,7 @@ public class AuthenticationService {
 
     private static String loggedInUser;
 
-    private static String username;
+    private String username;
     private static Boolean isLoggedIn = false;
 
     private static List<Employee> loggedInEmployees= new ArrayList<Employee>();
@@ -37,7 +37,7 @@ public class AuthenticationService {
         return isLoggedIn;
     }
 
-    public static String getUsername() {
+    public String getUsername() {
         return username;
     }
 

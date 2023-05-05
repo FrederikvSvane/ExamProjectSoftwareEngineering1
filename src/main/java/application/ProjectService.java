@@ -5,7 +5,6 @@ public interface ProjectService {
     void setProjectLeader(String initials) throws ExceptionHandler;
 
     void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler;
-    void addConstantActivity(String activityName, int hours, int startDate, int duration);
 
     void addEmployeeToProject(String initials) throws ExceptionHandler;
 
