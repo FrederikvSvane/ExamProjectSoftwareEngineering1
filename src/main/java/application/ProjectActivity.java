@@ -1,11 +1,14 @@
 package application;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class ProjectActivity extends Activity {
     private int startWeek;
     private int numberOfWeeks;
     private int budgetedHours;
     private String endDate;
-    private int totalHours;
+    private IntegerProperty totalHours;
     private String pName;
 
     public ProjectActivity(String activityName, int budgetedHours, int startWeek, int numberOfWeeks) {
@@ -13,6 +16,7 @@ public class ProjectActivity extends Activity {
         this.budgetedHours = budgetedHours;
         this.startWeek = startWeek;
         this.numberOfWeeks = numberOfWeeks;
+        this.totalHours = new SimpleIntegerProperty(getHours());
         updateEndDate();
     }
 
@@ -62,9 +66,15 @@ public class ProjectActivity extends Activity {
     public int getBudgetedHours(){
         return budgetedHours;
     }
-    public int getTotalHours(){return totalHours;}
+    public int getTotalHours(){return totalHours.get();}
+    public void setTotalHours(int totalHours){
+        this.totalHours.set(totalHours);
+    }
+    public IntegerProperty totalHoursProperty(){
+        return totalHours;
+    }
 
-    public void addHoursToActivity(int Hours){this.totalHours = this.totalHours + Hours;}
+    public void addHoursToActivity(int Hours){this.setTotalHours(getHours());}
     public String getpName(){return pName;}
 
 }

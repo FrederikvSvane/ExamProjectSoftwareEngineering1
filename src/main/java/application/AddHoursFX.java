@@ -12,26 +12,38 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AddHoursFX extends Application {
+public class AddHoursFX{
     private String activityName;
-    private Project project;
-    public void newStart(String activityName, Project project) throws IOException {
+    private String pName;
+    Project project;
+    public void newStart(String activityName,String pName) throws IOException, ExceptionHandler {
         this.activityName = activityName;
-        this.project = project;
+        this.pName = pName;
+        this.project = ProjectMenu.getProject(pName);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AddHours.fxml"));
+        loader.setControllerFactory(param -> this);
+        Parent root = loader.load();
 
         Stage stage = new Stage();
-        start(stage);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+
+        Label nameLabel = (Label) stage.getScene().lookup("#activityLabel");
+        nameLabel.setText("Add hours for " + activityName);
+        stage.show();
 
     }
+    /*
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, ExceptionHandler {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("AddHours.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         Label nameLabel = (Label) stage.getScene().lookup("#activityLabel");
-        nameLabel.setText("Add hours for " + activityName);
+        nameLabel.setText("Add hours for " +  activityName);
         stage.show();
-    }
+    }*/
     @FXML
     Label activityLabel;
     @FXML
@@ -41,11 +53,12 @@ public class AddHoursFX extends Application {
     @FXML
     TextField aNameTextfield;
 
-    public void submitHours() throws ExceptionHandler {
+    public void submitHours() throws Exception {
         int Hours = Integer.parseInt(aNameTextfield.getText());
         ProjectActivity activity = project.getActivity(activityName);
-        activity.addHoursToActivity(Hours);
-
+        activity.addHours(AuthenticationService.getLoggedInUser() ,Hours);
+        System.out.println(activity.getActivityName() + " " + activity.getHours());
+        ProjectMenuFX.getInstance().updateHours(project);
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();
     }

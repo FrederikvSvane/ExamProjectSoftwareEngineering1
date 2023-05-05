@@ -3,7 +3,7 @@ package application;
 import java.util.HashMap;
 
 public abstract class Activity{
-    public int hours;
+    private int hours;
     public String activityName;
     public HashMap<Employee,Integer> employeeHours = new HashMap<Employee, Integer>();
 
@@ -21,6 +21,8 @@ public abstract class Activity{
             }
             this.hours += hours;
         }
+    }
+    public int getHours(){return hours;
     }
 
     public String getActivityName(){
