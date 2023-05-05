@@ -166,8 +166,7 @@ public class ProjectMenuFX extends Application {
     }
 
     public void setEmployeeView(Project project){
-
-        ObservableList<String> info =FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
+        ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
         employeeListView.setItems(info);
     }
 
