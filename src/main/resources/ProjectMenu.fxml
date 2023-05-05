@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollBar?>
@@ -97,9 +96,9 @@
                                           <TableView fx:id="table" layoutY="198.0" prefHeight="471.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="198.0">
                                              <columns>
                                                 <TableColumn fx:id="aNameColumn" prefWidth="137.0" text="Activities" />
-                                                <TableColumn prefWidth="137.0" text="Budget Hours" />
-                                                <TableColumn prefWidth="137.0" text="Total Hours" />
-                                                <TableColumn prefWidth="137.0" text="Due Date" />
+                                                <TableColumn fx:id="hoursColumn" prefWidth="137.0" text="Budget Hours" />
+                                                <TableColumn fx:id="totalHoursColumn" prefWidth="137.0" text="Total Hours" />
+                                                <TableColumn fx:id="dueDate" prefWidth="137.0" text="Due Date" />
                                              </columns>
                                           </TableView>
                                           <Button fx:id="newProject2" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" onAction="#addProject" prefWidth="100.0" text="New Project" />

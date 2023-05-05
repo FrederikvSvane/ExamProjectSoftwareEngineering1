@@ -4,7 +4,8 @@ public class ProjectActivity extends Activity {
     private int startWeek;
     private int numberOfWeeks;
     private int budgetedHours;
-    private int endDate;
+    private String endDate;
+    private int totalHours;
 
     public ProjectActivity(String activityName, int budgetedHours, int startWeek, int numberOfWeeks) {
         this.activityName = activityName;
@@ -15,7 +16,7 @@ public class ProjectActivity extends Activity {
     }
 
     private void updateEndDate() {
-        endDate = startWeek + numberOfWeeks;
+        endDate = "week " + (startWeek + numberOfWeeks);
     }
 
 
@@ -53,8 +54,14 @@ public class ProjectActivity extends Activity {
         }
     }
 
-    public int getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
+    public int getBudgetedHours(){
+        return budgetedHours;
+    }
+    public int getTotalHours(){return totalHours;}
+
+    public void setTotalHours(int totalHours){this.totalHours = totalHours;}
 }

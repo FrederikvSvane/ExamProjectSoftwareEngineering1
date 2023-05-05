@@ -100,6 +100,8 @@ public class ProjectMenuFX extends Application {
 
     @FXML
     private TableColumn<ProjectActivity, String> totalHoursColumn;
+    @FXML
+    private  TableColumn<ProjectActivity, String> dueDate;
 
     @FXML
     private TableView<ProjectActivity> table = new TableView<ProjectActivity>();
@@ -107,6 +109,9 @@ public class ProjectMenuFX extends Application {
     @FXML
     public void initialize() {
         aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
+        hoursColumn.setCellValueFactory(new PropertyValueFactory<>("budgetedHours"));
+        totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("totalHours"));
+        dueDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         updateList();
         setInformationRowLeft();
     }
@@ -140,10 +145,10 @@ public class ProjectMenuFX extends Application {
         //activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
         //activityData.add(new ProjectActivity("Activity 1", 2,3 ,5));
 
-        ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList();
+        //ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList();
 
-        table.setItems(activityData);
-        System.out.println("Hey Hey");
+        //table.setItems(activityData);
+        //System.out.println("Hey Hey");
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
 
