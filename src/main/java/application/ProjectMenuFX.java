@@ -99,7 +99,7 @@ public class ProjectMenuFX extends Application {
 
     @FXML
     private TableView<ProjectActivity> table = new TableView<ProjectActivity>();
-    ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList();
+
     @FXML
     public void initialize() {
         aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
@@ -134,8 +134,10 @@ public class ProjectMenuFX extends Application {
     }
     public void updateList(){
         //activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
+        //activityData.add(new ProjectActivity("Activity 1", 2,3 ,5));
 
-        activityData.add(new ProjectActivity("Activity 1", 2,3 ,5));
+        ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList();
+
         table.setItems(activityData);
         System.out.println("Hey Hey");
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
@@ -153,6 +155,7 @@ public class ProjectMenuFX extends Application {
     public void projectSelect(){
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
+        addProjectActivityToList(project);
         setInformationRowRight1(project);
         setEmployeeView(project);
 
@@ -181,8 +184,8 @@ public class ProjectMenuFX extends Application {
         PM.newStart();
     }
 
-    public void addProjectActivity(String name, int hours, int date, int duration){
-        activityData.add(new ProjectActivity(name, hours,date ,duration));
+    public void addProjectActivityToList(Project project){
+        ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
         table.setItems(activityData);
     }
 }
