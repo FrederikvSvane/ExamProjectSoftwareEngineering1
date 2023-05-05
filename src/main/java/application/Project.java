@@ -9,7 +9,7 @@ public class Project implements ProjectService{
     private String projectName;
     private static int projectID = 23000; //Indkorporér dato/kalender her
     private List<ProjectActivity> activityList = new ArrayList<ProjectActivity>();
-    private ArrayList<Employee> employeeList;
+    public ArrayList<Employee> employeeList;
     private Employee projectLeader;
     private int budgetedHours;
     private HashMap<Employee, Integer> employeeHours;

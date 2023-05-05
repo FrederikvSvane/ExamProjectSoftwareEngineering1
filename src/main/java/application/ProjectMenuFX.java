@@ -27,6 +27,8 @@ public class ProjectMenuFX extends Application {
     NewProjectFX npFX = new NewProjectFX();
     NewActivityFX naFX = new NewActivityFX();
 
+    private Project currentProject;
+
     private static ProjectMenuFX instance;
 
     public ProjectMenuFX() {
@@ -63,6 +65,8 @@ public class ProjectMenuFX extends Application {
     ListView<String> informationRowLeft;
     @FXML
     ListView<String> informationRowLeft1;
+    @FXML
+    ListView<String> employeeListView;
     @FXML
     Button update1;
     @FXML
@@ -150,11 +154,18 @@ public class ProjectMenuFX extends Application {
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
         setInformationRowRight1(project);
+        setEmployeeView(project);
 
     }
     public void projectSelect2(){
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         System.out.println("Clicked on: " + selectedItem);
+    }
+
+    public void setEmployeeView(Project project){
+
+        ObservableList<String> info =FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
+        employeeListView.setItems(info);
     }
 
     public void logOut() throws IOException {

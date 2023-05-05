@@ -42,6 +42,7 @@ public class ProjectMenu{
             } else {
                 Project newProject = new Project(projectName, budgetedHours, startDate, duration);
                 projects.add(newProject);
+                newProject.addEmployeeToProject("ljs");
             }
         }
     }
