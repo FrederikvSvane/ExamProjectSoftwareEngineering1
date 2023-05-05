@@ -90,7 +90,9 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button logOut;
     @FXML
-    Button addHoursButton;
+    Button addEmployeeButton;
+    @FXML
+    Button addProjectLeaderButton;
     @FXML
     private TableColumn<ProjectActivity, String> aNameColumn;
     @FXML
@@ -190,7 +192,19 @@ public class ProjectMenuFX extends Application {
         table.setItems(activityData);
     }
 
-    public void addEmployee(){}
+    public void addEmployee() throws ExceptionHandler {
+        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
+        Project project = ProjectMenu.getProject(selectedItem);
+        System.out.println("Add Employee");
+        project.addEmployeeToProject("sss");
+        setEmployeeView(project);
+    }
 
-    public void addProjectLeader(){}
+    public void addProjectLeader() throws ExceptionHandler {
+        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
+        Project project = ProjectMenu.getProject(selectedItem);
+        System.out.println("Add PL");
+        project.setProjectLeader("sss");
+        setInformationRowRight1(project);
+    }
 }
