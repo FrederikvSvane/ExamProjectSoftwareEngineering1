@@ -57,13 +57,13 @@ public class NewActivityFX extends Application {
         int sDate = startDate.getValue().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
         int bHours = Integer.parseInt(budgetHours.getText());
         int aDuration = Integer.parseInt(duration.getText());
-
+        System.out.println(aName + "" + sDate+ "" + bHours + "" + aDuration);
         Project project = ProjectMenu.getProject(pName);
         project.addProjectActivity(aName,bHours,sDate,aDuration);
-        ProjectMenuFX pmFX = new ProjectMenuFX();
-        //pmFX.activityData.add(new ProjectActivity(aName, sDate,bHours ,aDuration));
+        ProjectMenuFX.getInstance().addProjectActivity(aName,bHours,sDate,aDuration);
         //pmFX.activityData = FXCollections.observableArrayList();
         //ProjectMenu.getProject("Hey").getActivityList()
+        ProjectMenuFX.getInstance().updateList();
         Stage stage = (Stage) createActivityButton.getScene().getWindow();
         stage.close();
         //System.out.println(project.activityExists(aName));

@@ -134,8 +134,8 @@ public class ProjectMenuFX extends Application {
     }
     public void updateList(){
         //activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
-        activityData.add(new ProjectActivity("Activity 1", 2,3 ,12));
-        activityData.add(new ProjectActivity("Activity 2", 4, 6,12));
+
+        activityData.add(new ProjectActivity("Activity 1", 2,3 ,5));
         table.setItems(activityData);
         System.out.println("Hey Hey");
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
@@ -181,7 +181,8 @@ public class ProjectMenuFX extends Application {
         PM.newStart();
     }
 
-    public void showProjectActivity(){
-
+    public void addProjectActivity(String name, int hours, int date, int duration){
+        activityData.add(new ProjectActivity(name, hours,date ,duration));
+        table.setItems(activityData);
     }
 }
