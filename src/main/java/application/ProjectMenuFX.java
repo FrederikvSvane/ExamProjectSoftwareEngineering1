@@ -54,7 +54,7 @@ public class ProjectMenuFX extends Application {
     @FXML
     ListView<String> MyProjectsList;
     @FXML
-    ListView<String> AllProjectsList;
+    ListView<String> AllProjectsList = new ListView<String>();
     @FXML
     ListView<String> informationRowRight;
     @FXML
@@ -88,17 +88,17 @@ public class ProjectMenuFX extends Application {
     @FXML
     private TableColumn<ProjectActivity, String> aNameColumn;
     @FXML
-    private TableColumn<Activity, String> hoursColumn;
+    private TableColumn<ProjectActivity, String> hoursColumn;
 
     @FXML
-    private TableColumn<Activity, String> totalHoursColumn;
+    private TableColumn<ProjectActivity, String> totalHoursColumn;
 
     @FXML
-    private TableView<ProjectActivity> table;
+    private TableView<ProjectActivity> table = new TableView<ProjectActivity>();
     ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList();
     @FXML
     public void initialize() {
-
+        aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         updateList();
         setInformationRowLeft();
     }
@@ -130,14 +130,13 @@ public class ProjectMenuFX extends Application {
     }
     public void updateList(){
         //activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
-        aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         activityData.add(new ProjectActivity("Activity 1", 2,3 ,12));
         activityData.add(new ProjectActivity("Activity 2", 4, 6,12));
         table.setItems(activityData);
+        System.out.println("Hey Hey");
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
-        ObservableList<String> data = FXCollections.observableArrayList();
-        data.add("Hello, world!");
+
         //table = new TableView<String>();
         // Set the data model as the table's data source
         //table.setItems((ObservableList<String>)data);
@@ -169,5 +168,9 @@ public class ProjectMenuFX extends Application {
 
         DriverFX PM = new DriverFX();
         PM.newStart();
+    }
+
+    public void showProjectActivity(){
+
     }
 }

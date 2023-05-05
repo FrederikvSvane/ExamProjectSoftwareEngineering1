@@ -87,7 +87,7 @@
                                           <Button fx:id="update2" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#updateList" prefWidth="100.0" text="Refresh" />
                                           <TableView fx:id="table" layoutY="198.0" prefHeight="471.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="198.0">
                                              <columns>
-                                                <TableColumn prefWidth="178.0" text="Activities" />
+                                                <TableColumn fx:id="aNameColumn" prefWidth="178.0" text="Activities" />
                                                 <TableColumn prefWidth="188.0" text="Hours" />
                                                 <TableColumn prefWidth="181.0" text="Total Hours" />
                                              </columns>

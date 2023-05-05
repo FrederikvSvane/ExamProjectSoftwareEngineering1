@@ -61,10 +61,11 @@ public class NewActivityFX extends Application {
         Project project = ProjectMenu.getProject(pName);
         project.addProjectActivity(aName,bHours,sDate,aDuration);
         ProjectMenuFX pmFX = new ProjectMenuFX();
-        pmFX.activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
+        //pmFX.activityData.add(new ProjectActivity(aName, sDate,bHours ,aDuration));
+        //pmFX.activityData = FXCollections.observableArrayList();
+        //ProjectMenu.getProject("Hey").getActivityList()
         Stage stage = (Stage) createActivityButton.getScene().getWindow();
         stage.close();
-
         //System.out.println(project.activityExists(aName));
     }
     public void cancel(){
