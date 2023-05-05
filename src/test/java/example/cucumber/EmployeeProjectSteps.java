@@ -36,16 +36,41 @@ public class EmployeeProjectSteps {
     }
 
     @Given("A user exists with the initials {string}.")
-    public void a_user_exists_with_the_initials(String string) {
-        assertTrue(employeeBase.containsEmployee(string));
+    public void a_user_exists_with_the_initials(String employeeInitials) {
+        assertTrue(employeeBase.containsEmployee(employeeInitials));
     }
 
     @When("An existing user adds {string} to a project")
-    public void an_existing_user_adds_to_a_project(String string) throws Exception {
+    public void an_existing_user_adds_to_a_project(String employeeInitials) throws Exception {
         try {
-            project.addEmployeeToProject(string);
+            project.addEmployeeToProject(employeeInitials);
         } catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
     }
+
+    @Given("An existing user {string} has been added to the project")
+    public void anExistingUserHasBeenAddedToTheProject(String employeeInitials) throws Exception {
+        try {
+            project.addEmployeeToProject(employeeInitials);
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @When("An existing user removes {string} from a project")
+    public void anExistingUserRemovesFromAProject(String employeeInitials) throws Exception {
+        try {
+            project.removeEmployeeFromProject(employeeInitials);
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("user {string} is removed from the project")
+    public void userIsRemovedFromTheProject(String employeeInitials) {
+        assertFalse(project.containsEmployee(employeeInitials));
+    }
+
+
 }

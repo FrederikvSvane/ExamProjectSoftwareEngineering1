@@ -8,7 +8,7 @@ public interface ProjectService {
 
     void addEmployeeToProject(String initials) throws ExceptionHandler;
 
-    void removeEmployeeFromProject(String initials);
+    void removeEmployeeFromProject(String initials) throws ExceptionHandler;
 
     //void displayProject(Project project);
 

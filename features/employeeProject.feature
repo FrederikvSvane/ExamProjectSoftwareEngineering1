@@ -23,3 +23,18 @@ Feature: Employee Project
     Given A user is logged in and has a project selected.
     When An existing user adds "rsas" to a project
     Then error message "The user doesn't exist"
+
+  # removes employee from project
+
+  Scenario: Remove an employee from a project
+    Given A user is logged in and has a project selected.
+    And A user exists with the initials "lusj".
+    And An existing user "lusj" has been added to the project
+    When An existing user removes "lusj" from a project
+    Then user "lusj" is removed from the project
+
+  Scenario: Remove an employee from a project that is not added to the project
+    Given A user is logged in and has a project selected.
+    And A user exists with the initials "lusj".
+    When An existing user removes "lusj" from a project
+    Then error message "User doesn't exist in the project"

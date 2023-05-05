@@ -13,7 +13,4 @@ public class Employee {
         return employeeInitials;
     }
 
-    public String getUsername() {
-        return employeeInitials;
-    }
 }

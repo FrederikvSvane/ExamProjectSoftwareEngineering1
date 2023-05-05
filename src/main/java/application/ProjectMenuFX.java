@@ -122,7 +122,7 @@ public class ProjectMenuFX extends Application {
     }
 
     public void setInformationRowRight1(Project project) {
-        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getUsername(), "Week " + Integer.toString(project.getEndDate()), "Week " + Integer.toString(project.getStartDate()), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
+        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()), "Week " + Integer.toString(project.getStartDate()), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
         informationRowRight1.setItems(info);
     }
 

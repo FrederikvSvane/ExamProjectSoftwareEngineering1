@@ -116,7 +116,16 @@ public class Project implements ProjectService {
 
     }
 
-    public void removeEmployeeFromProject(String initials) {
+    public void removeEmployeeFromProject(String initials) throws ExceptionHandler{
+        if (containsEmployee(initials)) {
+            employeeList.remove(employeeBase.getEmployee(initials));
+        } else {
+            throw new ExceptionHandler("User doesn't exist in the project");
+        }
+    }
+
+    public boolean containsEmployee(String initials) {
+        return employeeList.stream().anyMatch(e -> e.getEmployeeInitials().equals(initials));
     }
 
     public void setTimeframe(int startDate, int duration) throws ExceptionHandler {
