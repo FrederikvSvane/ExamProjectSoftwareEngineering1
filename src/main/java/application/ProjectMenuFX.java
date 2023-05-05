@@ -10,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import javax.swing.text.TableView;
+
 import javax.swing.text.View;
 
 import java.io.IOException;
@@ -23,6 +25,9 @@ public class ProjectMenuFX extends Application {
 
     String[] list = new String[10];
     NewProjectFX npFX = new NewProjectFX();
+    NewActivityFX naFX = new NewActivityFX();
+
+    private Project currentProject;
 
     private static ProjectMenuFX instance;
 
@@ -51,7 +56,7 @@ public class ProjectMenuFX extends Application {
     @FXML
     ListView<String> MyProjectsList;
     @FXML
-    ListView<String> AllProjectsList;
+    ListView<String> AllProjectsList = new ListView<String>();
     @FXML
     ListView<String> informationRowRight;
     @FXML
@@ -60,6 +65,8 @@ public class ProjectMenuFX extends Application {
     ListView<String> informationRowLeft;
     @FXML
     ListView<String> informationRowLeft1;
+    @FXML
+    ListView<String> employeeListView;
     @FXML
     Button update1;
     @FXML
@@ -83,13 +90,29 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button logOut;
     @FXML
+    private TableColumn<ProjectActivity, String> aNameColumn;
+    @FXML
+    private TableColumn<ProjectActivity, String> hoursColumn;
+
+    @FXML
+    private TableColumn<ProjectActivity, String> totalHoursColumn;
+
+    @FXML
+    private TableView<ProjectActivity> table = new TableView<ProjectActivity>();
+
+    @FXML
     public void initialize() {
+        aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         updateList();
         setInformationRowLeft();
     }
 
     public void addProject() throws IOException {
         npFX.newStart();
+    }
+    public void addProjectActivity() throws IOException {
+        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
+        naFX.newStart(selectedItem);
     }
 
     public void setInformationRowLeft() {
@@ -110,19 +133,41 @@ public class ProjectMenuFX extends Application {
 
     }
     public void updateList(){
+        //activityData = FXCollections.observableArrayList(ProjectMenu.getProject("Hey").getActivityList());
+        //activityData.add(new ProjectActivity("Activity 1", 2,3 ,5));
+
+        ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList();
+
+        table.setItems(activityData);
+        System.out.println("Hey Hey");
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
+
+        //table = new TableView<String>();
+        // Set the data model as the table's data source
+        //table.setItems((ObservableList<String>)data);
+
+
+        //aNameColumn.setCellValueFactory(new PropertyValueFactory("Navn1"));
         //System.out.println(projectList.getOnMouseClicked());
     }
 
     public void projectSelect(){
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
+        addProjectActivityToList(project);
         setInformationRowRight1(project);
+        setEmployeeView(project);
+
     }
     public void projectSelect2(){
-        String selectedItem = MyProjectsList.getSelectionModel().getSelectedItem();
+        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         System.out.println("Clicked on: " + selectedItem);
+    }
+
+    public void setEmployeeView(Project project){
+        ObservableList<String> info =FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
+        employeeListView.setItems(info);
     }
 
     public void logOut() throws IOException {
@@ -136,5 +181,10 @@ public class ProjectMenuFX extends Application {
 
         DriverFX PM = new DriverFX();
         PM.newStart();
+    }
+
+    public void addProjectActivityToList(Project project){
+        ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
+        table.setItems(activityData);
     }
 }

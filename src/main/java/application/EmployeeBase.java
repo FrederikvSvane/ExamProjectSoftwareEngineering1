@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class EmployeeBase {
@@ -32,5 +33,13 @@ public class EmployeeBase {
 
     public static Employee getEmployee(String initials){
         return employeeBase.stream().filter(e-> e.getEmployeeInitials().equals(initials)).findFirst().get();
+    }
+
+    public static List<String> getEmployeeNames(List<Employee> list){
+        List<String> employeeNames = new ArrayList<String>();
+        for (Employee employee : list) {
+            employeeNames.add(employee.getEmployeeInitials());
+        }
+        return employeeNames;
     }
 }
