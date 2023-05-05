@@ -9,7 +9,7 @@ public class Project implements ProjectService {
     private String projectName;
     private int projectID; //Indkorporér dato/kalender her
     private List<ProjectActivity> activityList = new ArrayList<ProjectActivity>();
-    private ArrayList<Employee> employeeList;
+    ArrayList<Employee> employeeList;
     private Employee projectLeader;
     private int budgetedHours;
     private HashMap<Employee, Integer> employeeHours;
@@ -171,4 +171,6 @@ public class Project implements ProjectService {
             return activityList.stream().filter(e -> e.getActivityName().equals(activityName)).findFirst().get();
         }
     }
+
+    public List<ProjectActivity> getActivityList(){return activityList;}
 }

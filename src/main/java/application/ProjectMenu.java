@@ -41,6 +41,7 @@ public class ProjectMenu{
             } else {
                 Project newProject = new Project(projectName, budgetedHours, startDate, duration);
                 projects.add(newProject);
+                newProject.addEmployeeToProject("ljs");
                 if (projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) == null) {
                     projectsCreatedInYear.put(getDate().get(Calendar.YEAR), 1);
                 } else {
