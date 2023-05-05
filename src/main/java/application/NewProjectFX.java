@@ -66,7 +66,7 @@ public class NewProjectFX extends Application {
 
         //Add code to project
         //project = new Project(pName, bHours, sDate, pDuration);
-        projectMenu = new ProjectMenu(AuthenticationService.getUsername());
+        projectMenu = new ProjectMenu(AuthenticationService.getLoggedInUser());
         projectMenu.addProject(pName,bHours,sDate,pDuration);
 
         //System.out.println(projectMenu.toString());
