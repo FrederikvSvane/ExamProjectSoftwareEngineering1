@@ -5,17 +5,18 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class Project implements ProjectService{
+public class Project implements ProjectService {
     private String projectName;
-    private int projectID = 23000; //Indkorporér dato/kalender her
+    private int projectID; //Indkorporér dato/kalender her
     private List<ProjectActivity> activityList = new ArrayList<ProjectActivity>();
-    public ArrayList<Employee> employeeList;
+    ArrayList<Employee> employeeList;
     private Employee projectLeader;
     private int budgetedHours;
     private HashMap<Employee, Integer> employeeHours;
     private int startDate;
     private int endDate;
     private int duration;
+
     ProjectActivity activity;
     EmployeeBase employeeBase = new EmployeeBase();
 
@@ -73,8 +74,8 @@ public class Project implements ProjectService{
     }
 
     public Employee getProjectLeader() {
-        if(projectLeader == null){
-            Employee none = new Employee("none",0);
+        if (projectLeader == null) {
+            Employee none = new Employee("none", 0);
             return none;
         } else {
             return projectLeader;
@@ -91,7 +92,7 @@ public class Project implements ProjectService{
         if (employeeBase.containsEmployee(initials)) {
             if (!employeeList.contains(employeeBase.getEmployee(initials))) {
                 employeeList.add(employeeBase.getEmployee(initials));
-            } else{
+            } else {
                 throw new ExceptionHandler("The user is already assigned to the project");
             }
         } else {
@@ -99,18 +100,24 @@ public class Project implements ProjectService{
         }
     }
 
-    public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler{
-        if(!activityExists(activityName)){
+    public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler {
+        if (activityName == null || activityName.equals("")) {
+            throw new ExceptionHandler("The activity name is invalid");
+        } else if (hours <= 0) {
+            throw new ExceptionHandler("The amount of hours is invalid");
+        } else if (startDate <= 0 || startDate > 52 || duration <= 0) {
+            throw new ExceptionHandler("The given timeframe is invalid");
+        } else if (activityExists(activityName)) {
+            throw new ExceptionHandler("An activity with the given name already exists");
+        } else {
             activity = new ProjectActivity(activityName, hours, startDate, duration);
             activityList.add(activity);
-        } else {
-            throw new ExceptionHandler("An activity with the given name already exists");
         }
 
     }
-    public void addConstantActivity(String activityName, int hours, int startDate, int duration){}
 
-    public void removeEmployeeFromProject(String initials){}
+    public void removeEmployeeFromProject(String initials) {
+    }
 
     public void setTimeframe(int startDate, int duration) throws ExceptionHandler {
         if (startDate <= 0 || startDate > 52 || duration <= 0) {
@@ -123,10 +130,13 @@ public class Project implements ProjectService{
     }
 
 
-    public boolean activityExists(String activityName){
+    public boolean activityExists(String activityName) {
         return activityList.stream().anyMatch(e -> e.getActivityName().equals(activityName));
     }
-    public Activity selectActivity(String activityName){ return new ProjectActivity(null, 0, 0, 0);}
+
+    public Activity selectActivity(String activityName) {
+        return new ProjectActivity(null, 0, 0, 0);
+    }
 
 
     public int getEndDate() {
@@ -153,5 +163,14 @@ public class Project implements ProjectService{
         }
         return totalHours;
     }
-    public List<ProjectActivity> getActivityList(){ return activityList; }
+
+    public ProjectActivity getActivity(String activityName) throws ExceptionHandler {
+        if (!activityExists(activityName)) {
+            throw new ExceptionHandler("The activity does not exist in the project");
+        } else {
+            return activityList.stream().filter(e -> e.getActivityName().equals(activityName)).findFirst().get();
+        }
+    }
+
+    public List<ProjectActivity> getActivityList(){return activityList;}
 }

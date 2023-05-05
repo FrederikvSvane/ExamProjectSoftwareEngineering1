@@ -1,15 +1,14 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 public class ProjectMenu{
 
     private static DateServer dateServer = new DateServer();
     private String username;
+
+    private ArrayList<offWorkActivity> offWorkActivities = new ArrayList<offWorkActivity>();
 
     private static List<Project> projects = new ArrayList<Project>();
 
@@ -43,6 +42,11 @@ public class ProjectMenu{
                 Project newProject = new Project(projectName, budgetedHours, startDate, duration);
                 projects.add(newProject);
                 newProject.addEmployeeToProject("ljs");
+                if (projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) == null) {
+                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), 1);
+                } else {
+                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) + 1);
+                }
             }
         }
     }
@@ -76,4 +80,30 @@ public class ProjectMenu{
         return projectNames;
     }
 
+    public void createOffWorkActivity(String activityName) throws ExceptionHandler{
+        if(!AuthenticationService.loginStatus()){
+            throw new ExceptionHandler("User must be logged in to create activity");
+        }else if(offWorkActivityExists(activityName)){
+            throw new ExceptionHandler("An off-work activity with the given name already exists");
+        }else {
+            offWorkActivity offWorkActivity = new offWorkActivity(activityName);
+            offWorkActivities.add(offWorkActivity);
+        }
+    }
+
+    public boolean offWorkActivityExists(String activityName) {
+        return offWorkActivities.stream().anyMatch(a -> a.getActivityName().equals(activityName));
+    }
+
+    public offWorkActivity getOffWorkActivity(String activityName) {
+        return offWorkActivities.stream().filter(a -> a.getActivityName().equals(activityName)).findFirst().get();
+    }
+
+    public void addHoursToOffWorkActivity(String activityName, String employeeInitials,Integer hours) throws Exception{
+        getOffWorkActivity(activityName).addHours(employeeInitials, hours);
+    }
+
+    public void setProjectsCreatedInYear(Integer numOfProjects, Integer year) {
+        projectsCreatedInYear.put(year, numOfProjects);
+    }
 }

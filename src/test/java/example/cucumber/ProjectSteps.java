@@ -57,7 +57,8 @@ public class ProjectSteps {
 
     @Given("there has been created {int} projects in {int}")
     public void there_has_been_created_projects_in(Integer numOfProjects, Integer year) {
-        assertEquals(ProjectMenu.getProjectsCreatedInYear(year), (int) numOfProjects);
+        projectMenuHolder.getProjectMenu().setProjectsCreatedInYear(numOfProjects, year);
+        assertEquals(numOfProjects,ProjectMenu.getProjectsCreatedInYear(year));
     }
 
     @When("user creates project with name {string}")
@@ -88,8 +89,6 @@ public class ProjectSteps {
     @Given("a user is not logged in")
     public void a_user_is_not_logged_in() {
         AuthenticationService.logout();
-        user = "non";
-        AuthenticationService as = new AuthenticationService(user);
     }
 
 
