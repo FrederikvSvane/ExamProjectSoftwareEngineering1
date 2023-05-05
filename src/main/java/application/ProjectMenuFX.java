@@ -90,6 +90,8 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button logOut;
     @FXML
+    Button addHoursButton;
+    @FXML
     private TableColumn<ProjectActivity, String> aNameColumn;
     @FXML
     private TableColumn<ProjectActivity, String> hoursColumn;
@@ -187,4 +189,8 @@ public class ProjectMenuFX extends Application {
         ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
         table.setItems(activityData);
     }
+
+    public void addEmployee(){}
+
+    public void addProjectLeader(){}
 }

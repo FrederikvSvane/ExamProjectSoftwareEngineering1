@@ -33,7 +33,7 @@
                                     <Button fx:id="newActivity1" layoutX="570.0" layoutY="125.0" mnemonicParsing="false" prefWidth="100.0" text="New Activity" />
                                     <Button fx:id="deleteActivity1" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" prefWidth="100.0" text="Delete Activity" />
                                     <Button fx:id="addHours1" layoutX="570.0" layoutY="225.0" mnemonicParsing="false" prefWidth="100.0" text="Add Hours" />
-                                    <Button fx:id="logOut" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#logOut" prefWidth="100.0" text="Log Out" />
+                                    <Button fx:id="logOut" layoutX="570.0" layoutY="390.0" mnemonicParsing="false" onAction="#logOut" prefWidth="100.0" text="Log Out" />
                                     <SplitPane dividerPositions="0.5018315018315018" prefHeight="197.0" prefWidth="548.0">
                                       <items>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -68,6 +68,8 @@
                                           <TableColumn prefWidth="137.0" text="Due Date" />
                                       </columns>
                                     </TableView>
+                                    <Button fx:id="addEmployeeButton" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="25.0" prefWidth="100.0" text="Add Employee" />
+                                    <Button fx:id="addProjectLeaderButton" layoutX="570.0" layoutY="325.0" mnemonicParsing="false" onAction="#addProjectLeader" prefHeight="45.0" prefWidth="100.0" text="Add Project Leader" textAlignment="CENTER" wrapText="true" />
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
@@ -103,7 +105,7 @@
                                           <Button fx:id="addHours2" layoutX="570.0" layoutY="225.0" mnemonicParsing="false" prefWidth="100.0" text="Add Hours" />
                                           <Button fx:id="newActivity2" layoutX="570.0" layoutY="125.0" mnemonicParsing="false" onAction="#addProjectActivity" prefWidth="100.0" text="New Activity" />
                                           <Button fx:id="deleteActivity2" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" prefWidth="100.0" text="Delete Activity" />
-                                          <Button fx:id="logOut" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#logOut" prefWidth="100.0" text="Log Out" />
+                                          <Button fx:id="logOut" layoutX="570.0" layoutY="390.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="100.0" text="Log Out" />
                                           <SplitPane dividerPositions="0.5018315018315018" layoutY="2.0" prefHeight="197.0" prefWidth="548.0">
                                              <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -132,6 +134,8 @@
                                                    </children></AnchorPane>
                                              </items>
                                           </SplitPane>
+                                          <Button fx:id="addEmployeeButton" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="25.0" prefWidth="100.0" text="Add Employee" />
+                                          <Button fx:id="addProjectLeaderButton" layoutX="570.0" layoutY="325.0" mnemonicParsing="false" onAction="#addProjectLeader" prefHeight="45.0" prefWidth="100.0" text="Add Project Leader" textAlignment="CENTER" wrapText="true" />
                                        </children>
                                     </AnchorPane>
                                  </items>
