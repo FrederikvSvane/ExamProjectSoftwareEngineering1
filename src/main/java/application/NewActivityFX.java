@@ -50,24 +50,28 @@ public class NewActivityFX extends Application {
     @FXML
     Button createActivityButton;
     @FXML
-    Button cancelButton;
+    Button cancel;
 
     public void createActivity() throws ExceptionHandler {
+        System.out.println("I was run create act");
         String aName = activityName.getText();
+
         int sDate = startDate.getValue().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
         int bHours = Integer.parseInt(budgetHours.getText());
         int aDuration = Integer.parseInt(duration.getText());
-        System.out.println(aName + "" + sDate+ "" + bHours + "" + aDuration);
+
         Project project = ProjectMenu.getProject(pName);
+
         project.addProjectActivity(aName,bHours,sDate,aDuration);
+
         ProjectMenuFX.getInstance().addProjectActivityToList(project);
+
         Stage stage = (Stage) createActivityButton.getScene().getWindow();
         stage.close();
 
     }
     public void cancel(){
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
-
 }

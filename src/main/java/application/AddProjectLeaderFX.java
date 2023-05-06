@@ -16,10 +16,6 @@ public class AddProjectLeaderFX extends Application {
 
     private static String pName;
 
-    private ProjectMenuFX pmFX = new ProjectMenuFX();
-
-
-
     public void newStart(String pName) throws IOException {
         this.pName = pName;
 
@@ -33,7 +29,7 @@ public class AddProjectLeaderFX extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         Label nameLabel = (Label) stage.getScene().lookup("#addEmployeeLabel");
-        nameLabel.setText("Edit Employee list for " + pName);
+        nameLabel.setText("Assign a project leader to " + pName);
         stage.show();
     }
 
@@ -49,9 +45,16 @@ public class AddProjectLeaderFX extends Application {
     public void addProjectLeaderToList() throws ExceptionHandler {
         String initials = projectLeaderInitials.getText();
         Project project = ProjectMenu.getProject(pName);
-        project.setProjectLeader(initials);
-
+        if(project.employeeList.contains(EmployeeBase.getEmployee(initials))){
+            project.setProjectLeader(initials);
+        } else {
+            addEmployeeLabel.setWrapText(true);
+            addEmployeeLabel.setMaxWidth(250);
+            addEmployeeLabel.setText("The user is not assigned the project, add the user and try again");
+            throw new ExceptionHandler("The user is not assigned the project.");
+        }
         ProjectMenuFX.getInstance().setInformationRowRight1(project);
+
 
         Stage stage = (Stage) addProjectLeaderButton.getScene().getWindow();
         stage.close();

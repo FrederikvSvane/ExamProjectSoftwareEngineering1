@@ -19,9 +19,6 @@ public class AddEmployeeFX extends Application {
 
     private static String pName;
 
-    private ProjectMenuFX pmFX = new ProjectMenuFX();
-
-
 
     public void newStart(String pName) throws IOException {
         this.pName = pName;
@@ -53,14 +50,13 @@ public class AddEmployeeFX extends Application {
         String initials = employeeInitials.getText();
         Project project = ProjectMenu.getProject(pName);
         project.addEmployeeToProject(initials);
+        EmployeeBase.getEmployee(initials).addToMyProjects(project);
 
 
         Stage stage = (Stage) addEmployeeButton.getScene().getWindow();
-
-        ProjectMenuFX.getInstance().setEmployeeView(project);
-
         stage.close();
 
+        ProjectMenuFX.getInstance().setEmployeeView(project);
     }
 
     public void cancel(){
@@ -72,8 +68,6 @@ public class AddEmployeeFX extends Application {
         String initials = employeeInitials.getText();
         Project project = ProjectMenu.getProject(pName);
         project.removeEmployeeFromProject(initials);
-
-
 
         Stage stage = (Stage) addEmployeeButton.getScene().getWindow();
 

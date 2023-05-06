@@ -19,6 +19,7 @@ import javax.swing.text.View;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectMenuFX extends Application {
 
@@ -55,11 +56,11 @@ public class ProjectMenuFX extends Application {
 
 
     @FXML
-    ListView<String> MyProjectsList;
+    ListView<String> MyProjectsList = new ListView<String>();
     @FXML
     ListView<String> AllProjectsList = new ListView<String>();
     @FXML
-    ListView<String> informationRowRight;
+    ListView<String> informationRowRight = new ListView<>();
     @FXML
     ListView<String> informationRowRight1 = new ListView<>();
     @FXML
@@ -69,6 +70,8 @@ public class ProjectMenuFX extends Application {
     @FXML
     public ListView<String> employeeListView = new ListView<>();
     @FXML
+    public ListView<String> employeeListView1 = new ListView<>();
+    @FXML
     Button update1;
     @FXML
     Button update2;
@@ -77,9 +80,9 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button newProject2;
     @FXML
-    Button newActivity1;
+    Button newActivity1 = new Button();
     @FXML
-    Button newActivity2;
+    Button newActivity2 = new Button();
     @FXML
     Button deleteActivity1;
     @FXML
@@ -90,6 +93,8 @@ public class ProjectMenuFX extends Application {
     Button addHoursAll;
     @FXML
     Button logOut;
+    @FXML
+    Button logOut1;
     @FXML
     Button addEmployeeButton;
     @FXML
@@ -116,6 +121,7 @@ public class ProjectMenuFX extends Application {
         dueDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         updateList();
         setInformationRowLeft();
+        updateMyProjectList();
     }
 
     public void addProject() throws IOException {
@@ -133,38 +139,72 @@ public class ProjectMenuFX extends Application {
     }
 
     public void setInformationRowRight1(Project project) {
-        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getUsername(), "Week " + Integer.toString(project.getEndDate()), "Week " + Integer.toString(project.getStartDate()), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
+        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()), "Week " + Integer.toString(project.getStartDate()), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
         informationRowRight1.setItems(info);
     }
 
-
-    public void addProject2(){
-        ObservableList<String> items = FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
-        MyProjectsList.setItems(items);
-
+    public void setMyInformationRowRight(Project project) {
+        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()), "Week " + Integer.toString(project.getStartDate()), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
+        informationRowRight.setItems(info);
     }
     public void updateList(){
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
+    }
 
+    public void updateMyProjectList(){
+        ObservableList<String> myProjects = FXCollections.observableArrayList(EmployeeBase.getEmployee(AuthenticationService.getLoggedInUser()).getProjectList());
+        MyProjectsList.setItems((ObservableList<String>) myProjects);
+
+        for(String project : myProjects){
+            System.out.println("project: " + project);
+        }
+    }
+
+
+    public void correctAccess(Project project){
+        System.out.println("project lead : " + project.getProjectLeader().getEmployeeInitials().equals("none"));
+
+        if(project.getProjectLeader().getEmployeeInitials().equals("none") || project.getProjectLeader().getEmployeeInitials().equals(ProjectMenu.username)){
+            newActivity1.setDisable(false);
+            newActivity2.setDisable(false);
+        } else{
+            newActivity1.setDisable(true);
+            newActivity2.setDisable(true);
+        }
     }
 
     public void projectSelect(){
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
+
+        addProjectActivityToList(project);
         setInformationRowRight1(project);
         setEmployeeView(project);
+        correctAccess(project);
     }
-    public void projectSelect2(){
-        String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
-        System.out.println("Clicked on: " + selectedItem);
+
+    public void myProjectSelect(){
+        String mySelectedItem = MyProjectsList.getSelectionModel().getSelectedItem();
+        Project myProject = ProjectMenu.getProject(mySelectedItem);
+        setMyEmployeeListView(myProject);
+
+        addProjectActivityToList(myProject);
+        setMyInformationRowRight(myProject);
+        correctAccess(myProject);
     }
 
     public void setEmployeeView(Project project){
         ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
         employeeListView.setItems(info);
+
         System.out.println("I was run");
         System.out.println(project.employeeList.contains(EmployeeBase.getEmployee("sss")));
+    }
+
+    public void setMyEmployeeListView(Project project){
+        ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
+        employeeListView1.setItems(info);
     }
 
     public void logOut() throws IOException {
@@ -188,20 +228,19 @@ public class ProjectMenuFX extends Application {
     public void addEmployee() throws ExceptionHandler, IOException {
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
-        System.out.println("Add Employee");
-        //project.addEmployeeToProject("sss");
+
         AddEmployeeFX aeFX = new AddEmployeeFX();
         aeFX.newStart(project.getProjectName());
-        setEmployeeView(project);
     }
 
     public void addProjectLeader() throws ExceptionHandler, IOException {
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
-        System.out.println("Add PL");
+
         AddProjectLeaderFX aplFX = new AddProjectLeaderFX();
         aplFX.newStart(project.getProjectName());
-        setInformationRowRight1(project);
+
+        updateList();
     }
 
     public void removeProjectLeader(){
@@ -217,19 +256,19 @@ public class ProjectMenuFX extends Application {
         Project project = ProjectMenu.getProject(selectedProject);
 
         ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
-
         project.getActivityList().remove(selectedActivity);
+
         updateList();
     }
 
 
     public void addHours() throws IOException, ExceptionHandler {
-                String selectedItem1 = AllProjectsList.getSelectionModel().getSelectedItem();
-                ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
-                String aName = selectedActivity.getActivityName();
-                System.out.println(selectedItem1 + " " + aName);
-                adFX.newStart(aName, selectedItem1);
-            }
+        String selectedItem1 = AllProjectsList.getSelectionModel().getSelectedItem();
+        ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
+        String aName = selectedActivity.getActivityName();
+        System.out.println(selectedItem1 + " " + aName);
+        adFX.newStart(aName, selectedItem1);
+    }
     public void updateHours(Project project){
         ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
         table.setItems(activityData);

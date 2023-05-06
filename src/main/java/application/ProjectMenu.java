@@ -6,7 +6,7 @@ import java.util.*;
 public class ProjectMenu{
 
     private static DateServer dateServer = new DateServer();
-    private String username;
+    public static String username;
 
     private ArrayList<offWorkActivity> offWorkActivities = new ArrayList<offWorkActivity>();
 
@@ -31,7 +31,6 @@ public class ProjectMenu{
 //
 //    }
 
-
     public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler{
         if(!AuthenticationService.loginStatus()){
             throw new ExceptionHandler("User must be logged in to create project");
@@ -49,6 +48,10 @@ public class ProjectMenu{
                 }
             }
         }
+    }
+
+    public static Employee getCurrentUser(){
+        return EmployeeBase.getEmployee(username);
     }
 
 

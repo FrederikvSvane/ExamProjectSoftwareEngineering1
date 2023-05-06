@@ -72,6 +72,7 @@ public class NewProjectFX extends Application {
         //System.out.println(projectMenu.toString());
 
         ProjectMenuFX.getInstance().updateList();
+        ProjectMenuFX.getInstance().updateMyProjectList();
 
         Stage stage = (Stage) createProjectButton.getScene().getWindow();
         stage.close();

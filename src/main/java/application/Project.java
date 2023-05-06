@@ -43,6 +43,14 @@ public class Project implements ProjectService {
 
     }
 
+    //public boolean isProjectLeader(String username, Project project){
+    //   if(project.getProjectLeader().getUsername() == username){
+    //        return true;
+    //    } else {
+    //        return false;
+    //    }
+    //}
+
     public int getProjectID() {
         return projectID;
     }
