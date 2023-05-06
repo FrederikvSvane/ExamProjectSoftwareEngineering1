@@ -28,11 +28,6 @@ public class ProjectMenu {
     }
 
 
-//    public void displayMenu(){
-//
-//    }
-
-
     public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler {
         if (!AuthenticationService.loginStatus()) {
             throw new ExceptionHandler("User must be logged in to create project");

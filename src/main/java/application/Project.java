@@ -111,8 +111,13 @@ public class Project implements ProjectService {
         } else if (activityExists(activityName)) {
             throw new ExceptionHandler("An activity with the given name already exists");
         } else {
-            activity = new ProjectActivity(activityName, hours, startDate, duration);
-            activityList.add(activity);
+            if(getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null){
+                activity = new ProjectActivity(activityName, hours, startDate, duration);
+                activityList.add(activity);
+            } else {
+                throw new ExceptionHandler("Activity can not be made when user is not the projectleader");
+            }
+
         }
 
     }

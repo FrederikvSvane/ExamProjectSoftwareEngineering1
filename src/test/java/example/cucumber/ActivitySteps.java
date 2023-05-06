@@ -121,7 +121,7 @@ public class ActivitySteps {
     }
 
     @Then("The user have added a start week {int} and stopdate {int} to the activity {string} in project {string}")
-    public void theUserHaveAddedAStartAndStopdateToTheActivity( int startWeek, int stopDate, String activityName, String projectName) throws Exception {
+    public void theUserHaveAddedAStartAndStopdateToTheActivity(int startWeek, int stopDate, String activityName, String projectName) throws Exception {
         // Write code here that turns the phrase above into concrete actions
         try {
             assertEquals(startWeek, projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).getStartWeek());
@@ -170,9 +170,13 @@ public class ActivitySteps {
 
     @Then("the activity {string} in project {string} have {int} budgeted hours")
     public void theActivityInProjectHaveBudgetedHours(String activityName, String projectName, Integer budgetedHours) throws Exception {
-        assertEquals(budgetedHours,projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).getBudgetedHours());
+        assertEquals(budgetedHours, projectMenuHolder.getProjectMenu().getProject(projectName).getActivity(activityName).getBudgetedHours());
     }
 
-
+    @Given("The user {string} is the project leader of the project")
+    public void theUserIsTheProjectLeaderOfTheProject(String employeeInitials) throws ExceptionHandler {
+        project.removeProjectLeader();
+        project.setProjectLeader(employeeInitials);
+    }
 
 }
