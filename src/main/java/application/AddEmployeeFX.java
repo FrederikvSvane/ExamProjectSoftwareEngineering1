@@ -64,7 +64,7 @@ public class AddEmployeeFX extends Application {
         stage.close();
     }
 
-    public void removeEmployee(){
+    public void removeEmployee() throws ExceptionHandler {
         String initials = employeeInitials.getText();
         Project project = ProjectMenu.getProject(pName);
         project.removeEmployeeFromProject(initials);

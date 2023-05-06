@@ -29,9 +29,6 @@ public abstract class Activity{
         return activityName;
     }
 
-    public int getHours(){
-        return hours;
-    }
 
     public int getEmployeeHours(String employeeInitials) {
         Employee employee = EmployeeBase.getEmployee(employeeInitials);

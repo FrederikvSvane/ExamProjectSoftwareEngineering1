@@ -7,7 +7,7 @@ public class ProjectActivity extends Activity {
     private int startWeek;
     private int numberOfWeeks;
     private int budgetedHours;
-    private String endDate;
+    private int endDate;
     private IntegerProperty totalHours;
     private String pName;
 
@@ -20,7 +20,7 @@ public class ProjectActivity extends Activity {
     }
 
     private void updateEndDate() {
-        endDate = "week " + (startWeek + numberOfWeeks);
+        endDate = (startWeek + numberOfWeeks);
     }
 
 
@@ -58,7 +58,7 @@ public class ProjectActivity extends Activity {
         }
     }
 
-    public String getEndDate() {
+    public int getEndDate() {
         return endDate;
     }
 
