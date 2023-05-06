@@ -65,12 +65,12 @@
                                              </children></AnchorPane>
                                       </items>
                                     </SplitPane>
-                                    <TableView fx:id="table" layoutY="197.0" prefHeight="472.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="197.0">
+                                    <TableView fx:id="myTable" layoutY="197.0" prefHeight="472.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="197.0">
                                       <columns>
-                                        <TableColumn fx:id="aNameColumn" prefWidth="137.0" text="Activities" />
-                                        <TableColumn prefWidth="137.0" text="My Hours" />
-                                          <TableColumn fx:id="totalHoursColumn" prefWidth="137.0" text="Total Hours" />
-                                          <TableColumn fx:id="dueDate" prefWidth="137.0" text="Due Date" />
+                                        <TableColumn fx:id="myNameColumn" prefWidth="137.0" text="Activities" />
+                                        <TableColumn fx:id="myHours" prefWidth="137.0" text="My Hours" />
+                                          <TableColumn fx:id="myTotalHours" prefWidth="137.0" text="Total Hours" />
+                                          <TableColumn fx:id="myDueDate" prefWidth="137.0" text="Due Date" />
                                       </columns>
                                     </TableView>
                                     <Button fx:id="addEmployeeButton" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="25.0" prefWidth="100.0" text="Edit Employees" />

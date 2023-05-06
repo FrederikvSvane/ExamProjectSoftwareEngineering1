@@ -108,14 +108,27 @@ public class ProjectMenuFX extends Application {
     private TableColumn<ProjectActivity, String> totalHoursColumn;
     @FXML
     private  TableColumn<ProjectActivity, String> dueDate;
+    @FXML
+    private TableColumn<ProjectActivity, String> myNameColumn;
+    @FXML
+    private TableColumn<ProjectActivity, String> myHours;
+
+    @FXML
+    private TableColumn<ProjectActivity, String> myTotalHours;
+    @FXML
+    private  TableColumn<ProjectActivity, String> myDueDate;
 
     @FXML
     private TableView<ProjectActivity> table = new TableView<ProjectActivity>();
+    @FXML
+    private TableView<ProjectActivity> myTable = new TableView<ProjectActivity>();
 
     @FXML
     public void initialize() {
         aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
+        myNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         hoursColumn.setCellValueFactory(new PropertyValueFactory<>("budgetedHours"));
+        myHours.setCellValueFactory(new PropertyValueFactory<>(""));
         totalHoursColumn.setCellValueFactory(cellData -> cellData.getValue().totalHoursProperty().asObject().asString());
         //totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("totalHours"));
         dueDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
