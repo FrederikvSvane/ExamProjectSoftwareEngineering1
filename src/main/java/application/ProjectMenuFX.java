@@ -169,14 +169,10 @@ public class ProjectMenuFX extends Application {
         ObservableList<String> myProjects = FXCollections.observableArrayList(EmployeeBase.getEmployee(AuthenticationService.getLoggedInUser()).getProjectList());
         MyProjectsList.setItems((ObservableList<String>) myProjects);
 
-        for(String project : myProjects){
-            System.out.println("project: " + project);
-        }
     }
 
 
     public void correctAccess(Project project){
-        System.out.println("project lead : " + project.getProjectLeader().getEmployeeInitials().equals("none"));
 
         if(project.getProjectLeader().getEmployeeInitials().equals("none") || project.getProjectLeader().getEmployeeInitials().equals(ProjectMenu.username)){
             newActivity1.setDisable(false);
@@ -210,9 +206,6 @@ public class ProjectMenuFX extends Application {
     public void setEmployeeView(Project project){
         ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
         employeeListView.setItems(info);
-
-        System.out.println("I was run");
-        System.out.println(project.employeeList.contains(EmployeeBase.getEmployee("sss")));
     }
 
     public void setMyEmployeeListView(Project project){
@@ -223,8 +216,6 @@ public class ProjectMenuFX extends Application {
     public void logOut() throws IOException {
 
         AuthenticationService.logout();
-
-        System.out.println("Logged out");
 
         Stage stage = (Stage) logOut.getScene().getWindow();
         stage.close();
@@ -279,7 +270,6 @@ public class ProjectMenuFX extends Application {
         String selectedItem1 = AllProjectsList.getSelectionModel().getSelectedItem();
         ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
         String aName = selectedActivity.getActivityName();
-        System.out.println(selectedItem1 + " " + aName);
         adFX.newStart(aName, selectedItem1);
     }
     public void updateHours(Project project){

@@ -62,14 +62,11 @@ public class NewProjectFX extends Application {
 
         int bHours = Integer.parseInt(budgetHours.getText());
         int pDuration = Integer.parseInt(duration.getText());
-        System.out.println(sDate + " " + pName + " " + bHours + " " + pDuration);
 
-        //Add code to project
-        //project = new Project(pName, bHours, sDate, pDuration);
+
         projectMenu = new ProjectMenu(AuthenticationService.getLoggedInUser());
         projectMenu.addProject(pName,bHours,sDate,pDuration);
 
-        //System.out.println(projectMenu.toString());
 
         ProjectMenuFX.getInstance().updateList();
         ProjectMenuFX.getInstance().updateMyProjectList();

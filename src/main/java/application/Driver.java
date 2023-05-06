@@ -33,7 +33,6 @@ public class Driver extends Application{
     public boolean createLogin(String textField) throws ExceptionHandler {
         try{
             employeeBase.createEmployee(textField);
-            System.out.println("User created");
         } finally {
             return true;
         }

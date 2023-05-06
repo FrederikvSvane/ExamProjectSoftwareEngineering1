@@ -48,12 +48,9 @@ public class DriverFX extends Application{
         boolean doesExist = driver.getLogin(initials);
 
         if(doesExist){
-            System.out.println("I exist");
             stage.close();
             ProjectMenuFX PM = new ProjectMenuFX();
             PM.newStart();
-        } else {
-            System.out.println("I do not exist");
         }
     }
 

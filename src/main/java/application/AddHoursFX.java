@@ -57,7 +57,6 @@ public class AddHoursFX{
         int Hours = Integer.parseInt(aNameTextfield.getText());
         ProjectActivity activity = project.getActivity(activityName);
         activity.addHours(AuthenticationService.getLoggedInUser() ,Hours);
-        System.out.println(activity.getActivityName() + " " + activity.getHours());
         ProjectMenuFX.getInstance().updateHours(project);
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();

@@ -53,7 +53,6 @@ public class NewActivityFX extends Application {
     Button cancel;
 
     public void createActivity() throws ExceptionHandler {
-        System.out.println("I was run create act");
         String aName = activityName.getText();
 
         int sDate = startDate.getValue().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
