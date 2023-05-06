@@ -12,7 +12,7 @@ public class EmployeeBase {
     public void createEmployee(String employeeInitials) throws ExceptionHandler{
         if(employeeInitials.length() <= 4 && employeeInitials.length() >= 1 && employeeInitials.matches("[a-zA-Z]+" )){
             if (!containsEmployee(employeeInitials)){
-                Employee employee = new Employee(employeeInitials, 0);
+                Employee employee = new Employee(employeeInitials);
                 employeeBase.add(employee);
             } else {
                 throw new ExceptionHandler("Employee with given initials already exist, please input new initials.");

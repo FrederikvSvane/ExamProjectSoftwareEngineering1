@@ -5,13 +5,12 @@ Feature: A projectleader is added to a specific project Actors: user
     When createEmployee is given "mate"
     When createEmployee is given "heya"
     Given a user is logged in
-    When user creates project with name "Awesome Project"
+    When user creates project with name "Not cool project"
 
   Scenario: User successfully adds a project leader
-
     Given a user is logged in and have selected a project
     And a user has an employee with username "heya"
-    When a user add the employee as project leader
+    When a user add the employee "heya" as project leader
     Then the employee is marked as project leader
 
   Scenario: User unsuccessfully adds a project leader

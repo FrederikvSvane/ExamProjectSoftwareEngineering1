@@ -83,7 +83,7 @@ public class Project implements ProjectService {
 
     public Employee getProjectLeader() {
         if (projectLeader == null) {
-            Employee none = new Employee("none", 0);
+            Employee none = new Employee("none");
             return none;
         } else {
             return projectLeader;
@@ -99,6 +99,7 @@ public class Project implements ProjectService {
     public void addEmployeeToProject(String initials) throws ExceptionHandler {
         if (employeeBase.containsEmployee(initials)) {
             if (!employeeList.contains(employeeBase.getEmployee(initials))) {
+                employeeBase.getEmployee(initials).addProject(this);
                 employeeList.add(employeeBase.getEmployee(initials));
             } else {
                 throw new ExceptionHandler("The user is already assigned to the project");
@@ -118,14 +119,29 @@ public class Project implements ProjectService {
         } else if (activityExists(activityName)) {
             throw new ExceptionHandler("An activity with the given name already exists");
         } else {
-            activity = new ProjectActivity(activityName, hours, startDate, duration);
-            activityList.add(activity);
+            if(getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null){
+                activity = new ProjectActivity(activityName, hours, startDate, duration);
+                activityList.add(activity);
+            } else {
+                throw new ExceptionHandler("Activity can not be made when user is not the projectleader");
+            }
+
         }
 
     }
 
-    public void removeEmployeeFromProject(String initials) {
-        employeeList.remove(EmployeeBase.getEmployee(initials));
+
+    public void removeEmployeeFromProject(String initials) throws ExceptionHandler {
+        if (containsEmployee(initials)) {
+            employeeList.remove(employeeBase.getEmployee(initials));
+            employeeBase.getEmployee(initials).removeProject(this);
+        } else {
+            throw new ExceptionHandler("User doesn't exist in the project");
+        }
+    }
+
+    public boolean containsEmployee(String initials) {
+        return employeeList.stream().anyMatch(e -> e.getEmployeeInitials().equals(initials));
     }
 
     public void setTimeframe(int startDate, int duration) throws ExceptionHandler {
@@ -142,11 +158,6 @@ public class Project implements ProjectService {
     public boolean activityExists(String activityName) {
         return activityList.stream().anyMatch(e -> e.getActivityName().equals(activityName));
     }
-
-    public Activity selectActivity(String activityName) {
-        return new ProjectActivity(null, 0, 0, 0);
-    }
-
 
     public int getEndDate() {
         return endDate;
@@ -166,9 +177,8 @@ public class Project implements ProjectService {
 
     public int getTotalHours() {
         int totalHours = 0;
-        for (Activity activity : activityList) {
-            //totalHours += ProjectActivity.getHours();
-            return totalHours;
+        for (ProjectActivity activity : activityList) {
+            totalHours += activity.getHours();
         }
         return totalHours;
     }
@@ -181,5 +191,7 @@ public class Project implements ProjectService {
         }
     }
 
-    public List<ProjectActivity> getActivityList(){return activityList;}
+    public List<ProjectActivity> getActivityList() {
+        return activityList;
+    }
 }

@@ -47,7 +47,7 @@ public class ProjectSteps {
 
     @Given("a project with name {string} does not exist")
     public void a_project_with_name_does_not_exist(String string) throws Exception{
-        assertFalse(projectMenuHolder.getProjectMenu().projectExists(string));
+        projectMenuHolder.getProjectMenu().removeProject(string);
     }
 
     @Given("the year is {int}")
@@ -91,6 +91,25 @@ public class ProjectSteps {
         AuthenticationService.logout();
     }
 
+    @When("user creates project with name {string}, duration {int}, budgeted hours {int} and start week {int}")
+    public void userCreatesProjectWithNameDurationBudgetedHoursAndStartWeek(String projectName, Integer duration, Integer budgetedHours, Integer startWeek) throws Exception{
+        try {
+            projectMenuHolder.getProjectMenu().addProject(projectName, budgetedHours, startWeek,duration);
+        } catch (Exception e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("a new project with the name {string}, duration {int}, budgeted hours {int} and start week {int} and project ID {int} is created")
+    public void aNewProjectWithTheNameDurationBudgetedHoursAndStartWeekAndProjectIDIsCreated(String projectName, Integer duration, Integer budgetedHours, Integer startWeek, Integer projectID) {
+        assertTrue(projectMenuHolder.getProjectMenu().projectExists(projectName));
+        assertEquals(projectID,projectMenuHolder.getProjectMenu().getProject(projectName).getProjectID());
+
+        assertEquals(duration,projectMenuHolder.getProjectMenu().getProject(projectName).getDuration());
+        assertEquals(budgetedHours,projectMenuHolder.getProjectMenu().getProject(projectName).getBudgetedHours());
+        assertEquals(startWeek,projectMenuHolder.getProjectMenu().getProject(projectName).getStartDate());
+
+    }
 
 
 }

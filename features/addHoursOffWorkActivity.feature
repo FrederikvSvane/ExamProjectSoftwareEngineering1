@@ -20,7 +20,6 @@ Feature: Add hours to off-work activity
     When a user adds 34 hours to off-work activity "Vacation"
     Then the activity "Vacation" has 68 hours on user
 
-
   Scenario: Not logged in user unsuccessfully adds hours to a off-work activity twice.
     When a user adds 34 hours to off-work activity "Vacation"
     Then error message "User must be logged in to add hours"

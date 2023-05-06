@@ -16,7 +16,6 @@ public class ProjectActivity extends Activity {
         this.budgetedHours = budgetedHours;
         this.startWeek = startWeek;
         this.numberOfWeeks = numberOfWeeks;
-        this.totalHours = new SimpleIntegerProperty(getHours());
         updateEndDate();
     }
 
@@ -50,7 +49,7 @@ public class ProjectActivity extends Activity {
     }
 
 
-    public void setNumberOfWeeks(int numberOfWeeks) throws ExceptionHandler {
+    public void setDuration(int numberOfWeeks) throws ExceptionHandler {
         if (numberOfWeeks <= 0) {
             throw new ExceptionHandler("The given time is invalid");
         } else {
@@ -63,6 +62,7 @@ public class ProjectActivity extends Activity {
         return endDate;
     }
 
+
     public int getBudgetedHours(){
         return budgetedHours;
     }
@@ -74,7 +74,12 @@ public class ProjectActivity extends Activity {
         return totalHours;
     }
 
-    public void addHoursToActivity(int Hours){this.setTotalHours(getHours());}
     public String getpName(){return pName;}
+
+
+
+    public void setBudgetedHours(Integer budgetedHours) {
+        this.budgetedHours = budgetedHours;
+    }
 
 }

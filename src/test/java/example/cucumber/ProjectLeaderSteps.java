@@ -36,7 +36,7 @@ public class ProjectLeaderSteps {
 
         assertTrue(as.loginSuccessful());
 
-        project = projectMenuHolder.getProjectMenu().getProject("Awesome Project");
+        project = projectMenuHolder.getProjectMenu().getProject("Not cool project");
     }
 
     @Given("a user has an employee with username {string}")
@@ -47,11 +47,11 @@ public class ProjectLeaderSteps {
         assertTrue(employeeBase.containsEmployee(string));
     }
 
-    @When("a user add the employee as project leader")
-    public void i_add_the_employee_as_project_leader() throws Exception {
+    @When("a user add the employee {string} as project leader")
+    public void i_add_the_employee_as_project_leader(String employeeInitials) throws Exception {
         // Write code here that turns the phrase above into concrete actions
         try{
-            projectMenuHolder.getProjectMenu().getProject("Awesome Project").setProjectLeader(employee);
+            projectMenuHolder.getProjectMenu().getProject("Not cool project").setProjectLeader(employeeInitials);
         }catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -60,13 +60,13 @@ public class ProjectLeaderSteps {
     @Then("the employee is marked as project leader")
     public void the_employee_is_marked_as_project_leader() {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals(projectMenuHolder.getProjectMenu().getProject("Awesome Project").getProjectLeader().getEmployeeInitials(), employee);
+        assertEquals(projectMenuHolder.getProjectMenu().getProject("Not cool project").getProjectLeader().getEmployeeInitials(), employee);
     }
     @When("a user add the employee with username {string} as a project leader")
     public void i_add_the_employee_with_username_as_a_project_leader(String string) throws Exception {
         // Write code here that turns the phrase above into concrete actions
         try{
-            projectMenuHolder.getProjectMenu().getProject("Awesome Project").setProjectLeader(string);
+            projectMenuHolder.getProjectMenu().getProject("Not cool project").setProjectLeader(string);
         }catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -76,7 +76,7 @@ public class ProjectLeaderSteps {
     public void i_add_the_employee_as_a_project_leader() {
         // Write code here that turns the phrase above into concrete actions
         try{
-            projectMenuHolder.getProjectMenu().getProject("Awesome Project").setProjectLeader(employee);
+            projectMenuHolder.getProjectMenu().getProject("Not cool project").setProjectLeader(employee);
         }catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -92,10 +92,10 @@ public class ProjectLeaderSteps {
 
         assertTrue(as.loginSuccessful());
 
-        project = projectMenuHolder.getProjectMenu().getProject("Awesome Project");
+        project = projectMenuHolder.getProjectMenu().getProject("Not cool project");
 
         try{
-            projectMenuHolder.getProjectMenu().getProject("Awesome Project").setProjectLeader(user1);
+            projectMenuHolder.getProjectMenu().getProject("Not cool project").setProjectLeader(user1);
         }catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -103,13 +103,13 @@ public class ProjectLeaderSteps {
     @When("a user remove the projectleader from the project")
     public void i_remove_the_projectleader_from_the_project() {
         // Write code here that turns the phrase above into concrete actions
-        projectMenuHolder.getProjectMenu().getProject("Awesome Project").removeProjectLeader();
+        projectMenuHolder.getProjectMenu().getProject("Not cool project").removeProjectLeader();
     }
 
     @Then("the employee is no longer marked as project leader")
     public void the_employee_is_no_longer_marked_as_project_leader() {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals(projectMenuHolder.getProjectMenu().getProject("Awesome Project").getProjectLeader().getEmployeeInitials(), "none");
+        assertEquals(projectMenuHolder.getProjectMenu().getProject("Not cool project").getProjectLeader().getEmployeeInitials(), "none");
     }
 
 
