@@ -1,4 +1,4 @@
-Feature: A projectleader is added to a specific project Actors: user
+Feature: A project leader is added to a project
 
   Background: The employeeDatabase has a set of employees
     When createEmployee is given "giig"
