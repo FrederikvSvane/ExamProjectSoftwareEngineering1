@@ -128,9 +128,9 @@ public class ProjectMenuFX extends Application {
         aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         myNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         hoursColumn.setCellValueFactory(new PropertyValueFactory<>("budgetedHours"));
-        myHours.setCellValueFactory(new PropertyValueFactory<>(""));
+        myHours.setCellValueFactory(new PropertyValueFactory<>("totalHours"));
         //totalHoursColumn.setCellValueFactory(cellData -> cellData.getValue().totalHoursProperty().asObject().asString());
-        //totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("totalHours"));
+        totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("hours"));
         dueDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         updateList();
         setInformationRowLeft();
@@ -274,6 +274,7 @@ public class ProjectMenuFX extends Application {
     }
     public void updateHours(Project project){
         ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
+        totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("hours"));
         table.setItems(activityData);
     }
     }

@@ -41,6 +41,7 @@ public class Project implements ProjectService {
         this.duration = duration;
         this.endDate = startDate + duration;
 
+
     }
 
     //public boolean isProjectLeader(String username, Project project){
