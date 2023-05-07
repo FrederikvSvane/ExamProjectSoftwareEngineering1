@@ -109,21 +109,21 @@ public class Project implements ProjectService {
         }
     }
 
-    public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler {
-        if (activityName == null || activityName.equals("")) {
-            throw new ExceptionHandler("The activity name is invalid");
-        } else if (hours <= 0) {
-            throw new ExceptionHandler("The amount of hours is invalid");
-        } else if (startDate <= 0 || startDate > 52 || duration <= 0) {
-            throw new ExceptionHandler("The given timeframe is invalid");
-        } else if (activityExists(activityName)) {
-            throw new ExceptionHandler("An activity with the given name already exists");
-        } else {
-            if(getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null){
-                activity = new ProjectActivity(activityName, hours, startDate, duration);
-                activityList.add(activity);
-            } else {
-                throw new ExceptionHandler("Activity can not be made when user is not the projectleader");
+    public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler { // 1
+        if (activityName == null || activityName.equals("")) {                                                             //2
+            throw new ExceptionHandler("The activity name is invalid");                                                 //3
+        } else if (hours <= 0) {                                                                                            //4
+            throw new ExceptionHandler("The amount of hours is invalid");                                               //5
+        } else if (startDate <= 0 || startDate > 52 || duration <= 0) {                                                    //6
+            throw new ExceptionHandler("The given timeframe is invalid");                                               //7
+        } else if (activityExists(activityName)) {                                                                         //8
+            throw new ExceptionHandler("An activity with the given name already exists");                              //9
+        } else {                                                                                                          //10
+            if(getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null){             //11
+                activity = new ProjectActivity(activityName, hours, startDate, duration);                            //12
+                activityList.add(activity);                                                                            //13
+            } else {                                                                                                 //14
+                throw new ExceptionHandler("Activity can not be made when user is not the projectleader");        //15
             }
 
         }

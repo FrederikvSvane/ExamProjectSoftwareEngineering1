@@ -11,7 +11,7 @@ Feature: Create a project activity.
     When a user adds an activity with activityName "Computer app", with 100 budgeted hours, a start week 18 and duration of 2 weeks
     Then the activity with name "Computer app" is added to the project
 
-  Scenario: Add a project unsuccessfully
+  Scenario: Add an activity unsuccessfully
     Given That a user is logged in and have selected an existing project.
     When a user adds an activity with activityName "Computer app", with 100 budgeted hours, a start week 18 and duration of 2 weeks
     When a user adds an activity with activityName "Computer app", with 100 budgeted hours, a start week 18 and duration of 2 weeks
