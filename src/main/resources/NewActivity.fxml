@@ -15,5 +15,6 @@
         <Button fx:id="createActivityButton" layoutX="335.0" layoutY="150.0" mnemonicParsing="false" onAction="#createActivity" text="Create" />
         <TextField fx:id="duration" layoutX="171.0" layoutY="93.0" promptText="Duration (Weeks)" />
       <Label fx:id="nameLabel" layoutX="14.0" layoutY="14.0" text="Label" />
+      <Label fx:id="errorLabelNewActivity" layoutX="12.0" layoutY="132.0" prefHeight="45.0" prefWidth="200.0" />
     </children>
 </AnchorPane>

@@ -109,7 +109,9 @@ public class ProjectMenu {
         projectsCreatedInYear.put(year, numOfProjects);
     }
 
-    public void removeProject(String ProjectName) {
+    public static void removeProject(String ProjectName) {
+        Employee employee = EmployeeBase.getEmployee(AuthenticationService.getLoggedInUser());
+        employee.removeProject(getProject(ProjectName));
         projects.removeIf(p -> p.getProjectName().equals(ProjectName));
     }
 

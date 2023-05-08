@@ -28,8 +28,8 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <Button fx:id="update1" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#updateList" prefWidth="100.0" text="Refresh" />
-                                    <Button fx:id="newProject1" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" onAction="#addProject" prefWidth="100.0" text="New Project" />
+                                    <Button fx:id="newProject1" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#addProject" prefWidth="100.0" text="New Project" />
+                                    <Button fx:id="deleteProject1" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" onAction="#removeProjectFromMyList" prefWidth="100.0" text="Delete Project" />
                                     <Button fx:id="newActivity1" layoutX="570.0" layoutY="125.0" mnemonicParsing="false" prefWidth="100.0" text="New Activity" />
                                     <Button fx:id="deleteActivity1" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" onAction="#removeActivityFromList" prefWidth="100.0" text="Delete Activity" />
                                     <Button fx:id="addHours1" layoutX="570.0" layoutY="225.0" mnemonicParsing="false" prefWidth="100.0" text="Add Hours" />
@@ -100,7 +100,7 @@
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
                                           <Button fx:id="addHoursAll" layoutX="570.0" layoutY="225.0" mnemonicParsing="false" onAction="#addHours" prefWidth="100.0" text="Add Hours" />
-                                          <Button fx:id="update2" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#updateList" prefWidth="100.0" text="Refresh" />
+                                          <Button fx:id="newProject2" layoutX="570.0" layoutY="25.0" mnemonicParsing="false" onAction="#addProject" prefWidth="100.0" text="New Project" />
                                           <TableView fx:id="table" layoutY="198.0" prefHeight="471.0" prefWidth="548.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="198.0">
                                              <columns>
                                                 <TableColumn fx:id="aNameColumn" prefWidth="137.0" text="Activities" />
@@ -109,7 +109,7 @@
                                                 <TableColumn fx:id="dueDate" prefWidth="137.0" text="Due Date" />
                                              </columns>
                                           </TableView>
-                                          <Button fx:id="newProject2" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" onAction="#addProject" prefWidth="100.0" text="New Project" />
+                                          <Button fx:id="deleteProject" layoutX="570.0" layoutY="75.0" mnemonicParsing="false" onAction="#removeProjectFromAllList" prefWidth="100.0" text="Delete Project" />
                                           <Button fx:id="newActivity2" layoutX="570.0" layoutY="125.0" mnemonicParsing="false" onAction="#addProjectActivity" prefWidth="100.0" text="New Activity" />
                                           <Button fx:id="deleteActivity2" layoutX="570.0" layoutY="175.0" mnemonicParsing="false" onAction="#removeActivityFromList" prefWidth="100.0" text="Delete Activity" />
                                           <Button fx:id="logOut" layoutX="570.0" layoutY="455.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="100.0" text="Log Out" />
@@ -144,6 +144,7 @@
                                           <Button fx:id="addEmployeeButton" layoutX="570.0" layoutY="275.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="25.0" prefWidth="100.0" text="Add Employee" />
                                           <Button fx:id="addProjectLeaderButton" layoutX="570.0" layoutY="325.0" mnemonicParsing="false" onAction="#addProjectLeader" prefHeight="45.0" prefWidth="100.0" text="Add Project Leader" textAlignment="CENTER" wrapText="true" />
                                           <Button fx:id="removeProjectLeaderButton" layoutX="570.0" layoutY="390.0" mnemonicParsing="false" onAction="#removeProjectLeader" prefHeight="45.0" prefWidth="100.0" text="Remove Project Leader" textAlignment="CENTER" wrapText="true" />
+                                          <Label fx:id="errorLabel" layoutX="570.0" layoutY="513.0" />
                                        </children>
                                     </AnchorPane>
                                  </items>
