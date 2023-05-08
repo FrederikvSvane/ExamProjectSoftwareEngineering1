@@ -69,20 +69,19 @@ Feature: Add hours to project activity
     When the user adds the length of the activity is 7 to activity "exampleActivity" in project "Awesome Project"
     Then The user have added a start week 3 and stopdate 10 to the activity "exampleActivity" in project "Awesome Project"
 
-  Scenario: User makes a start and stopdate for a specific activity seprate
+  Scenario: User makes a wrong start date for a specific activity and fails
     Given a user is logged in
     And An activity "exampleActivity" exists in project "Awesome Project"
     When the user adds the week -3 as start week to activity "exampleActivity" in project "Awesome Project"
     Then error message "The given time is invalid"
 
-  Scenario: User makes a start and stopdate for a specific activity seprate
+  Scenario: User makes a budgeted hours for a specific activity seprate
     Given a user is logged in
     And An activity "exampleActivity" exists in project "Awesome Project"
     When the user adds 8 budgeted hours to activity "exampleActivity" in project "Awesome Project"
     Then the activity "exampleActivity" in project "Awesome Project" have 8 budgeted hours
 
-
-  Scenario: User makes a start and stopdate for a specific activity seprate
+  Scenario: User makes a wrong stopdate for a specific activity and fails
     Given a user is logged in
     And An activity "exampleActivity" exists in project "Awesome Project"
     When the user adds the length of the activity is -7 to activity "exampleActivity" in project "Awesome Project"
