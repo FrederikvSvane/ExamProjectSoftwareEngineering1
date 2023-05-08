@@ -111,6 +111,9 @@ public class Project implements ProjectService {
     }
 
     public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler { // 1
+        assert EmployeeBase.employeeBase != null && EmployeeBase.containsEmployee("giig");
+        assert AuthenticationService.loginStatus();
+        assert Project
         if (activityName == null || activityName.equals("")) {                                                             //2
             throw new ExceptionHandler("The activity name is invalid");                                                 //3
         } else if (hours <= 0) {                                                                                            //4
