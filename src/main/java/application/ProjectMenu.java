@@ -49,9 +49,10 @@ public class ProjectMenu {
 
     public void addProjectWhiteBox(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler {
 
-        assert AuthenticationService.loginStatus();                                                                                         // Precondition 1
-        assert !projectExists(projectName) && projectName != null;                                                                          // Precondition 2
-        assert budgetedHours > 0 && startDate > 0 && duration > 0 && startDate <= 52;                                                       // Precondition 3
+        assert AuthenticationService.loginStatus(): "User must be logged in to create project";                                             // Precondition 1
+        assert !projectExists(projectName): "Project already exists";                                                                       // Precondition 2
+        assert !(budgetedHours <= 0 || startDate <= 0 || duration <= 0 || startDate > 52) : "Invalid timeframe";                            // Precondition 3
+        assert projectName != null;                                                                                                         // Precondition 4
 
         if (!AuthenticationService.loginStatus()) {                                                                                         // 1
             throw new ExceptionHandler("User must be logged in to create project");                                                     // 2
@@ -74,7 +75,7 @@ public class ProjectMenu {
             }
         }
 
-        assert getProject(projectName).getProjectID() == (getDate().get(Calendar.YEAR)%100)*10000+projectsCreatedInYear.get(getDate().get(Calendar.YEAR));    // Postcondition 1
+        assert getProject(projectName).getProjectID() == (getDate().get(Calendar.YEAR) % 100) * 10000 + projectsCreatedInYear.get(getDate().get(Calendar.YEAR));    // Postcondition 1
         assert projectExists(projectName);                                                                                                  // Postcondition 2
 
     }
@@ -84,7 +85,7 @@ public class ProjectMenu {
     }
 
 
-    public boolean projectExists(String projectName) {
+    public static boolean projectExists(String projectName) {
         return projects.stream().anyMatch(p -> p.getProjectName().equals(projectName));
     }
 
