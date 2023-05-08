@@ -135,7 +135,11 @@ public class Project implements ProjectService {
         assert EmployeeBase.employeeBase != null && EmployeeBase.containsEmployee("giig");                  //Precondition 1
         assert AuthenticationService.loginStatus();                                                                     //Precondition 2
         assert ProjectMenu.projectExists("Awesome Project");                                                 //Precondition 3
-
+        assert (activityName == null || activityName.equals("")) == false: "The activity name is invalid";                 //Precondition 4
+        assert hours > 0: "The amount of hours is invalid";                                                              //Precondition 5
+        assert startDate > 0 && startDate <= 52 && duration > 0: "The given timeframe is invalid";                        //Precondition 6
+        assert activityExists(activityName) == false: "An activity with the given name already exists";                   //Precondition 7
+        assert (getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null) == true: "Activity can not be made when user is not the projectleader"; //Precondition 8
 
         if (activityName == null || activityName.equals("")) {                                                             //2
             throw new ExceptionHandler("The activity name is invalid");                                                 //3
@@ -148,10 +152,6 @@ public class Project implements ProjectService {
         } else {                                                                                                          //10
             if(getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null){             //11
                 assert !activityList.contains(null);                                                               //Invariant 1 before
-
-
-
-                assert getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null;  //Invariant 5
                 activity = new ProjectActivity(activityName, hours, startDate, duration);                            //12
                 activityList.add(activity);                                                                            //13
             } else {                                                                                                 //14
