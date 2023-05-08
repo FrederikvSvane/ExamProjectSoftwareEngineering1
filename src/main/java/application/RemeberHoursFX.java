@@ -18,8 +18,6 @@ public class RemeberHoursFX extends Application {
     Button yesButton;
 
     DriverFX dFX = new DriverFX();
-
-    private static boolean close;
     public void newStart() throws IOException {
         Stage stage = new Stage();
         start(stage);
