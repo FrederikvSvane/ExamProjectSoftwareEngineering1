@@ -139,7 +139,8 @@ public class Project implements ProjectService {
         assert hours > 0: "The amount of hours is invalid";                                                              //Precondition 5
         assert startDate > 0 && startDate <= 52 && duration > 0: "The given timeframe is invalid";                        //Precondition 6
         assert activityExists(activityName) == false: "An activity with the given name already exists";                   //Precondition 7
-        assert (getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null) == true: "Activity can not be made when user is not the projectleader"; //Precondition 8
+        assert (getProjectLeader().equals(AuthenticationService.getLoggedInUser()) || projectLeader == null) == true:
+                "Activity can not be made when user is not the projectleader"; //Precondition 8
 
         if (activityName == null || activityName.equals("")) {                                                             //2
             throw new ExceptionHandler("The activity name is invalid");                                                 //3
@@ -157,7 +158,7 @@ public class Project implements ProjectService {
             } else {                                                                                                 //14
                 throw new ExceptionHandler("Activity can not be made when user is not the projectleader");        //15
             }
-        assert !activityList.contains(null);                                                                        //Invariance 1 after
+        assert !activityList.contains(null);                                                                        //Invariant 1 after
         }
         assert activityList.contains(activity);                                                                        //Postcondition 1
         }
