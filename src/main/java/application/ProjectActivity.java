@@ -1,14 +1,12 @@
 package application;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 public class ProjectActivity extends Activity {
     private int startWeek;
     private int numberOfWeeks;
     private int budgetedHours;
     private int endDate;
-    private IntegerProperty totalHours;
+
     private String pName;
 
     public ProjectActivity(String activityName, int budgetedHours, int startWeek, int numberOfWeeks) {
