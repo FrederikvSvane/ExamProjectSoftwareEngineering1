@@ -306,12 +306,8 @@ public class ProjectMenuFX extends Application {
             Project project = ProjectMenu.getProject(selectedItem);
 
             ProjectMenu.removeProject(project.getProjectName());
-
             updateMyProjectList();
-
             updateList();
-
-
         }catch(Exception err){
             System.out.println(err);
             errorLabel.setText("You need to select a project to delete");
@@ -327,7 +323,6 @@ public class ProjectMenuFX extends Application {
             updateMyProjectList();
 
         }catch(Exception err){
-
             System.out.println(err);
             errorLabel.setText("You need to select a project to delete");
 
