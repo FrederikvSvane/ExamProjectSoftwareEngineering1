@@ -132,8 +132,7 @@ public class ProjectMenuFX extends Application {
         myNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         hoursColumn.setCellValueFactory(new PropertyValueFactory<>("budgetedHours"));
         myHours.setCellValueFactory(new PropertyValueFactory<>(""));
-        //totalHoursColumn.setCellValueFactory(cellData -> cellData.getValue().totalHoursProperty().asObject().asString());
-        //totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("totalHours"));
+        totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("totalHours"));
         dueDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         updateList();
         setInformationRowLeft();
