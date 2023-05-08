@@ -27,7 +27,7 @@ public class ProjectSteps {
     String user;
 
 
-    public ProjectSteps(ErrorMessageHolder errorMessageHolder, ProjectMenuHolder projectMenuHolder, ProjectHolder projectHolder){
+    public ProjectSteps(ErrorMessageHolder errorMessageHolder, ProjectMenuHolder projectMenuHolder, ProjectHolder projectHolder) {
         this.projectMenuHolder = projectMenuHolder;
         mockDateHolder = new MockDateHolder(this.projectMenuHolder.getProjectMenu());
         mockDateHolder.setDate(new GregorianCalendar());
@@ -46,8 +46,10 @@ public class ProjectSteps {
     }
 
     @Given("a project with name {string} does not exist")
-    public void a_project_with_name_does_not_exist(String string) throws Exception{
-        projectMenuHolder.getProjectMenu().removeProject(string);
+    public void a_project_with_name_does_not_exist(String string) throws Exception {
+        if (projectMenuHolder.getProjectMenu().projectExists(string)) {
+            projectMenuHolder.getProjectMenu().removeProject(string);
+        }
     }
 
     @Given("the year is {int}")
@@ -58,13 +60,13 @@ public class ProjectSteps {
     @Given("there has been created {int} projects in {int}")
     public void there_has_been_created_projects_in(Integer numOfProjects, Integer year) {
         projectMenuHolder.getProjectMenu().setProjectsCreatedInYear(numOfProjects, year);
-        assertEquals(numOfProjects,ProjectMenu.getProjectsCreatedInYear(year));
+        assertEquals(numOfProjects, ProjectMenu.getProjectsCreatedInYear(year));
     }
 
     @When("user creates project with name {string}")
-    public void user_creates_project_with_name(String projectName) throws Exception{
+    public void user_creates_project_with_name(String projectName) throws Exception {
         try {
-            projectMenuHolder.getProjectMenu().addProject(projectName, 1, 1,1);
+            projectMenuHolder.getProjectMenu().addProject(projectName, 1, 1, 1);
         } catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -77,11 +79,11 @@ public class ProjectSteps {
     }
 
     @Given("a project with name {string} exists")
-    public void a_project_with_name_exists(String projectName) throws Exception{
-        try{
+    public void a_project_with_name_exists(String projectName) throws Exception {
+        try {
             projectMenuHolder.getProjectMenu().addProject(projectName, 1, 1, 1);
-        assertTrue(projectMenuHolder.getProjectMenu().projectExists(projectName));
-        }catch(Exception e){
+            assertTrue(projectMenuHolder.getProjectMenu().projectExists(projectName));
+        } catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
     }
@@ -92,9 +94,9 @@ public class ProjectSteps {
     }
 
     @When("user creates project with name {string}, duration {int}, budgeted hours {int} and start week {int}")
-    public void userCreatesProjectWithNameDurationBudgetedHoursAndStartWeek(String projectName, Integer duration, Integer budgetedHours, Integer startWeek) throws Exception{
+    public void userCreatesProjectWithNameDurationBudgetedHoursAndStartWeek(String projectName, Integer duration, Integer budgetedHours, Integer startWeek) throws Exception {
         try {
-            projectMenuHolder.getProjectMenu().addProject(projectName, budgetedHours, startWeek,duration);
+            projectMenuHolder.getProjectMenu().addProject(projectName, budgetedHours, startWeek, duration);
         } catch (Exception e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -103,11 +105,11 @@ public class ProjectSteps {
     @Then("a new project with the name {string}, duration {int}, budgeted hours {int} and start week {int} and project ID {int} is created")
     public void aNewProjectWithTheNameDurationBudgetedHoursAndStartWeekAndProjectIDIsCreated(String projectName, Integer duration, Integer budgetedHours, Integer startWeek, Integer projectID) {
         assertTrue(projectMenuHolder.getProjectMenu().projectExists(projectName));
-        assertEquals(projectID,projectMenuHolder.getProjectMenu().getProject(projectName).getProjectID());
+        assertEquals(projectID, projectMenuHolder.getProjectMenu().getProject(projectName).getProjectID());
 
-        assertEquals(duration,projectMenuHolder.getProjectMenu().getProject(projectName).getDuration());
-        assertEquals(budgetedHours,projectMenuHolder.getProjectMenu().getProject(projectName).getBudgetedHours());
-        assertEquals(startWeek,projectMenuHolder.getProjectMenu().getProject(projectName).getStartDate());
+        assertEquals(duration, projectMenuHolder.getProjectMenu().getProject(projectName).getDuration());
+        assertEquals(budgetedHours, projectMenuHolder.getProjectMenu().getProject(projectName).getBudgetedHours());
+        assertEquals(startWeek, projectMenuHolder.getProjectMenu().getProject(projectName).getStartDate());
 
     }
 

@@ -10,8 +10,6 @@ public interface ProjectService {
 
     void removeEmployeeFromProject(String initials) throws ExceptionHandler;
 
-    //void displayProject(Project project);
-
     void setTimeframe(int startDate, int duration) throws ExceptionHandler;
 
     boolean activityExists(String activityName);

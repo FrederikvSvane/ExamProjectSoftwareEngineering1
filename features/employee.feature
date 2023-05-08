@@ -11,7 +11,7 @@ Feature: Create employee
 
   Scenario: The user inputted "hhu12f"
     When createEmployee is given "hhu12f"
-    Then error message "Initials doesn’t fit the restrictions, please input new initials."
+    Then error message "Initials doesn't fit the restrictions, please input new initials."
 
   Scenario: The user inputted "giig"
     When createEmployee is given "giig"

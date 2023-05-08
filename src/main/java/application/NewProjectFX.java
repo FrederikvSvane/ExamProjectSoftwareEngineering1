@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -55,26 +56,37 @@ public class NewProjectFX extends Application {
     TextField budgetHours;
     @FXML
     TextField duration;
-
+    @FXML
+    Label errorLabelNewProject;
     public void createProject() throws ExceptionHandler {
-        String pName = projectName.getText();
-        int sDate = startDate.getValue().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+        try{
+            String pName = projectName.getText();
+            int sDate = startDate.getValue().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
 
-        int bHours = Integer.parseInt(budgetHours.getText());
-        int pDuration = Integer.parseInt(duration.getText());
-
-
-        projectMenu = new ProjectMenu(AuthenticationService.getLoggedInUser());
-        projectMenu.addProject(pName,bHours,sDate,pDuration);
+            int bHours = Integer.parseInt(budgetHours.getText());
+            int pDuration = Integer.parseInt(duration.getText());
 
 
-        ProjectMenuFX.getInstance().updateList();
-        ProjectMenuFX.getInstance().updateMyProjectList();
-
-        Stage stage = (Stage) createProjectButton.getScene().getWindow();
-        stage.close();
+            projectMenu = new ProjectMenu(AuthenticationService.getLoggedInUser());
+            projectMenu.addProject(pName,bHours,sDate,pDuration);
 
 
+            ProjectMenuFX.getInstance().updateList();
+            ProjectMenuFX.getInstance().updateMyProjectList();
+
+            Stage stage = (Stage) createProjectButton.getScene().getWindow();
+            stage.close();
+        } catch(ExceptionHandler err){
+            errorLabelNewProject.setMaxWidth(200);
+            errorLabelNewProject.setMaxHeight(100);
+            errorLabelNewProject.setWrapText(true);
+            if(err.getMessage().equals("Project already exists")){
+                errorLabelNewProject.setText("Project already exists");
+            } else if(err.getMessage().equals("Invalid timeframe")){
+                errorLabelNewProject.setText("Invalid timeframe");
+            }
+            System.out.println(err);
+        }
     }
 
     public void cancel(){

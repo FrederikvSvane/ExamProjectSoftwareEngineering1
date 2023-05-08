@@ -1,5 +1,6 @@
 package application;
 
+import io.cucumber.java.an.E;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,12 +31,11 @@ public class Driver extends Application{
         return doesExist;
     }
 
-    public boolean createLogin(String textField) throws ExceptionHandler {
+    public void createLogin(String textField) throws ExceptionHandler {
         try{
             employeeBase.createEmployee(textField);
-        } finally {
-            return true;
+        } catch (ExceptionHandler err) {
+            throw new ExceptionHandler("Wrong input");
         }
-
     }
 }

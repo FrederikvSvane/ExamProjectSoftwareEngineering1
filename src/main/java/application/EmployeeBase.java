@@ -6,28 +6,46 @@ import java.util.List;
 
 public class EmployeeBase {
 
-    public static ArrayList<Employee> employeeBase = new ArrayList<Employee>();
+    public static ArrayList<Employee> employeeBase = new ArrayList<>();
 
 
     public void createEmployee(String employeeInitials) throws ExceptionHandler{
-        if(employeeInitials.length() <= 4 && employeeInitials.length() >= 1 && employeeInitials.matches("[a-zA-Z]+" )){
-            if (!containsEmployee(employeeInitials)){
-                Employee employee = new Employee(employeeInitials);
-                employeeBase.add(employee);
-            } else {
-                throw new ExceptionHandler("Employee with given initials already exist, please input new initials.");
+        if(employeeInitials.length() <= 4 && employeeInitials.length() >= 1 && employeeInitials.matches("[a-zA-Z]+" )){ //1
+            if (!containsEmployee(employeeInitials)){                                                                         //2
+                Employee employee = new Employee(employeeInitials);                                                           //3
+                employeeBase.add(employee);                                                                                   //4
+            } else {                                                                                                          //5
+                throw new ExceptionHandler("Employee with given initials already exist, please input new initials.");     //6
             }
-        } else {
-            throw new ExceptionHandler("Initials doesn’t fit the restrictions, please input new initials.");
+        } else {                                                                                                              //7
+            throw new ExceptionHandler("Initials doesn't fit the restrictions, please input new initials.");              //8
+        }
+    }
+
+    public void createEmployeeWhiteBox(String employeeInitials) throws ExceptionHandler{
+
+        assert (employeeInitials.length() <= 4 && employeeInitials.length() >= 1 && employeeInitials.matches("[a-zA-Z]+")) != false : "Input does not satisft requirements"; //Precondition 1
+        assert !containsEmployee(employeeInitials) : "Employee is already in the database";                                                                                        //Precondition 2
+
+        if(employeeInitials.length() <= 4 && employeeInitials.length() >= 1 && employeeInitials.matches("[a-zA-Z]+" )){ //1
+            if (!containsEmployee(employeeInitials)){                                                                         //2
+                Employee employee = new Employee(employeeInitials);                                                           //3
+                employeeBase.add(employee);                                                                                   //4
+            } else {                                                                                                          //5
+                throw new ExceptionHandler("Employee with given initials already exist, please input new initials.");     //6
+            }
+        } else {                                                                                                              //7
+            throw new ExceptionHandler("Initials doesn't fit the restrictions, please input new initials.");              //8
         }
 
+        assert EmployeeBase.containsEmployee(employeeInitials) : "The employee was not added to EmployeeBase";                //Postcondition
     }
 
     /*public boolean checkInitials(String employeeInitials){
         return employeeBase.contains(employeeInitials);
     }*/
 
-    public boolean containsEmployee(String employeeInitials) {
+    public static boolean containsEmployee(String employeeInitials) {
         return employeeBase.stream().anyMatch(e -> e.getEmployeeInitials().equals(employeeInitials));
     }
 
@@ -36,7 +54,7 @@ public class EmployeeBase {
     }
 
     public static List<String> getEmployeeNames(List<Employee> list){
-        List<String> employeeNames = new ArrayList<String>();
+        List<String> employeeNames = new ArrayList<>();
         for (Employee employee : list) {
             employeeNames.add(employee.getEmployeeInitials());
         }

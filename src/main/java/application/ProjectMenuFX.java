@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -28,8 +25,6 @@ public class ProjectMenuFX extends Application {
     NewProjectFX npFX = new NewProjectFX();
     NewActivityFX naFX = new NewActivityFX();
     AddHoursFX adFX = new AddHoursFX();
-
-    private Project currentProject;
 
     private static ProjectMenuFX instance;
 
@@ -100,6 +95,10 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button addProjectLeaderButton;
     @FXML
+    Button deleteProject1;
+    @FXML
+    Button deleteProject;
+    @FXML
     private TableColumn<ProjectActivity, String> aNameColumn;
     @FXML
     private TableColumn<ProjectActivity, String> hoursColumn;
@@ -122,6 +121,8 @@ public class ProjectMenuFX extends Application {
     private TableView<ProjectActivity> table = new TableView<ProjectActivity>();
     @FXML
     private TableView<ProjectActivity> myTable = new TableView<ProjectActivity>();
+    @FXML
+    Label errorLabel = new Label();
 
     @FXML
     public void initialize() {
@@ -135,6 +136,10 @@ public class ProjectMenuFX extends Application {
         updateList();
         setInformationRowLeft();
         updateMyProjectList();
+
+        errorLabel.setMaxWidth(140);
+        errorLabel.setMaxHeight(90);
+        errorLabel.setWrapText(true);
     }
 
     public void addProject() throws IOException {
@@ -152,28 +157,29 @@ public class ProjectMenuFX extends Application {
     }
 
     public void setInformationRowRight1(Project project) {
-        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()), "Week " + Integer.toString(project.getStartDate()), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
+        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()%52), "Week " + Integer.toString(project.getStartDate()%52), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
         informationRowRight1.setItems(info);
     }
 
     public void setMyInformationRowRight(Project project) {
-        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()), "Week " + Integer.toString(project.getStartDate()), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
+        ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()%52), "Week " + Integer.toString(project.getStartDate()%52), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
         informationRowRight.setItems(info);
     }
     public void updateList(){
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
+        errorLabel.setText("");
     }
 
     public void updateMyProjectList(){
         ObservableList<String> myProjects = FXCollections.observableArrayList(EmployeeBase.getEmployee(AuthenticationService.getLoggedInUser()).getProjectList());
         MyProjectsList.setItems((ObservableList<String>) myProjects);
-
+        errorLabel.setText("");
     }
 
 
     public void correctAccess(Project project){
-
+        errorLabel.setText("");
         if(project.getProjectLeader().getEmployeeInitials().equals("none") || project.getProjectLeader().getEmployeeInitials().equals(ProjectMenu.username)){
             newActivity1.setDisable(false);
             newActivity2.setDisable(false);
@@ -184,6 +190,7 @@ public class ProjectMenuFX extends Application {
     }
 
     public void projectSelect(){
+        errorLabel.setText("");
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
 
@@ -194,6 +201,7 @@ public class ProjectMenuFX extends Application {
     }
 
     public void myProjectSelect(){
+        errorLabel.setText("");
         String mySelectedItem = MyProjectsList.getSelectionModel().getSelectedItem();
         Project myProject = ProjectMenu.getProject(mySelectedItem);
         setMyEmployeeListView(myProject);
@@ -204,11 +212,13 @@ public class ProjectMenuFX extends Application {
     }
 
     public void setEmployeeView(Project project){
+        errorLabel.setText("");
         ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
         employeeListView.setItems(info);
     }
 
     public void setMyEmployeeListView(Project project){
+        errorLabel.setText("");
         ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
         employeeListView1.setItems(info);
     }
@@ -225,11 +235,13 @@ public class ProjectMenuFX extends Application {
     }
 
     public void addProjectActivityToList(Project project){
+        errorLabel.setText("");
         ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
         table.setItems(activityData);
     }
 
     public void addEmployee() throws ExceptionHandler, IOException {
+        errorLabel.setText("");
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
 
@@ -238,6 +250,7 @@ public class ProjectMenuFX extends Application {
     }
 
     public void addProjectLeader() throws ExceptionHandler, IOException {
+        errorLabel.setText("");
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
 
@@ -248,21 +261,31 @@ public class ProjectMenuFX extends Application {
     }
 
     public void removeProjectLeader(){
+        errorLabel.setText("");
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
 
         project.removeProjectLeader();
         setEmployeeView(project);
+        setInformationRowRight1(project);
     }
 
-    public void removeActivityFromList(){
-        String selectedProject = AllProjectsList.getSelectionModel().getSelectedItem();
-        Project project = ProjectMenu.getProject(selectedProject);
+    public void removeActivityFromList() throws ExceptionHandler {
+        try{
+            String selectedProject = AllProjectsList.getSelectionModel().getSelectedItem();
+            Project project = ProjectMenu.getProject(selectedProject);
 
-        ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
-        project.getActivityList().remove(selectedActivity);
+            ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
+            project.removeActivityFromList(selectedActivity);
 
-        updateList();
+            ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
+            table.setItems(activityData);
+
+            updateList();
+        }catch(Exception err){
+            errorLabel.setText("You need to select a project and an activity");
+            throw new ExceptionHandler("You need to select a project and an activity");
+        }
     }
 
 
@@ -276,6 +299,35 @@ public class ProjectMenuFX extends Application {
         ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
         totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("hours"));
         table.setItems(activityData);
+    }
+
+    public void removeProjectFromMyList(){
+        try{
+            String selectedItem = MyProjectsList.getSelectionModel().getSelectedItem();
+            Project project = ProjectMenu.getProject(selectedItem);
+
+            ProjectMenu.removeProject(project.getProjectName());
+            updateMyProjectList();
+            updateList();
+        }catch(Exception err){
+            System.out.println(err);
+            errorLabel.setText("You need to select a project to delete");
+        }
+    }
+    public void removeProjectFromAllList(){
+        try{
+            String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
+            Project project = ProjectMenu.getProject(selectedItem);
+
+            ProjectMenu.removeProject(project.getProjectName());
+            updateList();
+            updateMyProjectList();
+
+        }catch(Exception err){
+            System.out.println(err);
+            errorLabel.setText("You need to select a project to delete");
+
+        }
     }
     }
 

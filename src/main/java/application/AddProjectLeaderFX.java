@@ -43,6 +43,7 @@ public class AddProjectLeaderFX extends Application {
     Button cancelButton;
 
     public void addProjectLeaderToList() throws ExceptionHandler {
+
         String initials = projectLeaderInitials.getText();
         Project project = ProjectMenu.getProject(pName);
         if(project.employeeList.contains(EmployeeBase.getEmployee(initials))){
@@ -54,7 +55,6 @@ public class AddProjectLeaderFX extends Application {
             throw new ExceptionHandler("The user is not assigned the project.");
         }
         ProjectMenuFX.getInstance().setInformationRowRight1(project);
-
 
         Stage stage = (Stage) addProjectLeaderButton.getScene().getWindow();
         stage.close();

@@ -198,4 +198,13 @@ public class Project implements ProjectService {
     public List<ProjectActivity> getActivityList() {
         return activityList;
     }
+
+    public void removeActivityFromList(Activity activity) throws ExceptionHandler {
+            if(activityExists(activity.getActivityName())){
+                getActivityList().remove(activity);
+            } else {
+                throw new ExceptionHandler("Activity doesnt exist");
+            }
+    }
+
 }
