@@ -4,6 +4,7 @@ import application.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.junit.CucumberOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,6 +18,7 @@ public class ActivitySteps {
 
     private ErrorMessageHolder errorMessageHolder;
     private ProjectMenuHolder projectMenuHolder;
+    private String errorMessage;
 
     public ActivitySteps(ErrorMessageHolder errorMessageHolder, ProjectMenuHolder projectMenuHolder) {
         this.projectMenuHolder = projectMenuHolder;
@@ -177,6 +179,19 @@ public class ActivitySteps {
     public void theUserIsTheProjectLeaderOfTheProject(String employeeInitials) throws ExceptionHandler {
         project.removeProjectLeader();
         project.setProjectLeader(employeeInitials);
+    }
+
+    @When("user adds an activity with activityName {string}, with {int} budgeted hours, a start week {int} and duration of {int} weeks")
+    public void user_adds_an_activity_with_activity_name_with_budgeted_hours_a_start_week_and_duration_of_weeks(String string, Integer int1, Integer int2, Integer int3) throws Exception {
+        try {
+            project.addProjectActivityWhiteBox(string, int1, int2, int3);
+        } catch (AssertionError e) {
+            errorMessage = e.getMessage();
+        }
+    }
+    @Then("error message {string} was given")
+    public void error_message(String err){
+        assertEquals(err, errorMessage);
     }
 
 }
