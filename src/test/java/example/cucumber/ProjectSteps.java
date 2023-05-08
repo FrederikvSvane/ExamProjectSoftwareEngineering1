@@ -1,6 +1,7 @@
 package example.cucumber;
 
 import application.AuthenticationService;
+import application.ExceptionHandler;
 import application.ProjectMenu;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -23,6 +24,8 @@ public class ProjectSteps {
     private MockDateHolder mockDateHolder;
 
     private ErrorMessageHolder errorMessageHolder;
+
+    private String errorMessage;
 
     String user;
 
@@ -112,6 +115,28 @@ public class ProjectSteps {
         assertEquals(startWeek, projectMenuHolder.getProjectMenu().getProject(projectName).getStartDate());
 
     }
+
+    @When("a user creates project with name {string}, duration {int}, budgeted hours {int} and start week {int}")
+    public void aUserCreatesProjectWithNameDurationBudgetedHoursAndStartWeek(String string, Integer int1, Integer int2, Integer int3) {
+        try {
+            projectMenuHolder.getProjectMenu().addProject(string, int2, int3, int1);
+        } catch (ExceptionHandler e){
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("error message {string} is shown")
+    public void errorMessageIsShown(String expectedErrorMessage) {
+        assertEquals(expectedErrorMessage, errorMessage);
+
+    }
+
+    @When("a user creates project with name {string}")
+    public void aUserCreatesProjectWithName(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
 
 
 }
