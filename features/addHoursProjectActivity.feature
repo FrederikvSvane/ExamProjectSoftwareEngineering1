@@ -17,7 +17,6 @@ Feature: Add hours to project activity
   Scenario: A user adds work hours to activity
     Given a user "mate" is logged in
     And An activity "exampleActivity" exists in project "Awesome Project"
-#    And The user has 8 unregistered work hours
     When The user adds 8 work hours to "exampleActivity" in project "Awesome Project"
     Then 8 work hours are added to "exampleActivity" in project "Awesome Project"
 
@@ -48,15 +47,6 @@ Feature: Add hours to project activity
     Given a user "mate" is logged in
     When The user adds -34 work hours to "exampleActivity" in project "Awesome Project"
     Then error message "Invalid number of hours"
-
-
-#  Scenario: A user fails to add work hours to activity
-#    Given a user "mate" is logged in
-#    And An activity "exampleActivity" exists in project "Awesome Project"
-##    And The user has 0 unregistered work hours
-##    When The user adds 8 work hours to "exampleActivity" in project "Awesome Project"
-##    Then No work hours are added to "exampleActivity" in project "Awesome Project"
-#    Then error message ""
 
 
   Scenario: A user fails to add work hours to activity
@@ -91,11 +81,6 @@ Feature: Add hours to project activity
     When the user adds 8 budgeted hours to activity "exampleActivity" in project "Awesome Project"
     Then the activity "exampleActivity" in project "Awesome Project" have 8 budgeted hours
 
-#  Scenario: Projectleader adds budgeted hours to activity
-#    Given a user is logged in
-#    And An activity "exampleActivity" exists in project "Awesome Project"
-#    When the user adds 8 budgeted hours to activity "exampleActivity" in project "Awesome Project"
-#    Then the activity "exampleActivity" in project "Awesome Project" have 8 budgeted hours
 
   Scenario: User makes a start and stopdate for a specific activity seprate
     Given a user is logged in

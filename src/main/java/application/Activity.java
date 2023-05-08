@@ -22,6 +22,10 @@ public abstract class Activity{
             this.hours += hours;                                                       //11
         }
     }
+
+
+
+
     public int getHours(){return hours;
     }
 

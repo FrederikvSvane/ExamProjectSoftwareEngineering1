@@ -27,7 +27,7 @@ public class EmployeeBase {
         return employeeBase.contains(employeeInitials);
     }*/
 
-    public boolean containsEmployee(String employeeInitials) {
+    public static boolean containsEmployee(String employeeInitials) {
         return employeeBase.stream().anyMatch(e -> e.getEmployeeInitials().equals(employeeInitials));
     }
 
