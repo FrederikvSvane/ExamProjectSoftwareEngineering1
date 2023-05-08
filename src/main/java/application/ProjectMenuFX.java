@@ -100,6 +100,8 @@ public class ProjectMenuFX extends Application {
     @FXML
     Button addProjectLeaderButton;
     @FXML
+    Button showHoursButton1;
+    @FXML
     private TableColumn<ProjectActivity, String> aNameColumn;
     @FXML
     private TableColumn<ProjectActivity, String> hoursColumn;
@@ -276,6 +278,16 @@ public class ProjectMenuFX extends Application {
         ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
         totalHoursColumn.setCellValueFactory(new PropertyValueFactory<>("hours"));
         table.setItems(activityData);
+    }
+
+    public void showHours() throws IOException {
+        ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
+        String aName = selectedActivity.getActivityName();
+        String pName = AllProjectsList.getSelectionModel().getSelectedItem();
+        ShowHoursFX shFX = new ShowHoursFX();
+        System.out.println(pName);
+        shFX.newStart(aName, pName);
+
     }
     }
 
