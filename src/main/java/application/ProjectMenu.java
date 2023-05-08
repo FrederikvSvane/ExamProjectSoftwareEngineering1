@@ -28,11 +28,8 @@ public class ProjectMenu {
     }
 
 
-
-
-    public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler{
-        if(!AuthenticationService.loginStatus()){
-
+    public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler {
+        if (!AuthenticationService.loginStatus()) {
             throw new ExceptionHandler("User must be logged in to create project");
         } else {
             if (projectExists(projectName)) {
@@ -47,12 +44,11 @@ public class ProjectMenu {
                 } else {
                     projectsCreatedInYear.put(getDate().get(Calendar.YEAR), projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) + 1);
                 }
-                newProject.addEmployeeToProject("ljs");
             }
         }
     }
 
-    public static Employee getCurrentUser(){
+    public static Employee getCurrentUser() {
         return EmployeeBase.getEmployee(username);
     }
 

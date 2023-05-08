@@ -50,8 +50,6 @@ public class AddEmployeeFX extends Application {
         String initials = employeeInitials.getText();
         Project project = ProjectMenu.getProject(pName);
         project.addEmployeeToProject(initials);
-        EmployeeBase.getEmployee(initials).addToMyProjects(project);
-
 
         Stage stage = (Stage) addEmployeeButton.getScene().getWindow();
         stage.close();

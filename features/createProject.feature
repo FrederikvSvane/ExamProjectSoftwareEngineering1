@@ -21,6 +21,16 @@ Feature: Create Project
     When user creates project with name "project2", duration 10, budgeted hours 100 and start week 1
     Then a new project with the name "project2", duration 10, budgeted hours 100 and start week 1 and project ID 230001 is created
 
+  Scenario: Create two projects with duration, budgeted hours and start week
+    Given a user is logged in
+    And a project with name "project2" does not exist
+    And a project with name "project3" does not exist
+    And the year is 2023
+    And there has been created 0 projects in 2023
+    When user creates project with name "project2", duration 10, budgeted hours 100 and start week 1
+    When user creates project with name "project3", duration 10, budgeted hours 100 and start week 1
+    Then a new project with the name "project3", duration 10, budgeted hours 100 and start week 1 and project ID 230002 is created
+
   Scenario: Create a project with wrong duration
     Given a user is logged in
     And a project with name "project2" does not exist
