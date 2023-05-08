@@ -84,7 +84,7 @@ public class ProjectMenu {
     }
 
 
-    public boolean projectExists(String projectName) {
+    public static boolean projectExists(String projectName) {
         return projects.stream().anyMatch(p -> p.getProjectName().equals(projectName));
     }
 
