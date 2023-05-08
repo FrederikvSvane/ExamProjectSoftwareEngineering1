@@ -27,25 +27,56 @@ public class ProjectMenu {
         this.username = username;
     }
 
-
     public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler {
-        if (!AuthenticationService.loginStatus()) {
-            throw new ExceptionHandler("User must be logged in to create project");
-        } else {
-            if (projectExists(projectName)) {
-                throw new ExceptionHandler("Project already exists");
-            } else if (budgetedHours <= 0 || startDate <= 0 || duration <= 0 || startDate > 52) {
-                throw new ExceptionHandler("Invalid timeframe");
-            } else {
-                Project newProject = new Project(projectName, budgetedHours, startDate, duration);
-                projects.add(newProject);
-                if (projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) == null) {
-                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), 1);
-                } else {
-                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) + 1);
+        if (!AuthenticationService.loginStatus()) {                                                                                         // 1
+            throw new ExceptionHandler("User must be logged in to create project");                                                     // 2
+        } else {                                                                                                                            // 3
+            if (projectExists(projectName)) {                                                                                               // 4
+                throw new ExceptionHandler("Project already exists");                                                                   // 5
+            } else if (budgetedHours <= 0 || startDate <= 0 || duration <= 0 || startDate > 52) {                                           // 6
+                throw new ExceptionHandler("Invalid timeframe");                                                                        // 7
+            } else {                                                                                                                        // 8
+                Project newProject = new Project(projectName, budgetedHours, startDate, duration);                                          // 9
+                projects.add(newProject);                                                                                                   // 10
+                if (projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) == null) {                                                      // 11
+                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), 1);                                                             // 12
+                } else {                                                                                                                    // 13
+                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) + 1);   // 14
                 }
             }
         }
+    }
+
+    public void addProjectWhiteBox(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler {
+
+        assert AuthenticationService.loginStatus();                                                                                         // Precondition 1
+        assert !projectExists(projectName) && projectName != null;                                                                          // Precondition 2
+        assert budgetedHours > 0 && startDate > 0 && duration > 0 && startDate <= 52;                                                       // Precondition 3
+
+        if (!AuthenticationService.loginStatus()) {                                                                                         // 1
+            throw new ExceptionHandler("User must be logged in to create project");                                                     // 2
+        } else {                                                                                                                            // 3
+            if (projectExists(projectName)) {                                                                                               // 4
+                throw new ExceptionHandler("Project already exists");                                                                   // 5
+            } else if (budgetedHours <= 0 || startDate <= 0 || duration <= 0 || startDate > 52) {                                           // 6
+                throw new ExceptionHandler("Invalid timeframe");                                                                        // 7
+            } else {                                                                                                                        // 8
+                Project newProject = new Project(projectName, budgetedHours, startDate, duration);                                          // 9
+                projects.add(newProject);                                                                                                   // 10
+
+                assert getDate().get(Calendar.YEAR) != 0;                                                                                   // Invariant 1
+
+                if (projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) == null) {                                                      // 11
+                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), 1);                                                             // 12
+                } else {                                                                                                                    // 13
+                    projectsCreatedInYear.put(getDate().get(Calendar.YEAR), projectsCreatedInYear.get(getDate().get(Calendar.YEAR)) + 1);   // 14
+                }
+            }
+        }
+
+        assert getProject(projectName).getProjectID() == (getDate().get(Calendar.YEAR)%100)*10000+projectsCreatedInYear.get(getDate().get(Calendar.YEAR));    // Postcondition 1
+        assert projectExists(projectName);                                                                                                  // Postcondition 2
+
     }
 
     public static Employee getCurrentUser() {

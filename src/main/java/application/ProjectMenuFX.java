@@ -26,6 +26,8 @@ public class ProjectMenuFX extends Application {
     NewActivityFX naFX = new NewActivityFX();
     AddHoursFX adFX = new AddHoursFX();
 
+    RemeberHoursFX rhFX = new RemeberHoursFX();
+
     private static ProjectMenuFX instance;
 
     public ProjectMenuFX() {
@@ -224,15 +226,14 @@ public class ProjectMenuFX extends Application {
     }
 
     public void logOut() throws IOException {
+        rhFX.newStart();
+    }
 
-        AuthenticationService.logout();
-
+    public void close(){
         Stage stage = (Stage) logOut.getScene().getWindow();
         stage.close();
-
-        DriverFX PM = new DriverFX();
-        PM.newStart();
     }
+
 
     public void addProjectActivityToList(Project project){
         errorLabel.setText("");
