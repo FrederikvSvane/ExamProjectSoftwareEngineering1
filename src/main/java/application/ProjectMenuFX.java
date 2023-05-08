@@ -227,11 +227,12 @@ public class ProjectMenuFX extends Application {
 
     public void logOut() throws IOException {
         rhFX.newStart();
+        Stage stage = (Stage) logOut.getScene().getWindow();
+        stage.close();
     }
 
     public void close(){
-        Stage stage = (Stage) logOut.getScene().getWindow();
-        stage.close();
+
     }
 
 
