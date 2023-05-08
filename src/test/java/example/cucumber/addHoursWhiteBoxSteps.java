@@ -19,6 +19,8 @@ public class addHoursWhiteBoxSteps {
     private Project project;
     private EmployeeBase employeeBase;
 
+    private String errorMessage;
+
     private Activity activity;
 
     private ErrorMessageHolder errorMessageHolder;
@@ -34,9 +36,9 @@ public class addHoursWhiteBoxSteps {
     @When("the method addHours is called with parameters employeeInitials {string} and hours {int}")
     public void theMethodAddHoursIsCalledWithParametersEmployeeInitialsAndHours(String employeeInitials, Integer hours) throws Exception {
         try {
-            activity.addHours(employeeInitials, hours);
-        } catch (Exception e) {
-            errorMessageHolder.setErrorMessage(e.getMessage());
+            activity.addHoursWhiteBox(employeeInitials, hours);
+        } catch (AssertionError e) {
+            errorMessage = e.getMessage();
         }
     }
 
@@ -89,5 +91,11 @@ public class addHoursWhiteBoxSteps {
         }
 
     }
+
+    @Then("error message {string} is gotten")
+    public void errorMessageIsGotten(String expectedErrorMessage) {
+        assertEquals(expectedErrorMessage, errorMessage);
+    }
+
 
 }
