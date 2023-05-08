@@ -17,9 +17,9 @@ public class RemeberHoursFX extends Application {
     @FXML
     Button yesButton;
 
-    DriverFX PM = new DriverFX();
+    DriverFX dFX = new DriverFX();
 
-    private Stage backgroundStage;
+    private static boolean close;
     public void newStart() throws IOException {
         Stage stage = new Stage();
         start(stage);
@@ -36,17 +36,17 @@ public class RemeberHoursFX extends Application {
         Stage stage = (Stage) noButton.getScene().getWindow();
         stage.close();
 
-        PM.newStart();
-
-        ProjectMenuFX pmFX = new ProjectMenuFX();
+        dFX.newStart();
         AuthenticationService.logout();
-        pmFX.close();
     }
 
     public void closeWindow() throws IOException {
         Stage stage = (Stage) yesButton.getScene().getWindow();
         stage.close();
 
+        ProjectMenuFX pmFX = new ProjectMenuFX();
+        pmFX.newStart();
     }
+
 
 }

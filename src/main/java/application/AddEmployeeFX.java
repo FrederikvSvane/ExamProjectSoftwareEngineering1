@@ -76,7 +76,6 @@ public class AddEmployeeFX extends Application {
 
     public void removeEmployee() throws ExceptionHandler {
         try{
-
             String initials = employeeInitials.getText();
             Project project = ProjectMenu.getProject(pName);
             project.removeEmployeeFromProject(initials);
