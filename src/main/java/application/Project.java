@@ -202,4 +202,5 @@ public class Project implements ProjectService {
                 throw new ExceptionHandler("Activity doesnt exist");
             }
     }
+
 }

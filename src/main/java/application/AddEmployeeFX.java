@@ -50,12 +50,12 @@ public class AddEmployeeFX extends Application {
     Label errorLabelEmployee;
 
     public void addEmployeeToList() throws ExceptionHandler {
+
+        String initials = employeeInitials.getText();
+        Project project = ProjectMenu.getProject(pName);
+        project.addEmployeeToProject(initials);
+
         try{
-
-            String initials = employeeInitials.getText();
-            Project project = ProjectMenu.getProject(pName);
-            project.addEmployeeToProject(initials);
-
             Stage stage = (Stage) addEmployeeButton.getScene().getWindow();
             stage.close();
 
