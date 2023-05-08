@@ -15,21 +15,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 
-public class NewProjectFX extends Application {
+public class NewProjectFX extends Application {//Frederik
 
-    Project project;
     ProjectMenu projectMenu;
-    ProjectMenuFX projectMenuFX;
-
     public NewProjectFX() {
     }
-
-    public NewProjectFX(ProjectMenuFX projectMenuFX) {
-        this.projectMenuFX = projectMenuFX;
-    }
-
-
-
 
     public void newStart() throws IOException {
         Stage stage = new Stage();

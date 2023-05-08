@@ -4,7 +4,7 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employee {
+public class Employee { //Rasmus
     private String employeeInitials;
 
 
@@ -30,10 +30,6 @@ public class Employee {
             projectNames.add(project.getProjectName());
         }
         return projectNames;
-    }
-
-    public void addToMyProjects(Project project) {
-        projectList.add(project);
     }
     public boolean containsProject(String projectName) {
         return projectList.stream().anyMatch(p -> p.getProjectName().equals(projectName));

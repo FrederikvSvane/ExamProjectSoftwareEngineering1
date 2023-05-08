@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AddHoursFX{
+public class AddHoursFX{ //Søren
     private String activityName;
     private String pName;
     Project project;
@@ -34,16 +34,6 @@ public class AddHoursFX{
         stage.show();
 
     }
-    /*
-    @Override
-    public void start(Stage stage) throws IOException, ExceptionHandler {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("AddHours.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        Label nameLabel = (Label) stage.getScene().lookup("#activityLabel");
-        nameLabel.setText("Add hours for " +  activityName);
-        stage.show();
-    }*/
     @FXML
     Label activityLabel;
     @FXML

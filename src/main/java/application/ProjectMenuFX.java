@@ -127,7 +127,7 @@ public class ProjectMenuFX extends Application {
     Label errorLabel = new Label();
 
     @FXML
-    public void initialize() {
+    public void initialize() { //Frederik
         aNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         myNameColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         hoursColumn.setCellValueFactory(new PropertyValueFactory<>("budgetedHours"));
@@ -146,40 +146,40 @@ public class ProjectMenuFX extends Application {
     public void addProject() throws IOException {
         npFX.newStart();
     }
-    public void addProjectActivity() throws IOException {
+    public void addProjectActivity() throws IOException { //Lucas
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         naFX.newStart(selectedItem);
     }
 
-    public void setInformationRowLeft() {
+    public void setInformationRowLeft() { //Frederik
         ObservableList<String> info =FXCollections.observableArrayList("Project Name:", "Project Leader:", "End Date:","Start Date:","Duration:", "Budgeted Hours:", "Total Hours:", "Project ID:");
         informationRowLeft.setItems(info);
         informationRowLeft1.setItems(info);
     }
 
-    public void setInformationRowRight1(Project project) {
+    public void setInformationRowRight1(Project project) { //Rasmus
         ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()%52), "Week " + Integer.toString(project.getStartDate()%52), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
         informationRowRight1.setItems(info);
     }
 
-    public void setMyInformationRowRight(Project project) {
+    public void setMyInformationRowRight(Project project) { //Frederik
         ObservableList<String> info =FXCollections.observableArrayList(project.getProjectName(), project.getProjectLeader().getEmployeeInitials(), "Week " + Integer.toString(project.getEndDate()%52), "Week " + Integer.toString(project.getStartDate()%52), Integer.toString(project.getDuration()) + " weeks", Integer.toString(project.getBudgetedHours()), Integer.toString(project.getTotalHours()), Integer.toString(project.getProjectID()));
         informationRowRight.setItems(info);
     }
-    public void updateList(){
+    public void updateList(){ //Christoffer
         ObservableList<String> projects = FXCollections.observableArrayList(ProjectMenu.getProjectNames());
         AllProjectsList.setItems((ObservableList<String>) projects);
         errorLabel.setText("");
     }
 
-    public void updateMyProjectList(){
+    public void updateMyProjectList(){ //Christoffer
         ObservableList<String> myProjects = FXCollections.observableArrayList(EmployeeBase.getEmployee(AuthenticationService.getLoggedInUser()).getProjectList());
         MyProjectsList.setItems((ObservableList<String>) myProjects);
         errorLabel.setText("");
     }
 
 
-    public void correctAccess(Project project){
+    public void correctAccess(Project project){ //Lucas
         errorLabel.setText("");
         if(project.getProjectLeader().getEmployeeInitials().equals("none") || project.getProjectLeader().getEmployeeInitials().equals(ProjectMenu.username)){
             newActivity1.setDisable(false);
@@ -190,7 +190,7 @@ public class ProjectMenuFX extends Application {
         }
     }
 
-    public void projectSelect(){
+    public void projectSelect(){ //Søren
         errorLabel.setText("");
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
@@ -201,7 +201,7 @@ public class ProjectMenuFX extends Application {
         correctAccess(project);
     }
 
-    public void myProjectSelect(){
+    public void myProjectSelect(){ //Søren
         errorLabel.setText("");
         String mySelectedItem = MyProjectsList.getSelectionModel().getSelectedItem();
         Project myProject = ProjectMenu.getProject(mySelectedItem);
@@ -212,36 +212,30 @@ public class ProjectMenuFX extends Application {
         correctAccess(myProject);
     }
 
-    public void setEmployeeView(Project project){
+    public void setEmployeeView(Project project){ //Frederik
         errorLabel.setText("");
         ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
         employeeListView.setItems(info);
     }
 
-    public void setMyEmployeeListView(Project project){
+    public void setMyEmployeeListView(Project project){ //Frederik
         errorLabel.setText("");
         ObservableList<String> info = FXCollections.observableArrayList(EmployeeBase.getEmployeeNames(project.employeeList));
         employeeListView1.setItems(info);
     }
 
-    public void logOut() throws IOException {
+    public void logOut() throws IOException { //Rasmus
         rhFX.newStart();
         Stage stage = (Stage) logOut.getScene().getWindow();
         stage.close();
     }
-
-    public void close(){
-
-    }
-
-
-    public void addProjectActivityToList(Project project){
+    public void addProjectActivityToList(Project project){ //Christoffer
         errorLabel.setText("");
         ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
         table.setItems(activityData);
     }
 
-    public void addEmployee() throws ExceptionHandler, IOException {
+    public void addEmployee() throws ExceptionHandler, IOException { //Lucas
         errorLabel.setText("");
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
@@ -250,7 +244,7 @@ public class ProjectMenuFX extends Application {
         aeFX.newStart(project.getProjectName());
     }
 
-    public void addProjectLeader() throws ExceptionHandler, IOException {
+    public void addProjectLeader() throws ExceptionHandler, IOException { //Lucas
         errorLabel.setText("");
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
@@ -261,7 +255,7 @@ public class ProjectMenuFX extends Application {
         updateList();
     }
 
-    public void removeProjectLeader(){
+    public void removeProjectLeader(){ //Lucas
         errorLabel.setText("");
         String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
         Project project = ProjectMenu.getProject(selectedItem);
@@ -271,7 +265,7 @@ public class ProjectMenuFX extends Application {
         setInformationRowRight1(project);
     }
 
-    public void removeActivityFromList() throws ExceptionHandler {
+    public void removeActivityFromList() throws ExceptionHandler { //Søren
         try{
             String selectedProject = AllProjectsList.getSelectionModel().getSelectedItem();
             Project project = ProjectMenu.getProject(selectedProject);
@@ -290,18 +284,18 @@ public class ProjectMenuFX extends Application {
     }
 
 
-    public void addHours() throws IOException, ExceptionHandler {
+    public void addHours() throws IOException, ExceptionHandler { //Frederik
         String selectedItem1 = AllProjectsList.getSelectionModel().getSelectedItem();
         ProjectActivity selectedActivity = table.getSelectionModel().getSelectedItem();
         String aName = selectedActivity.getActivityName();
         adFX.newStart(aName, selectedItem1);
     }
-    public void updateHours(Project project){
+    public void updateHours(Project project){ //Rasmus
         ObservableList<ProjectActivity> activityData = FXCollections.observableArrayList(project.getActivityList());
         table.setItems(activityData);
     }
 
-    public void removeProjectFromMyList(){
+    public void removeProjectFromMyList(){ //Christoffer
         try{
             String selectedItem = MyProjectsList.getSelectionModel().getSelectedItem();
             Project project = ProjectMenu.getProject(selectedItem);
@@ -314,7 +308,7 @@ public class ProjectMenuFX extends Application {
             errorLabel.setText("You need to select a project to delete");
         }
     }
-    public void removeProjectFromAllList(){
+    public void removeProjectFromAllList(){ //Rasmus
         try{
             String selectedItem = AllProjectsList.getSelectionModel().getSelectedItem();
             Project project = ProjectMenu.getProject(selectedItem);
@@ -322,7 +316,6 @@ public class ProjectMenuFX extends Application {
             ProjectMenu.removeProject(project.getProjectName());
             updateList();
             updateMyProjectList();
-
         }catch(Exception err){
             System.out.println(err);
             errorLabel.setText("You need to select a project to delete");

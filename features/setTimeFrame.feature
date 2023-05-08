@@ -1,3 +1,4 @@
+#Rasmus
 Feature: Set time frame for project
 
   Background: A logged in user has created a project with name "Awesome Project"

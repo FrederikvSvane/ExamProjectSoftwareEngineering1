@@ -1,3 +1,4 @@
+#Søren
 Feature: Add hours to off-work activity
 
   Background: The employeeDatabase has a set of employees

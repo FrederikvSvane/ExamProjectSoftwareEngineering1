@@ -7,7 +7,7 @@ public abstract class Activity{
     public String activityName;
     public HashMap<Employee,Integer> employeeHours = new HashMap<Employee, Integer>();
 
-    public void addHours(String employeeInitials,int hours) throws Exception{
+    public void addHours(String employeeInitials,int hours) throws Exception{ //Frederik
         if(!AuthenticationService.loginStatus()){                                                       //1
             throw new ExceptionHandler("User must be logged in to add hours");                      //2
         } else if (hours <= 0) {                                                                        //3
@@ -24,7 +24,7 @@ public abstract class Activity{
     }
 
 
-    public void addHoursWhiteBox(String employeeInitials,int hours) throws Exception{
+    public void addHoursWhiteBox(String employeeInitials,int hours) throws Exception{ //Frederik
 
         assert AuthenticationService.loginStatus(): "User must be logged in to add hours";                                                   //Precondition 1
         assert employeeInitials != null && EmployeeBase.containsEmployee(employeeInitials): "Employee not found in employeeBase";            //Precondition 2
@@ -58,8 +58,7 @@ public abstract class Activity{
 
 
 
-    public int getHours(){return hours;
-    }
+    public int getHours(){return hours;}
 
     public String getActivityName(){
         return activityName;
@@ -70,7 +69,4 @@ public abstract class Activity{
         Employee employee = EmployeeBase.getEmployee(employeeInitials);
     	return employeeHours.get(employee);
     }
-
-
-
 }

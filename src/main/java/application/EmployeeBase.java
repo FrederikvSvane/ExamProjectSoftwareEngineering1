@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class EmployeeBase {
+public class EmployeeBase { //Lucas
 
     public static ArrayList<Employee> employeeBase = new ArrayList<>();
 
@@ -43,10 +43,6 @@ public class EmployeeBase {
 
         assert containsEmployee(employeeInitials) : "The employee was not added to EmployeeBase";                //Postcondition
     }
-
-    /*public boolean checkInitials(String employeeInitials){
-        return employeeBase.contains(employeeInitials);
-    }*/
 
     public static boolean containsEmployee(String employeeInitials) {
         return employeeBase.stream().anyMatch(e -> e.getEmployeeInitials().equals(employeeInitials));

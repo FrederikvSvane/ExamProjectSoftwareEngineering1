@@ -1,3 +1,4 @@
+#Frederik
 Feature: White box tests of the method addHours from the class Activity
 
   Background:

@@ -27,7 +27,7 @@ public class ProjectMenu {
         this.username = username;
     }
 
-    public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler {
+    public void addProject(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler { //Christoffer
         if (!AuthenticationService.loginStatus()) {                                                                                         // 1
             throw new ExceptionHandler("User must be logged in to create project");                                                     // 2
         } else {                                                                                                                            // 3
@@ -47,7 +47,7 @@ public class ProjectMenu {
         }
     }
 
-    public void addProjectWhiteBox(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler {
+    public void addProjectWhiteBox(String projectName, int budgetedHours, int startDate, int duration) throws ExceptionHandler { //Christoffer
 
         assert AuthenticationService.loginStatus(): "User must be logged in to create project";                                             // Precondition 1
         assert !projectExists(projectName): "Project already exists";                                                                       // Precondition 2
@@ -80,16 +80,11 @@ public class ProjectMenu {
 
     }
 
-    public static Employee getCurrentUser() {
-        return EmployeeBase.getEmployee(username);
-    }
-
-
-    public static boolean projectExists(String projectName) {
+    public static boolean projectExists(String projectName) { //Lucas
         return projects.stream().anyMatch(p -> p.getProjectName().equals(projectName));
     }
 
-    public static int getProjectsCreatedInYear(int year) {
+    public static int getProjectsCreatedInYear(int year) { //Frederik
         if (projectsCreatedInYear.get(year) == null) {
             return 0;
         } else {
@@ -97,11 +92,11 @@ public class ProjectMenu {
         }
     }
 
-    public static Project getProject(String projectName) {
+    public static Project getProject(String projectName) { //Søren
         return projects.stream().filter(p -> p.getProjectName().equals(projectName)).findFirst().get();
     }
 
-    public static List<String> getProjectNames() {
+    public static List<String> getProjectNames() { //Christoffer
         List<String> projectNames = new ArrayList<String>();
         for (Project project : projects) {
             projectNames.add(project.getProjectName());
@@ -109,7 +104,7 @@ public class ProjectMenu {
         return projectNames;
     }
 
-    public void createOffWorkActivity(String activityName) throws ExceptionHandler {
+    public void createOffWorkActivity(String activityName) throws ExceptionHandler { //Rasmus
         if (!AuthenticationService.loginStatus()) {
             throw new ExceptionHandler("User must be logged in to create activity");
         } else if (offWorkActivityExists(activityName)) {
@@ -121,23 +116,23 @@ public class ProjectMenu {
 
     }
 
-    public boolean offWorkActivityExists(String activityName) {
+    public boolean offWorkActivityExists(String activityName) { //Lucas
         return offWorkActivities.stream().anyMatch(a -> a.getActivityName().equals(activityName));
     }
 
-    public offWorkActivity getOffWorkActivity(String activityName) {
+    public offWorkActivity getOffWorkActivity(String activityName) { //Frederik
         return offWorkActivities.stream().filter(a -> a.getActivityName().equals(activityName)).findFirst().get();
     }
 
-    public void addHoursToOffWorkActivity(String activityName, String employeeInitials, Integer hours) throws Exception {
+    public void addHoursToOffWorkActivity(String activityName, String employeeInitials, Integer hours) throws Exception { //Søren
         getOffWorkActivity(activityName).addHours(employeeInitials, hours);
     }
 
-    public void setProjectsCreatedInYear(Integer numOfProjects, Integer year) {
+    public void setProjectsCreatedInYear(Integer numOfProjects, Integer year) { //Rasmus
         projectsCreatedInYear.put(year, numOfProjects);
     }
 
-    public static void removeProject(String ProjectName) {
+    public static void removeProject(String ProjectName) { //Lucas
         Employee employee = EmployeeBase.getEmployee(AuthenticationService.getLoggedInUser());
         employee.removeProject(getProject(ProjectName));
         projects.removeIf(p -> p.getProjectName().equals(ProjectName));

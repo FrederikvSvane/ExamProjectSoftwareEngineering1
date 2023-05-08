@@ -16,10 +16,9 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 
-public class AddEmployeeFX extends Application {
+public class AddEmployeeFX extends Application { //Lucas
 
     private static String pName;
-
 
     public void newStart(String pName) throws IOException {
         this.pName = pName;

@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.temporal.IsoFields;
 import java.util.Arrays;
 
-public class NewActivityFX extends Application {
+public class NewActivityFX extends Application { //Christoffer
     private static String pName;
 
     public void newStart(String pName) throws IOException {

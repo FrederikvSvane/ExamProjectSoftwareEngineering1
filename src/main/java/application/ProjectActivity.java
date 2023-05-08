@@ -24,7 +24,7 @@ public class ProjectActivity extends Activity {
     }
 
 
-    public void setTime(int startWeek, int numberOfWeeks) throws ExceptionHandler {
+    public void setTime(int startWeek, int numberOfWeeks) throws ExceptionHandler { //Frederik
         if (startWeek <= 0 || startWeek > 52 || numberOfWeeks <= 0) {
             throw new ExceptionHandler("The given time is invalid");
         } else {
@@ -39,7 +39,7 @@ public class ProjectActivity extends Activity {
         return startWeek;
     }
 
-    public void setStartWeek(int startWeek) throws ExceptionHandler {
+    public void setStartWeek(int startWeek) throws ExceptionHandler { //Lucas
         if (startWeek <= 0 || startWeek > 52) {
             throw new ExceptionHandler("The given time is invalid");
         } else {
@@ -49,7 +49,7 @@ public class ProjectActivity extends Activity {
     }
 
 
-    public void setDuration(int numberOfWeeks) throws ExceptionHandler {
+    public void setDuration(int numberOfWeeks) throws ExceptionHandler { //Lucas
         if (numberOfWeeks <= 0) {
             throw new ExceptionHandler("The given time is invalid");
         } else {
@@ -66,17 +66,6 @@ public class ProjectActivity extends Activity {
     public int getBudgetedHours(){
         return budgetedHours;
     }
-    public int getTotalHours(){return totalHours.get();}
-    public void setTotalHours(int totalHours){
-        this.totalHours.set(totalHours);
-    }
-    public IntegerProperty totalHoursProperty(){
-        return totalHours;
-    }
-
-    public String getpName(){return pName;}
-
-
 
     public void setBudgetedHours(Integer budgetedHours) {
         this.budgetedHours = budgetedHours;

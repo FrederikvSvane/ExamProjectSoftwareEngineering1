@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 
 // The DateServer has not 100% code coverage, as it basically replaced immediately by the
 // mock date server for testing.
-public class DateServer {
+public class DateServer { //Taget fra Huberts Library-app fra kurset.
 
 	/**
 	 * Return the current date without the current time.

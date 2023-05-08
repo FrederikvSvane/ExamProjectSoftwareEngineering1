@@ -20,16 +20,6 @@ public class Project implements ProjectService {
     ProjectActivity activity;
     EmployeeBase employeeBase = new EmployeeBase();
 
-
-    public Project(String projectName) {
-        this.projectName = projectName;
-        setProjectID();
-//      this.activityList = new List<Activity>;
-        this.employeeList = new ArrayList<Employee>();
-        this.employeeHours = new HashMap<>();
-//      this.endDate = endDate;
-    }
-
     public Project(String projectName, int budgetedHours, int startDate, int duration) {
         this.projectName = projectName;
         setProjectID();
@@ -44,14 +34,6 @@ public class Project implements ProjectService {
 
     }
 
-    //public boolean isProjectLeader(String username, Project project){
-    //   if(project.getProjectLeader().getUsername() == username){
-    //        return true;
-    //    } else {
-    //        return false;
-    //    }
-    //}
-
     public int getProjectID() {
         return projectID;
     }
@@ -61,14 +43,14 @@ public class Project implements ProjectService {
         return projectName;
     }
 
-    private void setProjectID() {
+    private void setProjectID() { //Christoffer
         int year = ProjectMenu.getDate().get(Calendar.YEAR);
         int numOfProjects = ProjectMenu.getProjectsCreatedInYear(year);
         //2023 mod 100 => 23 * 10000 => 230000 + 1 + 1 => 230001
         this.projectID = year % 100 * 10000 + numOfProjects + 1;
     }
 
-    public void setProjectLeader(String initials) throws ExceptionHandler {
+    public void setProjectLeader(String initials) throws ExceptionHandler { //Rasmus
         if (!employeeBase.containsEmployee(initials)) {
             throw new ExceptionHandler("User does not exist");
         } else {
@@ -91,13 +73,13 @@ public class Project implements ProjectService {
         }
     }
 
-    public void removeProjectLeader() {
+    public void removeProjectLeader() { //Søren
         if (projectLeader != null) {
             projectLeader = null;
         }
     }
 
-    public void addEmployeeToProject(String initials) throws ExceptionHandler {
+    public void addEmployeeToProject(String initials) throws ExceptionHandler {//Rasmus
         if (employeeBase.containsEmployee(initials)) {
             if (!employeeList.contains(employeeBase.getEmployee(initials))) {
                 employeeBase.getEmployee(initials).addProject(this);
@@ -110,7 +92,7 @@ public class Project implements ProjectService {
         }
     }
 
-    public void addEmployeeToProjectWhiteBox(String initials) throws ExceptionHandler {
+    public void addEmployeeToProjectWhiteBox(String initials) throws ExceptionHandler {//Rasmus
 
         assert initials != null : "Initials is null";
         assert employeeBase.containsEmployee(initials) : "The user doesn't exist";
@@ -136,7 +118,7 @@ public class Project implements ProjectService {
     }
 
 
-    public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler { // 1
+    public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler { //Søren 1
         if (activityName == null || activityName.equals("")) {                                                             //2
             throw new ExceptionHandler("The activity name is invalid");                                                 //3
         } else if (hours <= 0) {                                                                                            //4
@@ -157,7 +139,7 @@ public class Project implements ProjectService {
 
     }
 
-    public void addProjectActivityWhiteBox(String activityName, int hours, int startDate, int duration) throws ExceptionHandler { // 1
+    public void addProjectActivityWhiteBox(String activityName, int hours, int startDate, int duration) throws ExceptionHandler { //Søren 1
         assert EmployeeBase.employeeBase != null && EmployeeBase.containsEmployee("giig");                  //Precondition 1
         assert AuthenticationService.loginStatus();                                                                     //Precondition 2
         assert ProjectMenu.projectExists("Awesome Project");                                                 //Precondition 3
@@ -191,7 +173,7 @@ public class Project implements ProjectService {
 
 
 
-    public void removeEmployeeFromProject(String initials) throws ExceptionHandler {
+    public void removeEmployeeFromProject(String initials) throws ExceptionHandler {//Christoffer
         if (containsEmployee(initials)) {
             employeeList.remove(employeeBase.getEmployee(initials));
             employeeBase.getEmployee(initials).removeProject(this);
@@ -200,11 +182,11 @@ public class Project implements ProjectService {
         }
     }
 
-    public boolean containsEmployee(String initials) {
+    public boolean containsEmployee(String initials) {//Christoffer
         return employeeList.stream().anyMatch(e -> e.getEmployeeInitials().equals(initials));
     }
 
-    public void setTimeframe(int startDate, int duration) throws ExceptionHandler {
+    public void setTimeframe(int startDate, int duration) throws ExceptionHandler {//Rasmus
         if (startDate <= 0 || startDate > 52 || duration <= 0) {
             throw new ExceptionHandler("The given timeframe is invalid");
         } else {
@@ -215,7 +197,7 @@ public class Project implements ProjectService {
     }
 
 
-    public boolean activityExists(String activityName) {
+    public boolean activityExists(String activityName) {//Lucas
         return activityList.stream().anyMatch(e -> e.getActivityName().equals(activityName));
     }
 
@@ -235,7 +217,7 @@ public class Project implements ProjectService {
         return budgetedHours;
     }
 
-    public int getTotalHours() {
+    public int getTotalHours() {//Frederik
         int totalHours = 0;
         for (ProjectActivity activity : activityList) {
             totalHours += activity.getHours();
@@ -243,7 +225,7 @@ public class Project implements ProjectService {
         return totalHours;
     }
 
-    public ProjectActivity getActivity(String activityName) throws ExceptionHandler {
+    public ProjectActivity getActivity(String activityName) throws ExceptionHandler {//Christoffer
         if (!activityExists(activityName)) {
             throw new ExceptionHandler("The activity does not exist in the project");
         } else {
@@ -255,7 +237,7 @@ public class Project implements ProjectService {
         return activityList;
     }
 
-    public void removeActivityFromList(Activity activity) throws ExceptionHandler {
+    public void removeActivityFromList(Activity activity) throws ExceptionHandler {//Søren
             if(activityExists(activity.getActivityName())){
                 getActivityList().remove(activity);
             } else {

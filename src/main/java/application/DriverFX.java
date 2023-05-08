@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DriverFX extends Application{
+public class DriverFX extends Application{ //Søren
     private Driver driver = new Driver();
     private Stage stage;
 

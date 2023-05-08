@@ -7,7 +7,7 @@ public class ProjectHolder {
 
     public Project getProject() {
         if(project == null){
-            project = new Project("holde projekt");
+            project = new Project("holde projekt", 1, 1, 1);
         }return project;
     }
     public void setProject(Project project) {

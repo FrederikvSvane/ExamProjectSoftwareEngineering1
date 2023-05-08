@@ -1,3 +1,4 @@
+#Frederik
 Feature: Add hours to project activity
 
   Background: An activity exists in a project

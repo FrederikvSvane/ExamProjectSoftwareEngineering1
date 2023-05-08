@@ -23,14 +23,14 @@ public class RemeberHoursFX extends Application {
         start(stage);
     }
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException { //Søren
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("RememberHours.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void logoutSecond() throws IOException {
+    public void logoutSecond() throws IOException { //Lucas
         Stage stage = (Stage) noButton.getScene().getWindow();
         stage.close();
 
@@ -38,7 +38,7 @@ public class RemeberHoursFX extends Application {
         AuthenticationService.logout();
     }
 
-    public void closeWindow() throws IOException {
+    public void closeWindow() throws IOException { //Lucas
         Stage stage = (Stage) yesButton.getScene().getWindow();
         stage.close();
 

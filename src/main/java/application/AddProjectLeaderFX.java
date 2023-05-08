@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AddProjectLeaderFX extends Application {
+public class AddProjectLeaderFX extends Application { //Rasmus
 
     private static String pName;
 
