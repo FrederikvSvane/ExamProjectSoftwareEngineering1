@@ -94,6 +94,7 @@ public class addHoursWhiteBoxSteps {
 
     @Then("error message {string} is gotten")
     public void errorMessageIsGotten(String expectedErrorMessage) {
+
         assertEquals(expectedErrorMessage, errorMessage);
     }
 
