@@ -29,5 +29,3 @@ Feature: Add hours to off-work activity
     Given a user "mate" is logged in
     When a user adds -34 hours to off-work activity "Vacation"
     Then error message "Invalid number of hours"
-
-0

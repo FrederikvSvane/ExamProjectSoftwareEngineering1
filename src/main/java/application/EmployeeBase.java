@@ -18,8 +18,27 @@ public class EmployeeBase {
                 throw new ExceptionHandler("Employee with given initials already exist, please input new initials.");     //6
             }
         } else {                                                                                                              //7
-            throw new ExceptionHandler("Initials doesn’t fit the restrictions, please input new initials.");              //8
+            throw new ExceptionHandler("Initials doesn't fit the restrictions, please input new initials.");              //8
         }
+    }
+
+    public void createEmployeeWhiteBox(String employeeInitials) throws ExceptionHandler{
+
+        assert (employeeInitials.length() <= 4 && employeeInitials.length() >= 1 && employeeInitials.matches("[a-zA-Z]+")) != false : "Input does not satisft requirements"; //Precondition 1
+        assert !containsEmployee(employeeInitials) : "Employee is already in the database";                                                                                        //Precondition 2
+
+        if(employeeInitials.length() <= 4 && employeeInitials.length() >= 1 && employeeInitials.matches("[a-zA-Z]+" )){ //1
+            if (!containsEmployee(employeeInitials)){                                                                         //2
+                Employee employee = new Employee(employeeInitials);                                                           //3
+                employeeBase.add(employee);                                                                                   //4
+            } else {                                                                                                          //5
+                throw new ExceptionHandler("Employee with given initials already exist, please input new initials.");     //6
+            }
+        } else {                                                                                                              //7
+            throw new ExceptionHandler("Initials doesn't fit the restrictions, please input new initials.");              //8
+        }
+
+        assert EmployeeBase.containsEmployee(employeeInitials) : "The employee was not added to EmployeeBase";                //Postcondition
     }
 
     /*public boolean checkInitials(String employeeInitials){
