@@ -117,26 +117,28 @@ public class ProjectSteps {
     }
 
     @When("a user creates project with name {string}, duration {int}, budgeted hours {int} and start week {int}")
-    public void aUserCreatesProjectWithNameDurationBudgetedHoursAndStartWeek(String string, Integer int1, Integer int2, Integer int3) {
+    public void aUserCreatesProjectWithNameDurationBudgetedHoursAndStartWeek(String string, Integer int1, Integer int2, Integer int3) throws Exception {
         try {
-            projectMenuHolder.getProjectMenu().addProject(string, int2, int3, int1);
-        } catch (ExceptionHandler e){
-            errorMessageHolder.setErrorMessage(e.getMessage());
+            projectMenuHolder.getProjectMenu().addProjectWhiteBox(string, int2, int3, int1);
+        } catch (AssertionError e) {
+            errorMessage = e.getMessage();
         }
     }
 
     @Then("error message {string} is shown")
-    public void errorMessageIsShown(String expectedErrorMessage) {
-        assertEquals(expectedErrorMessage, errorMessage);
+    public void errorMessageIsShown(String err) {
+        assertEquals(err, errorMessage);
 
     }
 
     @When("a user creates project with name {string}")
-    public void aUserCreatesProjectWithName(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void aUserCreatesProjectWithName(String string) throws Exception{
+        try {
+            projectMenuHolder.getProjectMenu().addProjectWhiteBox(string, 1, 1, 1);
+        } catch (AssertionError e) {
+            errorMessage = e.getMessage();
+        }
     }
-
 
 
 }

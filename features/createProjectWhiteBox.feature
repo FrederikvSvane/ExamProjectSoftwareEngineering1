@@ -31,17 +31,17 @@ Feature: Create Project
     Then error message "Invalid timeframe" is shown
 
   Scenario: Test set D
-  Given a user is logged in
-  And a project with name "project1" exists
-  And the year is 2023
-  And there has been created 0 projects in 2023
-  When a user creates project with name "project1"
-  Then error message "Project already exists" is shown
+    Given a user is logged in
+    And a project with name "project1" exists
+    And the year is 2023
+    And there has been created 0 projects in 2023
+    When a user creates project with name "project1"
+    Then error message "Project already exists" is shown
 
   Scenario: Test set E
-  Given a user is not logged in
-  And a project with name "project" does not exist
-  And the year is 2023
-  And there has been created 0 projects in 2023
-  When a user creates project with name "project"
-  Then error message "User must be logged in to create project" is shown
+    Given a user is not logged in
+    And a project with name "project" does not exist
+    And the year is 2023
+    And there has been created 0 projects in 2023
+    When a user creates project with name "project"
+    Then error message "User must be logged in to create project" is shown
