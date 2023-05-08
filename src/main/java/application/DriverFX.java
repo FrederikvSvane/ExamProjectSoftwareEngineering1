@@ -51,12 +51,23 @@ public class DriverFX extends Application{
             stage.close();
             ProjectMenuFX PM = new ProjectMenuFX();
             PM.newStart();
+        } else {
+            createdLabel.setText("The user does not exist.");
         }
     }
 
     public void createLogin() throws ExceptionHandler {
         String initials = loginField.getText();
-        createdLabel.setVisible(true);
-        driver.createLogin(initials);
+        if(driver.getLogin(initials)){
+            createdLabel.setText("User already exists.");
+        } else{
+            try{
+                driver.createLogin(initials);
+                createdLabel.setText("User Created!");
+            } catch(ExceptionHandler err){
+                createdLabel.setText("Username has to be between 1 to 4 letters");
+                throw new ExceptionHandler("Wrong input");
+            }
+        }
     }
 }

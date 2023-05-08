@@ -1,20 +1,14 @@
 package application;
 
 
-import io.cucumber.java.bs.A;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Employee {
     private String employeeInitials;
 
-    private int currentHours;
 
-
-
-    private List<Project> projectList = new ArrayList<Project>();
+    private List<Project> projectList = new ArrayList<>();
 
     public Employee(String employeeInitials){
         this.employeeInitials = employeeInitials;

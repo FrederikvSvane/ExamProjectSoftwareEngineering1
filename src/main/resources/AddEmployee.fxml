@@ -12,5 +12,6 @@
       <Button fx:id="addEmployeeButton" layoutX="175.0" layoutY="111.0" mnemonicParsing="false" onAction="#addEmployeeToList" text="Add" />
       <Button fx:id="cancelButton" layoutX="225.0" layoutY="111.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
       <Button fx:id="deleteEmployeeButton" layoutX="105.0" layoutY="111.0" mnemonicParsing="false" onAction="#removeEmployee" text="Remove" />
+      <Label fx:id="errorLabelEmployee" layoutX="14.0" layoutY="88.0" />
    </children>
 </AnchorPane>

@@ -51,22 +51,32 @@ public class NewActivityFX extends Application {
     Button createActivityButton;
     @FXML
     Button cancel;
-
+    @FXML
+    Label errorLabelNewActivity;
     public void createActivity() throws ExceptionHandler {
-        String aName = activityName.getText();
+        try{
+            String aName = activityName.getText();
 
-        int sDate = startDate.getValue().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-        int bHours = Integer.parseInt(budgetHours.getText());
-        int aDuration = Integer.parseInt(duration.getText());
+            int sDate = startDate.getValue().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+            int bHours = Integer.parseInt(budgetHours.getText());
+            int aDuration = Integer.parseInt(duration.getText());
 
-        Project project = ProjectMenu.getProject(pName);
+            Project project = ProjectMenu.getProject(pName);
 
-        project.addProjectActivity(aName,bHours,sDate,aDuration);
+            project.addProjectActivity(aName,bHours,sDate,aDuration);
 
-        ProjectMenuFX.getInstance().addProjectActivityToList(project);
+            ProjectMenuFX.getInstance().addProjectActivityToList(project);
 
-        Stage stage = (Stage) createActivityButton.getScene().getWindow();
-        stage.close();
+            Stage stage = (Stage) createActivityButton.getScene().getWindow();
+            stage.close();
+        } catch(ExceptionHandler err){
+            errorLabelNewActivity.setMaxWidth(200);
+            errorLabelNewActivity.setMaxHeight(100);
+            errorLabelNewActivity.setWrapText(true);
+            errorLabelNewActivity.setText("Duration and budgeted hours has to be positive!");
+            throw new ExceptionHandler("Wrong input");
+        }
+
 
     }
     public void cancel(){

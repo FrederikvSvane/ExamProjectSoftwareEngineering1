@@ -19,12 +19,12 @@ Feature: A project leader is added to a project
     Then error message "User does not exist"
 
   Scenario: User unsuccessfully adds a project leader2
-    Given That I am logged in and have selected a project, and project already have a projectleader
+    Given a user is logged in and have selected a project, and project already have a projectleader
     And a user has an employee with username "heya"
     When a user adds the employee as a project leader
     Then error message "Project leader already assigned to project."
 
   Scenario: User removes a project leader from project
-    Given That I am logged in and have selected a project, and project already have a projectleader
+    Given a user is logged in and have selected a project, and project already have a projectleader
     When a user remove the projectleader from the project
     Then the employee is no longer marked as project leader

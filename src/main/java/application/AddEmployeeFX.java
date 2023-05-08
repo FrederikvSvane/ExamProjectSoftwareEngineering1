@@ -1,5 +1,6 @@
 package application;
 
+import io.cucumber.java.an.E;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,16 +46,27 @@ public class AddEmployeeFX extends Application {
     Button addEmployeeButton;
     @FXML
     Button cancelButton;
+    @FXML
+    Label errorLabelEmployee;
 
     public void addEmployeeToList() throws ExceptionHandler {
+
         String initials = employeeInitials.getText();
         Project project = ProjectMenu.getProject(pName);
         project.addEmployeeToProject(initials);
 
-        Stage stage = (Stage) addEmployeeButton.getScene().getWindow();
-        stage.close();
+        try{
+            Stage stage = (Stage) addEmployeeButton.getScene().getWindow();
+            stage.close();
 
-        ProjectMenuFX.getInstance().setEmployeeView(project);
+            ProjectMenuFX.getInstance().setEmployeeView(project);
+        } catch(Exception err){
+            if(err.getMessage().equals("The user is already assigned to the project")){
+                errorLabelEmployee.setText("The user is already assigned to the project");
+            } else {
+                errorLabelEmployee.setText("User doesn't exist.");
+            }
+        }
     }
 
     public void cancel(){
@@ -63,15 +75,19 @@ public class AddEmployeeFX extends Application {
     }
 
     public void removeEmployee() throws ExceptionHandler {
-        String initials = employeeInitials.getText();
-        Project project = ProjectMenu.getProject(pName);
-        project.removeEmployeeFromProject(initials);
+        try{
 
-        Stage stage = (Stage) addEmployeeButton.getScene().getWindow();
+            String initials = employeeInitials.getText();
+            Project project = ProjectMenu.getProject(pName);
+            project.removeEmployeeFromProject(initials);
 
-        ProjectMenuFX.getInstance().setEmployeeView(project);
+            Stage stage = (Stage) addEmployeeButton.getScene().getWindow();
 
-        stage.close();
+            ProjectMenuFX.getInstance().setEmployeeView(project);
 
+            stage.close();
+        } catch(ExceptionHandler err) {
+            errorLabelEmployee.setText("User doesn't exist.");
+        }
     }
 }

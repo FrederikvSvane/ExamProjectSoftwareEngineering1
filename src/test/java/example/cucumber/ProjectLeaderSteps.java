@@ -83,7 +83,7 @@ public class ProjectLeaderSteps {
 
     }
 
-    @Given("That I am logged in and have selected a project, and project already have a projectleader")
+    @Given("a user is logged in and have selected a project, and project already have a projectleader")
     public void that_i_am_logged_in_and_have_selected_a_project_and_project_already_have_a_projectleader() throws Exception {
         // Write code here that turns the phrase above into concrete actions
         user = "giig";
