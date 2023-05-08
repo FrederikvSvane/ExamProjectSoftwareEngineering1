@@ -88,6 +88,21 @@ public class EmployeeProjectSteps {
     public void isNotAddedToProject(String employeeInitials, String projectName) {
         assertFalse(employeeBase.getEmployee(employeeInitials).containsProject(projectName));
     }
+
+    @When("An existing user adds {string} to a project. WhiteBox")
+    public void an_existing_user_adds_to_a_project_white_box(String string) throws Exception{
+        try {
+            project.addEmployeeToProjectWhiteBox(string);
+        } catch (AssertionError e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("error message {string}. WhiteBox")
+    public void error_message_white_box(String error) {
+        assertEquals(error, errorMessageHolder.getErrorMessage());
+    }
+
 }
 
 

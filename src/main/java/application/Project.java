@@ -110,6 +110,32 @@ public class Project implements ProjectService {
         }
     }
 
+    public void addEmployeeToProjectWhiteBox(String initials) throws ExceptionHandler {
+
+        assert initials != null : "Initials is null";
+        assert employeeBase.containsEmployee(initials) : "The user doesn't exist";
+        assert!employeeList.contains(employeeBase.getEmployee(initials)) : "The user is already assigned to the project";
+
+        if (employeeBase.containsEmployee(initials)) {
+            if (!employeeList.contains(employeeBase.getEmployee(initials))) {
+
+                assert !EmployeeBase.employeeBase.contains(null) : "EmployeeBase contains null";
+
+                employeeBase.getEmployee(initials).addProject(this);
+                employeeList.add(employeeBase.getEmployee(initials));
+            } else {
+                throw new ExceptionHandler("The user is already assigned to the project");
+            }
+        } else {
+            throw new ExceptionHandler("The user doesn't exist");
+        }
+
+        assert employeeList.contains(employeeBase.getEmployee(initials)) : "Employee not added to project";
+        assert employeeBase.getEmployee(initials).containsProject(projectName) : "Project not added to employee";
+
+    }
+
+
     public void addProjectActivity(String activityName, int hours, int startDate, int duration) throws ExceptionHandler { // 1
         if (activityName == null || activityName.equals("")) {                                                             //2
             throw new ExceptionHandler("The activity name is invalid");                                                 //3
